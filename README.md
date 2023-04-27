@@ -1,2 +1,2 @@
-# NutriPlan
+# Receite Me
 Projeto Faculdade 
