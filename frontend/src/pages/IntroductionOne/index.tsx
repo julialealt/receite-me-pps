@@ -3,7 +3,28 @@ import { BackgroundImage, Container, IntroductionImage, ImageWrapper, ContainerL
 import { Text, View } from 'react-native';
 import { Weight700 } from '../../../globalStyles';
 
-
+const slides = [
+  {
+      key: '1',
+      title: 'Receite.Me',
+      logo: '../../assets/logo/logoBlack.png',
+      text: 'o seu app favorito de receitas!'
+  },
+  {
+      key: '2',
+      title: 'Faça suas receitas favoritas',
+      text: 'Encontre receitas com os ingredientes que você tem em casa'
+  },
+  {
+      key: '3',
+      title: 'Acompanhamento nutricional',
+      text: 'Saiba quantas calorias e macronutrientes você ingeriu'
+  },
+  {
+    key: '4',
+    title: 'Vamos cozinhar!',
+}
+]
 
 export default function IntroductionOne() {
   return (
