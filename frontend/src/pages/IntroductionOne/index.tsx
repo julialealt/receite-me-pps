@@ -1,20 +1,26 @@
 import React from 'react';
-import { BackgroundImage, Container, IntroductionImage, ImageWrapper, ContainerLogo, ImageLogo, TextLogo, TextIntroduction } from "./styles";
-import { Text } from 'react-native';
+import { BackgroundImage, Container, IntroductionImage, ImageWrapper, ContainerLogo, ImageLogo, TextIntroduction, Wave} from "./styles";
+import { Text, View } from 'react-native';
+import { Weight700 } from '../../../globalStyles';
+
+
 
 export default function IntroductionOne() {
   return (
-    <Container>
-      <BackgroundImage source={require('../../assets/HomeScreens/green-elipse.svg')}>
-        <ImageWrapper>
-          <IntroductionImage source={require('../../assets/HomeScreens/introduction one.svg')} />
-        </ImageWrapper>
-      </BackgroundImage>
-      <ContainerLogo>
-        <ImageLogo source={require('../../assets/logo/logo black.svg')} />
-        <Text style={{fontSize: 35}}>Receite<TextLogo>.Me</TextLogo></Text>
-        <TextIntroduction>O seu app favorito de receitas!</TextIntroduction>
-      </ContainerLogo>
-    </Container>
+    <View>
+      <Container>
+        <BackgroundImage source={require('../../assets/HomeScreens/greenElipse.png')}>
+          <ImageWrapper>
+            <IntroductionImage source={require('../../assets/HomeScreens/introductionOne.png')} />
+          </ImageWrapper>
+        </BackgroundImage>
+        <ContainerLogo>
+          <ImageLogo source={require('../../assets/logo/logoBlack.png')} />
+          <Text style={{fontSize: 35}}>Receite<Weight700>.Me</Weight700></Text>
+          <TextIntroduction>O seu app favorito de receitas!</TextIntroduction>
+        </ContainerLogo>
+        <Wave source={require("../../assets/HomeScreens/wave.png")}/>
+      </Container>
+    </View>
   );
 }
