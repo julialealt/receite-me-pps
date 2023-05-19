@@ -8,8 +8,7 @@ export const Wave = styled.Image `
 export const Container = styled.View`
   flex: 1;
   align-items: center;
-  justify-content: flex-start;
-  margin-top: 120px;
+  justify-content: flex-end;
 `;
 
 export const IntroductionImage = styled.Image`
