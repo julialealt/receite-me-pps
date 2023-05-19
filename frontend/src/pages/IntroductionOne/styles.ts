@@ -32,20 +32,16 @@ export const ContainerLogo = styled.View`
     flex-direction: column;
     align-items: center;
     gap: 10px;
-`
+`;
 
 export const ImageLogo = styled.Image`
     width: 36px;
     height: 41px;
-`
-
-export const TextLogo = styled.Text`
-    font-weight: 700
-`
+`;
 
 export const TextIntroduction = styled.Text`
     font-size: 18px;
     font-weight: 500;
     color: #8F8F8F;
     margin-top: 10px;
-`
+`;
