@@ -1,7 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
-import { Imgtest } from './globalStyles';
 import IntroductionOne from './src/pages/IntroductionOne';
+import Waves from './src/components/Waves';
 
 export default function App() {
   return (
@@ -14,8 +14,8 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FFFFFF',
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: '#FFFFFF',
   },
 });
