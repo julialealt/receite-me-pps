@@ -1,19 +1,21 @@
 import styled from 'styled-components/native';
+import { Dimensions } from 'react-native';
 
 export const Wave = styled.Image `
-    width: 100%;
+    width: ${Dimensions.get('window').width + 1}px;
     height: 170px;
 `
 
 export const Container = styled.View`
-  flex: 1;
+  display: flex;
   align-items: center;
   justify-content: flex-end;
+  /* margin-top: ${Dimensions.get('window').height - 741}px; */
 `;
 
 export const IntroductionImage = styled.Image`
   width: 400px;
-  height: 310px;
+  height: 338px; 
 `;
 
 export const BackgroundImage = styled.ImageBackground`
@@ -42,6 +44,9 @@ export const ImageLogo = styled.Image`
 export const TextIntroduction = styled.Text`
     font-size: 18px;
     font-weight: 500;
+    text-align: center;
     color: #8F8F8F;
     margin-top: 10px;
+    width: 300px
 `;
+
