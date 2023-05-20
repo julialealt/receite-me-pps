@@ -5,9 +5,7 @@ import Waves from './src/components/Waves';
 
 export default function App() {
   return (
-    <View style={styles.container}>
       <IntroductionOne />
-    </View>
   );
 }
 
