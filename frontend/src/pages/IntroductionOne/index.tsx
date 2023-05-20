@@ -12,23 +12,35 @@ import SliderButton from '../../components/SliderButton';
 const slides = [
   {
     key: '1',
-      title: 'Receite.Me',
-      logo: '../../assets/logo/logoBlack.png',
-      text: 'o seu app favorito de receitas!'
+    title: <Text style={{fontSize: 35}}>Receite<Weight700>.Me</Weight700></Text>,
+    logo: require('../../assets/logo/logoBlack.png'),
+    text: <TextIntroduction>O seu app favorito de receitas!</TextIntroduction>,
+    image: require('../../assets/HomeScreens/introductionOne.png'),
+    width: '400px',
+    height: '310px',
   },
   {
     key: '2',
-      title: 'Faça suas receitas favoritas',
-      text: 'Encontre receitas com os ingredientes que você tem em casa'
+    title: <TitleText>Faça suas receitas favoritas</TitleText>,
+    text: <TextIntroduction>Encontre receitas com os ingredientes que você tem em casa</TextIntroduction> ,
+    image: require('../../assets/HomeScreens/introductionTwo.png'),
+    width: '390px',
+    height: '226px',
   },
   {
     key: '3',
-      title: 'Acompanhamento nutricional',
-      text: 'Saiba quantas calorias e macronutrientes você ingeriu'
+    title: <TitleText>Acompanhamento nutricional</TitleText>,
+    text: <TextIntroduction>Saiba quantas calorias e macronutrientes você ingeriu</TextIntroduction> ,
+    image: require('../../assets/HomeScreens/introductionThree.png'),
+    width: '400px',
+    height: '338px',
   },
   {
     key: '4',
-    title: 'Vamos cozinhar!',
+    title: <TitleText>Vamos cozinhar!</TitleText>,
+    image: require('../../assets/HomeScreens/introductionFour.png'),
+    width: '460px',
+    height: '500px',
   }
 ]
 
