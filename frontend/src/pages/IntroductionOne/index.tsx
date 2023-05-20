@@ -17,7 +17,7 @@ interface Item {
 }
 
 
-const slides = [
+const slides: Item[] = [
   {
     key: '1',
     title: <Text style={{fontSize: 35}}>Receite<Weight700>.Me</Weight700></Text>,
@@ -55,7 +55,7 @@ const slides = [
 export default function IntroductionOne() {
   const [showScreen, setShowScreen] = useState(false);
 
-  const renderSlides = ({ item }) => {
+  const renderSlides = ({ item }: {item: Item}) => {
       if(Object.keys(item).length == 7) {
         return (
           <Container>
