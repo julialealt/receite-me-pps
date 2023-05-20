@@ -50,3 +50,9 @@ export const TextIntroduction = styled.Text`
     width: 300px
 `;
 
+export const TitleText = styled.Text`
+  font-size: 35px;
+  font-weight: bold;
+  text-align: center;
+
+`;
