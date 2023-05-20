@@ -6,7 +6,15 @@ import AppIntroSlider from 'react-native-app-intro-slider';
 import IntroductionButton from '../../components/SliderButton';
 import SliderButton from '../../components/SliderButton';
 
-
+interface Item {
+  key: string,
+  title: JSX.Element,
+  logo?: string,
+  text?: JSX.Element,
+  image: any,
+  width: string,
+  height: string,
+}
 
 
 const slides = [
@@ -47,7 +55,7 @@ const slides = [
 export default function IntroductionOne() {
   const [showScreen, setShowScreen] = useState(false);
 
-  const renderSlides = ({ item }: {item: Item}) => {
+  const renderSlides = ({ item }) => {
       if(Object.keys(item).length == 7) {
         return (
           <Container>
