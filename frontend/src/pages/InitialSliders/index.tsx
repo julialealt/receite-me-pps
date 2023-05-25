@@ -52,7 +52,7 @@ const slides: Item[] = [
   }
 ]
 
-export default function IntroductionOne() {
+export default function InitialSliders() {
   const [showScreen, setShowScreen] = useState(false);
 
   const renderSlides = ({ item }: {item: Item}) => {
