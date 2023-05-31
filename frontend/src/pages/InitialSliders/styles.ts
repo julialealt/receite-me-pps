@@ -1,11 +1,6 @@
 import styled from 'styled-components/native';
 import { Dimensions } from 'react-native';
 
-export const Wave = styled.Image `
-    width: ${Dimensions.get('window').width + 1}px;
-    height: 170px;
-`
-
 export const Container = styled.View`
   display: flex;
   align-items: center;
@@ -35,6 +30,13 @@ export const ContainerLogo = styled.View`
     align-items: center;
     gap: 10px;
 `;
+
+export const ContainerButton = styled.View`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 180px;
+`
 
 export const ImageLogo = styled.Image`
     width: 36px;
