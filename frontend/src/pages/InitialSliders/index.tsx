@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { BackgroundImage, Container, IntroductionImage, ImageWrapper, ContainerLogo, ImageLogo, TextIntroduction, Wave, TitleText} from "./styles";
+import { BackgroundImage, Container, IntroductionImage, ImageWrapper, ContainerLogo, ImageLogo, TextIntroduction, TitleText, ContainerButton} from "./styles";
 import { Image, Text, View } from 'react-native';
 import { Weight700 } from '../../../globalStyles';
 import AppIntroSlider from 'react-native-app-intro-slider';
-import IntroductionButton from '../../components/SliderButton';
-import SliderButton from '../../components/SliderButton';
+import IntroductionButton from '../../components/Button';
+import Button from '../../components/Button';
 
 interface Item {
   key: string,
@@ -93,10 +93,10 @@ export default function InitialSliders() {
                 <Image style={{width: item.width, height: item.height, transform: [{ scale: 0.8 }]}} source={item.image}></Image>
               </ImageWrapper>
             </BackgroundImage>
-            <ContainerLogo>
+            <ContainerButton>
               {item.title}
               <SliderButton labelButton='JUNTE-SE A NÓS' onPress={() => console.log("Alou")} />
-            </ContainerLogo>
+            </ContainerButton>
           </Container>
         );
       }
