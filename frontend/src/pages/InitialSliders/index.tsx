@@ -95,7 +95,7 @@ export default function InitialSliders() {
             </BackgroundImage>
             <ContainerButton>
               {item.title}
-              <SliderButton labelButton='JUNTE-SE A NÓS' onPress={() => console.log("Alou")} />
+              <Button labelButton='JUNTE-SE A NÓS' onPress={() => console.log("Alou")} width={290} height={65} radius={20} />
             </ContainerButton>
           </Container>
         );
