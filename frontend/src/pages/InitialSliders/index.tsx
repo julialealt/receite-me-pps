@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { BackgroundImage, Container, IntroductionImage, ImageWrapper, ContainerLogo, ImageLogo, TextIntroduction, TitleText, ContainerButton} from "./styles";
-import { Image, Text, View } from 'react-native';
+import { Image, Text, ScrollView } from 'react-native';
 import { Weight700 } from '../../../globalStyles';
 import AppIntroSlider from 'react-native-app-intro-slider';
 import IntroductionButton from '../../components/Button';
@@ -87,7 +87,7 @@ export default function InitialSliders() {
         );
       } else {
         return (
-          <Container>
+          <ScrollView>
             <BackgroundImage source={require('../../assets/HomeScreens/greenElipse.png')}>
               <ImageWrapper>
                 <Image style={{width: item.width, height: item.height, transform: [{ scale: 0.8 }]}} source={item.image}></Image>
@@ -97,7 +97,7 @@ export default function InitialSliders() {
               {item.title}
               <Button labelButton='JUNTE-SE A NÓS' onPress={() => console.log("Alou")} width={290} height={65} radius={20} />
             </ContainerButton>
-          </Container>
+          </ScrollView>
         );
       }
       
