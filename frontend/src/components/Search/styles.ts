@@ -5,7 +5,6 @@ export const Container = styled.View`
     display: flex;
     flex-direction: row;
     width: 100%;
-    padding: 0 40px;
 `
 
 export const ImageContainer = styled.View`
