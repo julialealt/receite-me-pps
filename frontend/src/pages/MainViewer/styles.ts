@@ -6,6 +6,7 @@ export const Container = styled.View`
     flex-direction: column;
     gap: 30px;
     margin-top: 64px;
+    padding: 0 30px;
 `
 
 export const UserContainer = styled.View`
@@ -21,11 +22,24 @@ export const GreetingUserContainer = styled.View`
     gap: 8px;
 `
 
-export const SearchContainer = styled.View`
+export const  TextContainer = styled.View`
     display:flex;
-    align-items: center;
-    justify-content: center;
+    gap: 15px;
 `
+
+export const ScrollContainer = styled.View`
+    height: 167px;
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+`
+
+export const ScrollCategoryContainer = styled.View`
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+`
+
 
 // Text
 export const GreetingText = styled.Text`
@@ -35,7 +49,7 @@ export const GreetingText = styled.Text`
 
 `
 
-export const CookText = styled.Text `
+export const TitleText = styled.Text `
     font-size: 20px;
     font-weight: 700;
     width: 230px;
