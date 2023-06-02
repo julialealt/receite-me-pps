@@ -1,17 +1,21 @@
-import { Container, ImageRecipe, TextRecipe, TextTimer } from "./styles";
+import { Container, ContainerTimer, ImageRecipe, ImageTimer, TextRecipe, TextTimer } from "./styles";
 
 interface RecipeProps {
     label?: string,
     icon?: any,
     time?: string,
+    size?: string,
 }
 
-export default function RecipeButton({label, icon, time}: RecipeProps) {
+export default function RecipeButton({label, icon, time, size}: RecipeProps) {
     return(
-        <Container>
-            <ImageRecipe source={icon} />
+        <Container size={size}>
+            <ImageRecipe size={size} source={icon} />
             <TextRecipe>{label}</TextRecipe>
-            <TextTimer>{time}</TextTimer>
+            <ContainerTimer>
+                <ImageTimer source={require('../../assets/geral/clock.png')} />
+                <TextTimer>{time}</TextTimer>
+            </ContainerTimer>
         </Container>
     )
 }
