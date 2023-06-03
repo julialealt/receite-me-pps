@@ -13,7 +13,7 @@ export const UserContainer = styled.View`
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
 `
 
 export const GreetingUserContainer = styled.View`
@@ -48,6 +48,6 @@ export const TitleText = styled.Text `
 //Image
 
 export const UserLogo = styled.Image `
-    width: 100px;
-    height: 100px;
+    width: 60px;
+    height: 60px;
 `
