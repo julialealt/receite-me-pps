@@ -1,5 +1,5 @@
 import { ScrollView } from "react-native";
-import { CenteredContainer, Container, GreetingText, GreetingUserContainer, RecipeContainer, TitleText, UserContainer, UserLogo } from "./styles";
+import { Container, GreetingText, GreetingUserContainer, RecipeContainer, TitleText, UserContainer, UserLogo } from "./styles";
 import Search from "../../components/Search";
 import RecipeButton from "../../components/RecipeButton";
 
