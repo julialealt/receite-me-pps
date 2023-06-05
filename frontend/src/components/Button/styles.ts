@@ -9,7 +9,7 @@ interface ScopeButtonProps {
 export const ScopeButton = styled.TouchableOpacity<ScopeButtonProps>`
     width: ${({ width }: ScopeButtonProps) => (width ? `${width}px` : 'auto')};
     height: ${({ height }: ScopeButtonProps) => (height ? `${height}px` : 'auto')};
-    background: #22A45D;
+    background: #22A36D;
     border-radius: ${({ radius }: ScopeButtonProps) => (radius ? `${radius}px` : '0px')};;
     align-items: center;
     justify-content: center;
