@@ -4,9 +4,8 @@ export const Container = styled.View`
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 100px;
     width: 100%;
-    padding: 25px;
+    padding: 0 25px;
 `
 
 export const SelectButtonScope = styled.View`
