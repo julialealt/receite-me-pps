@@ -8,11 +8,11 @@ import SearchViewer from './src/pages/SearchViewer';
 import MainProfile from './src/pages/Profile/MainProfile';
 import EditProfile from './src/pages/Profile/EditProfile';
 import RecentlyViewed from './src/pages/Profile/RecentlyViewed';
-import SearchByIngredients from './src/pages/SearchByIngredients';
 import SelectFilter from './src/components/SelectFilter';
+import SearchByIngredients from './src/pages/SearchByIngredients';
 
 export default function App() {
   return (
-      <SelectFilter />
+      <SearchByIngredients />
   );
 }
