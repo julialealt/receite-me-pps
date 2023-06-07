@@ -13,6 +13,6 @@ import SearchByIngredients from './src/pages/SearchByIngredients';
 
 export default function App() {
   return (
-      <SearchByIngredients />
+    <SearchByIngredients />
   );
 }
