@@ -8,8 +8,27 @@ export const Container = styled.View`
     gap: 40px;
 `
 
+export const IngredientsContainer = styled.View`
+    display: flex;
+    width: 100%;
+    padding: 0 25px;
+    gap: 10px;
+`
+
 export const TitleText = styled.Text`
     font-size: 30px;
     font-weight: 700;
     width: 220px;
+`
+
+export const ButtonContainer = styled.View`
+    display: flex;
+    width: 100%;
+    align-items: center;
+`
+
+export const Test = styled.View`
+    display: flex;
+    flex-direction: column;
+
 `
