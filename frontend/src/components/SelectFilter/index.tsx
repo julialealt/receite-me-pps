@@ -1,11 +1,23 @@
-import React, { useEffect, useState } from 'react';
-import { View, TextInput, FlatList, Text, TouchableOpacity } from 'react-native';
-import { Container, SelectButtonFlatList, SelectButtonImage, SelectButtonScope, SelectButtonTextInput, SelectButtonTouchableOpacity, SelectButttonFlatListText } from './styles';
+import React, { useEffect, useState } from "react";
+import { ScrollView, TouchableOpacity } from "react-native";
+import {
+    Container,
+    SelectButtonFlatList,
+    SelectButtonImage,
+    SelectButtonScope,
+    SelectButtonTextInput,
+    SelectButtonTouchableOpacity,
+    SelectButttonFlatListText,
+} from "./styles";
 
+interface SelectFilterProps {
+    arrayIngredients?: Ingredient[],
+    show: "none" | "flex"
+}
 interface Ingredient {
     id: number;
     ingredients: string;
-  }
+}
 
 const data: Ingredient[] = [
     { id: 1, ingredients: 'Farinha' },
@@ -25,52 +37,64 @@ const data: Ingredient[] = [
     { id: 15, ingredients: 'Coco ralado' }
   ]
 
-export default function SelectFilter() {
+export default function SelectFilter({show, arrayIngredients}: SelectFilterProps) {
     const [filterText, setFilterText] = useState('');
     const [formatedData, setFormatedData] = useState<Ingredient[]>(data);
+    const [ingredientsArray, setIngredientsArray] = useState<Ingredient[]>([])
+    const [selectedIngredientsArray, setSelectedIngredientsArray] = useState<Ingredient[]>([])
     const [isFocused, setIsFocused] = useState(false);
-  
+
     const renderItem = ({ item }: { item: Ingredient }) => (
-      <SelectButttonFlatListText>{item.ingredients}</SelectButttonFlatListText>
+        <TouchableOpacity onPressIn={() => handleIngredientsSelectedArray(item)}>
+            <SelectButttonFlatListText>{item.ingredients}</SelectButttonFlatListText>
+        </TouchableOpacity>
     );
-  
+    
     const handleFilter = (text: string) => {
-      setFilterText(text);
-      const filteredData = data.filter((item) =>
-        item.ingredients.toLowerCase().includes(text.toLowerCase())
-      );
-      setFormatedData(filteredData);
+        setFilterText(text);
+        const filteredData = data?.filter((item) =>
+            item.ingredients.toLowerCase().includes(text.toLowerCase())
+        );
+        setFormatedData(filteredData);
     };
-  
+
+    const handleIngredientsSelectedArray = (ingredient: Ingredient) => {
+        setIngredientsArray([...ingredientsArray ,ingredient]);
+        const updatedData = data.filter((item) => !ingredientsArray.some((ingredient) => ingredient.ingredients === item.ingredients));
+        setSelectedIngredientsArray(updatedData);
+    }
+
+    // const 
+
     useEffect(() => {
-    }, [isFocused]);
-  
+        console.log(ingredientsArray);
+        console.log(selectedIngredientsArray);
+    }, [selectedIngredientsArray]);
+
     return (
-      <Container>
-        <SelectButtonScope isFocused={isFocused}>
-          <SelectButtonTextInput
-            placeholder="Selecione um ingrediente"
-            placeholderTextColor="#a9a9a9"
-            value={filterText}
-            onChangeText={handleFilter}
-            onFocus={() => setIsFocused(true)}
-            onBlur={() => setIsFocused(false)}
-          />
-          <SelectButtonTouchableOpacity
-            onPress={() => setIsFocused(!isFocused)}
-            style={{ display: 'flex', alignItems: 'center', width: 50 }}
-          >
-            <SelectButtonImage source={require('../../assets/geral/arrowDown.png')} />
-          </SelectButtonTouchableOpacity>
-        </SelectButtonScope>
-        {isFocused && (
-          <SelectButtonFlatList
-            data={formatedData}
-            renderItem={renderItem}
-            keyExtractor={(item: { id: number; }) => item.id}
-          />
-        )}
-      </Container>
+        <ScrollView horizontal={true} style={{display: show === "none" ? "none" : "flex"}} >
+            <Container>
+                <SelectButtonScope styleIsFocused={isFocused}>
+                    <SelectButtonTextInput
+                        placeholder="Selecione um ingrediente"
+                        placeholderTextColor="#a9a9a9"
+                        value={filterText}
+                        onChangeText={handleFilter}
+                        onFocus={() => setIsFocused(true)}
+                        onBlur={() => setIsFocused(false)}
+                    />
+                    <SelectButtonTouchableOpacity onPress={() => setIsFocused(!isFocused)} >
+                        <SelectButtonImage source={require("../../assets/geral/arrowDown.png")} />
+                    </SelectButtonTouchableOpacity>
+                </SelectButtonScope>
+                {isFocused && (
+                    <SelectButtonFlatList
+                        data={formatedData}
+                        renderItem={renderItem}
+                        keyExtractor={(item: { id: number }) => item.id}
+                    />
+                    )}
+            </Container>
+        </ScrollView>
     );
-  };
-  
+}
