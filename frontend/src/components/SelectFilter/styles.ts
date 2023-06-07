@@ -5,7 +5,6 @@ export const Container = styled.View`
     align-items: center;
     justify-content: center;
     width: 100%;
-    padding: 0 25px;
 `
 
 export const SelectButtonScope = styled.View`
@@ -16,9 +15,9 @@ export const SelectButtonScope = styled.View`
     background: #F8F8F8;
     padding: 24px;
     border-top-left-radius: 25px ;
-    border-bottom-left-radius: ${(props: { isFocused: boolean; }) => (props.isFocused ? '0' : '25px')};
+    border-bottom-left-radius: ${(props: { styleIsFocused: boolean; }) => (props.styleIsFocused ? '0' : '25px')};
     border-top-right-radius: 25px;
-    border-bottom-right-radius: ${(props: { isFocused: boolean; }) => (props.isFocused ? '0' : '25px')};
+    border-bottom-right-radius: ${(props: { styleIsFocused: boolean; }) => (props.styleIsFocused ? '0' : '25px')};
     width: 100%;
 `
 
@@ -52,5 +51,6 @@ export const SelectButttonFlatListText = styled.Text`
 
 export const SelectButtonTouchableOpacity = styled.TouchableOpacity`
     display: flex;
+    align-items: center;
     width: 50px;
 `
