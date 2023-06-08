@@ -8,6 +8,7 @@ import {
     SelectButtonTextInput,
     SelectButtonTouchableOpacity,
     SelectButttonFlatListText,
+    TouchableWithoutFeedbackFlatList,
 } from "./styles";
 
 interface SelectFilterProps {
@@ -19,23 +20,6 @@ interface Ingredient {
     ingredients: string;
 }
 
-const data: Ingredient[] = [
-    { id: 1, ingredients: 'Farinha' },
-    { id: 2, ingredients: 'Açúcar' },
-    { id: 3, ingredients: 'Leite' },
-    { id: 4, ingredients: 'Ovos' },
-    { id: 5, ingredients: 'Manteiga' },
-    { id: 6, ingredients: 'Fermento em pó' },
-    { id: 7, ingredients: 'Sal' },
-    { id: 8, ingredients: 'Chocolate' },
-    { id: 9, ingredients: 'Canela' },
-    { id: 10, ingredients: 'Óleo vegetal' },
-    { id: 11, ingredients: 'Framboesas' },
-    { id: 12, ingredients: 'Amêndoas' },
-    { id: 13, ingredients: 'Baunilha' },
-    { id: 14, ingredients: 'Limão' },
-    { id: 15, ingredients: 'Coco ralado' }
-  ]
 
 export default function SelectFilter({show, arrayIngredients}: SelectFilterProps) {
     const [filterText, setFilterText] = useState('');
@@ -45,9 +29,9 @@ export default function SelectFilter({show, arrayIngredients}: SelectFilterProps
     const [isFocused, setIsFocused] = useState(false);
 
     const renderItem = ({ item }: { item: Ingredient }) => (
-        <TouchableOpacity onPressIn={() => handleIngredientsSelectedArray(item)}>
+        <TouchableWithoutFeedbackFlatList onPressIn={() => handleAddIngredientsArray(item)}>
             <SelectButttonFlatListText>{item.ingredients}</SelectButttonFlatListText>
-        </TouchableOpacity>
+        </TouchableWithoutFeedbackFlatList>
     );
     
     const handleFilter = (text: string) => {
@@ -88,7 +72,6 @@ export default function SelectFilter({show, arrayIngredients}: SelectFilterProps
                         value={filterText}
                         onChangeText={handleFilter}
                         onFocus={() => setIsFocused(true)}
-                        onBlur={() => setIsFocused(false)}
                     />
                     <SelectButtonTouchableOpacity onPress={() => setIsFocused(!isFocused)} >
                         <SelectButtonImage source={require("../../assets/geral/arrowDown.png")} />
