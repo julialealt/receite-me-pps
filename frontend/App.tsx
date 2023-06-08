@@ -10,9 +10,10 @@ import EditProfile from './src/pages/Profile/EditProfile';
 import RecentlyViewed from './src/pages/Profile/RecentlyViewed';
 import SelectFilter from './src/components/SelectFilter';
 import SearchByIngredients from './src/pages/SearchByIngredients';
+import RecipesByIngredients from './src/pages/RecipesByIngredients';
 
 export default function App() {
   return (
-    <SearchByIngredients />
+    <RecentlyViewed />
   );
 }
