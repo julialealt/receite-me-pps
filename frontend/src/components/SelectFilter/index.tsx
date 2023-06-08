@@ -59,17 +59,24 @@ export default function SelectFilter({show, arrayIngredients}: SelectFilterProps
     };
 
     const handleIngredientsSelectedArray = (ingredient: Ingredient) => {
-        setIngredientsArray([...ingredientsArray ,ingredient]);
-        const updatedData = data.filter((item) => !ingredientsArray.some((ingredient) => ingredient.ingredients === item.ingredients));
-        setSelectedIngredientsArray(updatedData);
+        console.log(ingredient);
+        if (ingredientsArray.length === 0) {
+            setIngredientsArray([ingredient]);
+        } else {
+            const AddNewIngredientArray = [...ingredientsArray, ingredient];
+            const FilteredIngredientsArray = AddNewIngredientArray.filter((value, index) => {
+                return AddNewIngredientArray.indexOf(value) === index;
+            })
+            setIngredientsArray(FilteredIngredientsArray);
+        }
+        setIsFocused(false);
     }
 
     // const 
 
     useEffect(() => {
         console.log(ingredientsArray);
-        console.log(selectedIngredientsArray);
-    }, [selectedIngredientsArray]);
+    }, [ingredientsArray]);
 
     return (
         <ScrollView horizontal={true} style={{display: show === "none" ? "none" : "flex"}} >
