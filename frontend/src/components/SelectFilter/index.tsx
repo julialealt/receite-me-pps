@@ -44,8 +44,7 @@ export default function SelectFilter({show, arrayIngredients, ingredientsArray, 
         setFormatedData(filteredData);
     };
 
-    const handleIngredientsSelectedArray = (ingredient: Ingredient) => {
-        console.log(ingredient);
+    const handleAddIngredientsArray = (ingredient: Ingredient) => {
         if (ingredientsArray.length === 0) {
             addIngredient([ingredient]);
         } else {
