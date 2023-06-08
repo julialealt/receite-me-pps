@@ -5,7 +5,7 @@ import SelectFilter from "../../components/SelectFilter";
 import { ButtonContainer, Container, IngredientsContainer, Test, TitleText } from "./styles";
 import SelectedIngredient from "../../components/SelectedIngredient";
 import Button from "../../components/Button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 interface Ingredient {
     id: number;
@@ -32,6 +32,7 @@ const data: Ingredient[] = [
 
 export default function SearchByIngredients() {
     const [addIngredient, setAddIngredient] = useState(false);
+    const [ingredientsArray, setIngredientsArray] = useState<Ingredient[]>([])
 
 
     return(
