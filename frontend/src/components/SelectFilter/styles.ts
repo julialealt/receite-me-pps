@@ -54,3 +54,9 @@ export const SelectButtonTouchableOpacity = styled.TouchableOpacity`
     align-items: center;
     width: 50px;
 `
+
+export const TouchableWithoutFeedbackFlatList = styled.TouchableWithoutFeedback`
+    display:flex;
+    align-self: center;
+    width: 50%;
+`
