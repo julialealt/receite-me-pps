@@ -34,6 +34,10 @@ export default function SearchByIngredients() {
     const [addIngredient, setAddIngredient] = useState(false);
     const [ingredientsArray, setIngredientsArray] = useState<Ingredient[]>([])
 
+    const handleRemoveIngredientsArray = (id: number) => {
+        const FilteredIngredientsArray = ingredientsArray.filter(value => value.id !== id);
+        setIngredientsArray(FilteredIngredientsArray);
+    }
 
     return(
         <ScrollView>
@@ -43,7 +47,7 @@ export default function SearchByIngredients() {
                 <SelectFilter show={addIngredient ? 'flex' : 'none'} arrayIngredients={data} ingredientsArray={ingredientsArray} addIngredient={setIngredientsArray}/>
                 <IngredientsContainer>
                     {ingredientsArray.map(({id, ingredients}) => (
-                        <SelectedIngredient key={id} label={ingredients} />
+                        <SelectedIngredient key={id} label={ingredients} onPress={() => handleRemoveIngredientsArray(id)} />
                     ))}
                 </IngredientsContainer>
                 <ButtonContainer>
