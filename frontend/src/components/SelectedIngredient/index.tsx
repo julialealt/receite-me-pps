@@ -10,7 +10,7 @@ export default function SelectedIngredient({label, onPress}: SelectedIngedientPr
     return(
         <ScopeButton>
             <TextButton>{label}</TextButton>
-            <IconTouchableOpacity>
+            <IconTouchableOpacity onPress={onPress}>
                 <IconButton source={require('../../assets/geral/bin.png')} />
             </IconTouchableOpacity>
         </ScopeButton>
