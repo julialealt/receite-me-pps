@@ -12,8 +12,10 @@ import {
 } from "./styles";
 
 interface SelectFilterProps {
-    arrayIngredients?: Ingredient[],
-    show: "none" | "flex"
+    arrayIngredients: Ingredient[],
+    show: "none" | "flex",
+    ingredientsArray: Ingredient[],
+    addIngredient: (ingredients: Ingredient[]) => void
 }
 interface Ingredient {
     id: number;
@@ -21,7 +23,8 @@ interface Ingredient {
 }
 
 
-export default function SelectFilter({show, arrayIngredients}: SelectFilterProps) {
+
+export default function SelectFilter({show, arrayIngredients, ingredientsArray, addIngredient }: SelectFilterProps) {
     const [filterText, setFilterText] = useState('');
     const [formatedData, setFormatedData] = useState<Ingredient[]>(data);
     const [ingredientsArray, setIngredientsArray] = useState<Ingredient[]>([])
@@ -56,11 +59,6 @@ export default function SelectFilter({show, arrayIngredients}: SelectFilterProps
         setIsFocused(false);
     }
 
-    // const 
-
-    useEffect(() => {
-        console.log(ingredientsArray);
-    }, [ingredientsArray]);
 
     return (
         <ScrollView horizontal={true} style={{display: show === "none" ? "none" : "flex"}} >
