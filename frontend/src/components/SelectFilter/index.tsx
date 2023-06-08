@@ -26,8 +26,7 @@ interface Ingredient {
 
 export default function SelectFilter({show, arrayIngredients, ingredientsArray, addIngredient }: SelectFilterProps) {
     const [filterText, setFilterText] = useState('');
-    const [formatedData, setFormatedData] = useState<Ingredient[]>(data);
-    const [ingredientsArray, setIngredientsArray] = useState<Ingredient[]>([])
+    const [formatedData, setFormatedData] = useState<Ingredient[]>(arrayIngredients);
     const [selectedIngredientsArray, setSelectedIngredientsArray] = useState<Ingredient[]>([])
     const [isFocused, setIsFocused] = useState(false);
 
@@ -39,7 +38,7 @@ export default function SelectFilter({show, arrayIngredients, ingredientsArray, 
     
     const handleFilter = (text: string) => {
         setFilterText(text);
-        const filteredData = data?.filter((item) =>
+        const filteredData = arrayIngredients.filter((item) =>
             item.ingredients.toLowerCase().includes(text.toLowerCase())
         );
         setFormatedData(filteredData);
@@ -48,13 +47,13 @@ export default function SelectFilter({show, arrayIngredients, ingredientsArray, 
     const handleIngredientsSelectedArray = (ingredient: Ingredient) => {
         console.log(ingredient);
         if (ingredientsArray.length === 0) {
-            setIngredientsArray([ingredient]);
+            addIngredient([ingredient]);
         } else {
             const AddNewIngredientArray = [...ingredientsArray, ingredient];
             const FilteredIngredientsArray = AddNewIngredientArray.filter((value, index) => {
                 return AddNewIngredientArray.indexOf(value) === index;
             })
-            setIngredientsArray(FilteredIngredientsArray);
+            addIngredient(FilteredIngredientsArray);
         }
         setIsFocused(false);
     }
