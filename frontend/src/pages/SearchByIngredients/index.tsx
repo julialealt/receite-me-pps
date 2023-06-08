@@ -42,8 +42,9 @@ export default function SearchByIngredients() {
                 <AddIngredientsButton onPress={() => setAddIngredient(!addIngredient)} />
                 <SelectFilter show={addIngredient ? 'flex' : 'none'} arrayIngredients={data} ingredientsArray={ingredientsArray} addIngredient={setIngredientsArray}/>
                 <IngredientsContainer>
-                    <SelectedIngredient label="queijo" />
-                    <SelectedIngredient label="queijo" />
+                    {ingredientsArray.map(({id, ingredients}) => (
+                        <SelectedIngredient key={id} label={ingredients} />
+                    ))}
                 </IngredientsContainer>
                 <ButtonContainer>
                     <Button labelButton="Pesquisar  >" height={70} width={240} radius={50}/>
