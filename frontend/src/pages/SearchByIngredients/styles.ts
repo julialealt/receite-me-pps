@@ -26,9 +26,3 @@ export const ButtonContainer = styled.View`
     width: 100%;
     align-items: center;
 `
-
-export const Test = styled.View`
-    display: flex;
-    flex-direction: column;
-
-`
