@@ -1,6 +1,6 @@
 import styled from 'styled-components/native';
 
-export const ScopeButton = styled.View`
+export const ScopeButton = styled.TouchableOpacity`
     display: flex;
     align-items: center;
     justify-content: center;
