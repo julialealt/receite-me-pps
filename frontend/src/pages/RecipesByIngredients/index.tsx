@@ -1,7 +1,7 @@
-import { Container, IngredientsContainer, RecipeContainer, TextTitle } from "./styles";
+import { Container, IngredientsContainer, IngredientsIcons, RecipeContainer, TextTitle } from "./styles";
 import Button from "../../components/Button";
 import SelectIngredientButton from "../../components/SelectIngredientButton";
-import { ScrollView } from "react-native";
+import { ScrollView, View } from "react-native";
 import RecipeButton from "../../components/RecipeButton";
 
 const recipes = [
@@ -36,25 +36,27 @@ const recipes = [
 
 export default function RecipesByIngredients() {
     return(
+      <ScrollView>
         <Container>
             <TextTitle>Receitas que você pode fazer!</TextTitle>
-            <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-                <IngredientsContainer>
-                    <SelectIngredientButton />
-                    <SelectIngredientButton />
-                    <SelectIngredientButton />
-                    <SelectIngredientButton />
-                    <SelectIngredientButton />
-                    <SelectIngredientButton />
-                </IngredientsContainer>
-            </ScrollView>
-            <ScrollView>
-                <RecipeContainer>
-                    {recipes.map(({name, time, image}, index) => (
-                        <RecipeButton key={index} label={name} icon={image} time={time} size="bigger" />
-                    ))}
-                </RecipeContainer>
-            </ScrollView>
+            <IngredientsContainer>
+              <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+                <IngredientsIcons>
+                  <SelectIngredientButton />
+                  <SelectIngredientButton />
+                  <SelectIngredientButton />
+                  <SelectIngredientButton />
+                  <SelectIngredientButton />
+                  <SelectIngredientButton />
+                </IngredientsIcons>
+              </ScrollView>
+            </IngredientsContainer>
+            <RecipeContainer>
+              {recipes.map(({name, time, image}, index) => (
+                  <RecipeButton key={index} label={name} icon={image} time={time} size="bigger" />
+              ))}
+            </RecipeContainer>
         </Container>
+      </ScrollView>
     )
 }
