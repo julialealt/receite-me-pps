@@ -2,7 +2,7 @@ import { ScrollView, View } from "react-native";
 import AddIngredientsButton from "../../components/AddIngredientsButton";
 import AddIngredients from "../../components/AddIngredientsButton";
 import SelectFilter from "../../components/SelectFilter";
-import { ButtonContainer, Container, IngredientsContainer, Test, TitleText } from "./styles";
+import { ButtonContainer, Container, IngredientsContainer, TitleText } from "./styles";
 import SelectedIngredient from "../../components/SelectedIngredient";
 import Button from "../../components/Button";
 import { useEffect, useState } from "react";
