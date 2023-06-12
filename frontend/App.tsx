@@ -11,9 +11,10 @@ import RecentlyViewed from './src/pages/Profile/RecentlyViewed';
 import SelectFilter from './src/components/SelectFilter';
 import SearchByIngredients from './src/pages/SearchByIngredients';
 import RecipesByIngredients from './src/pages/RecipesByIngredients';
+import RecipeInformations from './src/pages/RecipeInformations';
 
 export default function App() {
   return (
-    <RecentlyViewed />
+    <RecipeInformations />
   );
 }
