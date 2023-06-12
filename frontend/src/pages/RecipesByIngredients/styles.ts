@@ -19,7 +19,6 @@ export const TextTitle = styled.Text`
 export const IngredientsContainer = styled.View`
     display: flex;
     flex-direction: row;
-    gap: 7px;
     padding: 0 30px;
 `
 
@@ -29,5 +28,11 @@ export const RecipeContainer = styled.View`
     flex-direction: row;
     justify-content: center;
     gap: 20px;
-    margin-top: 25px;
-`;
+    margin-top: 20px;
+`
+
+export const IngredientsIcons = styled.View`
+    display:flex;
+    flex-direction: row;
+    gap: 7px;
+`
