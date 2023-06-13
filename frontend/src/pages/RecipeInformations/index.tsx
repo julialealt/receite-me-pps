@@ -91,6 +91,26 @@ export default function RecipeInformations() {
                         <TradeColorButton labelButton="Ingredientes" color={tradeInformation} onPress={() => setTradeInformation(true)} />
                         <TradeColorButton labelButton="Modo de preparo" color={!tradeInformation} onPress={() => setTradeInformation(false)} />
                     </ContainerButtons>
+                    {tradeInformation ? (
+                    <ContainerIngredientsAmounts>
+                        {ingredients.map(({id, ingredient, quantity}) => (
+                            <IngredientsAmountsUnit key={id} >
+                                <TextIngredientAmount>{ingredient}</TextIngredientAmount>
+                                <QuantityIngredientValue>{quantity}</QuantityIngredientValue>
+                            </IngredientsAmountsUnit>
+                        ))}
+                    </ContainerIngredientsAmounts>
+                    ) : (
+                    <ContainerPreparationMethod>
+                        {instructions.map((item, index) => (
+                            <UnitPrepationMethod key={index} >
+                                <PrepationMethodCircle source={require('../../assets/geral/circle.png')} />
+                                <TextPrepationMethod>{item}</TextPrepationMethod>
+                            </UnitPrepationMethod>
+                        ))}
+                    </ContainerPreparationMethod>
+                    )}
+                
                 </ContainerInformations>
             </Container>
         </ScrollView>
