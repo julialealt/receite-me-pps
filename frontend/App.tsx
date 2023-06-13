@@ -12,9 +12,10 @@ import SelectFilter from './src/components/SelectFilter';
 import SearchByIngredients from './src/pages/SearchByIngredients';
 import RecipesByIngredients from './src/pages/RecipesByIngredients';
 import RecipeInformations from './src/pages/RecipeInformations';
+import FavoriteBook from './src/pages/FavoriteBook';
 
 export default function App() {
   return (
-    <RecipeInformations />
+    <FavoriteBook />
   );
 }
