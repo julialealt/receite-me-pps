@@ -97,7 +97,51 @@ export const ContainerButtons = styled.View`
 export const ContainerIngredientsAmounts = styled.View`
     display: flex;
     flex-direction: column;
+    gap: 10px;
 `
 
-// export const 
+export const IngredientsAmountsUnit = styled.View`
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 13px 20px;
+    background: #F8F8F8;
+    width: 100%;
+    border-radius: 15px;
+`
 
+export const TextIngredientAmount = styled.Text`
+    font-size: 14px;
+    font-weight: 500;
+`
+
+export const QuantityIngredientValue = styled.Text`
+    font-size: 14px;
+    font-weight: 500;
+    color: #A9A9A9;
+`
+
+export const ContainerPreparationMethod = styled.View`
+    background: #f8f8f8;
+    padding: 14px 20px 20px 20px;
+    border-radius: 20px;
+    gap: 10px;
+`
+
+export const UnitPrepationMethod = styled.View`
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start ;
+    gap: 10px;
+`
+
+export const TextPrepationMethod = styled.Text`
+    font-size: 14px;
+    font-weight: 500;
+`
+
+export const PrepationMethodCircle = styled.Image`
+    width: 8px;
+    height: 8px;
+    margin-top: 7px;
+`
