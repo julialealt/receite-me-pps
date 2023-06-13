@@ -4,7 +4,7 @@ import { Dimensions } from 'react-native';
 export const Container = styled.View`
     display: flex;
     flex-direction: column;
-    gap: 46px;
+    margin-bottom: 20px;
 `
 
 export const ImageRecipe = styled.Image`
@@ -17,11 +17,16 @@ export const ContainerInformations = styled.View`
     flex-direction: column;
     gap: 15px;
     padding: 0 25px;
+    background: #FFFFFF;
+    margin-top: -25px;
+    border-top-right-radius: 30px;
+    border-top-left-radius: 30px;
 `
 
 export const TitleInformations = styled.Text`
     font-size: 26px;
     font-weight: 700;
+    margin-top: 46px;
 `
 
 export const ContainerFirstLayer = styled.View`
@@ -89,7 +94,7 @@ export const ContainerButtons = styled.View`
     gap: 7px;
 `
 
-export const ContainerIngredients = styled.View`
+export const ContainerIngredientsAmounts = styled.View`
     display: flex;
     flex-direction: column;
 `
