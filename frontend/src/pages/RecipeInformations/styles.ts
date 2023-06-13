@@ -1,6 +1,5 @@
 import styled from 'styled-components/native';
 import { Dimensions } from 'react-native';
-
 export const Container = styled.View`
     display: flex;
     flex-direction: column;
@@ -8,8 +7,8 @@ export const Container = styled.View`
 `
 
 export const ImageRecipe = styled.Image`
-    width: ${Dimensions.get('window').width};
-    height: ${Dimensions.get('window').width};
+    width: ${Dimensions.get('window').width}px;
+    height: ${Dimensions.get('window').width}px;
 `
 
 export const ContainerInformations = styled.View`
