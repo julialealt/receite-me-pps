@@ -131,7 +131,6 @@ export const ContainerPreparationMethod = styled.View`
 export const UnitPrepationMethod = styled.View`
     display: flex;
     flex-direction: row;
-    align-items: flex-start ;
     gap: 10px;
 `
 
