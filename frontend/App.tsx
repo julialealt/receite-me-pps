@@ -13,9 +13,10 @@ import SearchByIngredients from './src/pages/SearchByIngredients';
 import RecipesByIngredients from './src/pages/RecipesByIngredients';
 import RecipeInformations from './src/pages/RecipeInformations';
 import FavoriteBook from './src/pages/FavoriteBook';
+import BottomBar from './src/components/BottomBar';
 
 export default function App() {
   return (
-    <FavoriteBook />
+    <BottomBar />
   );
 }
