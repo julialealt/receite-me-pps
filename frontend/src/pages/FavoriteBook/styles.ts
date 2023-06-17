@@ -3,6 +3,7 @@ import styled from 'styled-components/native';
 
 export const ScrollViewContainer = styled.ScrollView`
     margin: 45px 25px 25px 25px;
+    background: #ffffff;
 `
 
 //View
