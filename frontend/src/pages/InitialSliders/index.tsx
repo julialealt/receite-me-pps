@@ -1,21 +1,11 @@
 import React, { useState } from 'react';
+import { useNavigation } from '@react-navigation/native';
 import { BackgroundImage, Container, IntroductionImage, ImageWrapper, ContainerLogo, ImageLogo, TextIntroduction, TitleText, ContainerButton} from "./styles";
 import { Image, Text, ScrollView } from 'react-native';
 import { Weight700 } from '../../../globalStyles';
 import AppIntroSlider from 'react-native-app-intro-slider';
 import IntroductionButton from '../../components/Button';
 import Button from '../../components/Button';
-
-interface Item {
-  key: string,
-  title: JSX.Element,
-  logo?: string,
-  text?: JSX.Element,
-  image: any,
-  width: number,
-  height: number,
-}
-
 
 const slides: Item[] = [
   {
@@ -51,52 +41,68 @@ const slides: Item[] = [
     height: 500,
   }
 ]
+interface Item {
+  key: string,
+  title: JSX.Element,
+  logo?: string,
+  text?: JSX.Element,
+  image: any,
+  width: number,
+  height: number,
+}
 
 export default function InitialSliders() {
   const [showScreen, setShowScreen] = useState(false);
-
+  const navigation = useNavigation();
+  
   const renderSlides = ({ item }: {item: Item}) => {
       if(Object.keys(item).length == 7) {
         return (
-          <Container>
-            <BackgroundImage source={require('../../assets/HomeScreens/greenElipse.png')}>
-              <ImageWrapper>
-                <Image style={{width: item.width, height: item.height}} source={item.image}></Image>
-              </ImageWrapper>
-            </BackgroundImage>
-            <ContainerLogo>
-              <ImageLogo source={item.logo} />
-              {item.title}
-              {item.text}
-            </ContainerLogo>
-          </Container>
+          <ScrollView>
+            <Container>
+              <BackgroundImage source={require('../../assets/HomeScreens/greenElipse.png')}>
+                <ImageWrapper>
+                  <Image style={{width: item.width, height: item.height}} source={item.image}></Image>
+                </ImageWrapper>
+              </BackgroundImage>
+              <ContainerLogo>
+                <ImageLogo source={item.logo} />
+                {item.title}
+                {item.text}
+              </ContainerLogo>
+            </Container>
+          </ScrollView>
         );
       } else if (Object.keys(item).length == 6) {
         return (
-          <Container>
-            <BackgroundImage source={require('../../assets/HomeScreens/greenElipse.png')}>
-              <ImageWrapper>
-                <Image style={{width: item.width, height: item.height}} source={item.image}></Image>
-              </ImageWrapper>
-            </BackgroundImage>
-            <ContainerLogo>
-              {item.title}
-              {item.text}
-            </ContainerLogo>
-          </Container>
+          <ScrollView>
+            <Container>
+              <BackgroundImage source={require('../../assets/HomeScreens/greenElipse.png')}>
+                <ImageWrapper>
+                  <Image style={{width: item.width, height: item.height}} source={item.image}></Image>
+                </ImageWrapper>
+              </BackgroundImage>
+              <ContainerLogo>
+                {item.title}
+                {item.text}
+              </ContainerLogo>
+            </Container>
+          </ScrollView>
         );
       } else {
         return (
           <ScrollView>
-            <BackgroundImage source={require('../../assets/HomeScreens/greenElipse.png')}>
-              <ImageWrapper>
-                <Image style={{width: item.width, height: item.height, transform: [{ scale: 0.8 }]}} source={item.image}></Image>
-              </ImageWrapper>
-            </BackgroundImage>
-            <ContainerButton>
-              {item.title}
-              <Button labelButton='JUNTE-SE A NÓS' onPress={() => console.log("Alou")} width={290} height={65} radius={20} />
-            </ContainerButton>
+            <Container>
+              <BackgroundImage source={require('../../assets/HomeScreens/greenElipse.png')}>
+                <ImageWrapper>
+                  <Image style={{width: item.width, height: item.height, transform: [{ scale: 0.8 }]}} source={item.image}></Image>
+                </ImageWrapper>
+              </BackgroundImage>
+              <ContainerButton>
+                {item.title}
+                <Button labelButton='JUNTE-SE A NÓS' onPress={() => navigation.navigate('signUp')}  width={290} height={65} radius={20} />
+              </ContainerButton>
+            </Container>
           </ScrollView>
         );
       }
