@@ -4,7 +4,7 @@ interface SizeProps {
     size?: string,
 }
 
-export const Container = styled.View`
+export const Container = styled.TouchableOpacity`
     width: ${({ size }: SizeProps) => (size === "bigger" ? "160px" : "140px")};
     height: 164px;
     padding: 10px 15px;
