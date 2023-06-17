@@ -1,4 +1,4 @@
-import { ScrollView } from "react-native";
+import {CustomScrollView as ScrollView } from "../../../globalStyles";
 import { BottomSideRightImage, Container, ContainerFavoriteBook, ContainerImages, LeftContainerImages, LeftImage, MainTitle, RightContainerImages, ScrollViewContainer, SeeMore, TitleContainer, TitleFavoriteBook, TopSideRightImage } from "./styles";
 
 export default function FavoriteBook() {

@@ -1,4 +1,4 @@
-import { ScrollView, View } from "react-native";
+import {CustomScrollView as ScrollView } from "../../../../globalStyles";
 import { Container, UserContainer, UserFunctionsIconContainer, UserFunctionsList, UserFunctionsText, UserIcon, UserLogo, UserName, UserStatus } from "./styles";
 
 const profiles = [

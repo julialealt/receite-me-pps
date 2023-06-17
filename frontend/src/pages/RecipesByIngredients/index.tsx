@@ -1,7 +1,7 @@
 import { Container, IngredientsContainer, IngredientsIcons, RecipeContainer, TextTitle } from "./styles";
 import Button from "../../components/Button";
 import SelectIngredientButton from "../../components/SelectIngredientButton";
-import { ScrollView, View } from "react-native";
+import {CustomScrollView as ScrollView } from "../../../globalStyles";
 import RecipeButton from "../../components/RecipeButton";
 
 const recipes = [

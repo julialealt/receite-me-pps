@@ -1,4 +1,4 @@
-import { ScrollView } from "react-native";
+import {CustomScrollView as ScrollView } from "../../../globalStyles";
 import { Container, GreetingText, GreetingUserContainer, RecipeContainer, TitleText, UserContainer, UserLogo } from "./styles";
 import Search from "../../components/Search";
 import RecipeButton from "../../components/RecipeButton";

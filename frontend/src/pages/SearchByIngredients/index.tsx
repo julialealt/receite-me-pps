@@ -1,4 +1,4 @@
-import { ScrollView, View } from "react-native";
+import {CustomScrollView as ScrollView } from "../../../globalStyles";
 import AddIngredientsButton from "../../components/AddIngredientsButton";
 import AddIngredients from "../../components/AddIngredientsButton";
 import SelectFilter from "../../components/SelectFilter";

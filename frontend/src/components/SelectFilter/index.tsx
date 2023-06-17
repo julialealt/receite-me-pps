@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { ScrollView, TouchableOpacity } from "react-native";
+import {CustomScrollView as ScrollView } from "../../../globalStyles";
 import {
     Container,
     SelectButtonFlatList,

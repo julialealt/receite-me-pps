@@ -1,4 +1,4 @@
-import { ScrollView } from "react-native";
+import {CustomScrollView as ScrollView } from "../../../../globalStyles";
 import Input from "../../../components/Input";
 import { Container, ContainerEditProfileInputs, EditProfileText } from "./styles";
 import Button from "../../../components/Button";

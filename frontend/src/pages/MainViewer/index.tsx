@@ -1,8 +1,10 @@
-import { Image, View, ScrollView, Text } from "react-native";
 import { Container, GreetingText, GreetingUserContainer, ScrollCategoryContainer, ScrollContainer, TextContainer, TitleText, UserContainer, UserLogo } from "./styles";
+import {CustomScrollView as ScrollView } from "../../../globalStyles";
 import Search from "../../components/Search";
 import CategoryButton from "../../components/CategoryButton";
 import RecipeButton from "../../components/RecipeButton";
+import BottomBar from "../../components/BottomBar";
+
 
 const categories = [
     { name: 'Veggie', 
@@ -64,7 +66,7 @@ export default function MainViewer() {
                     <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
                         <ScrollCategoryContainer>
                             {categories.map(({ name, image }, index) => (
-                                <CategoryButton key={index} label={name} Icon={image} />
+                                <CategoryButton key={index} label={name} Icon={image} onPress={() => console.log('test')} />
                             ))}
                         </ScrollCategoryContainer>
                     </ScrollView>
@@ -74,7 +76,7 @@ export default function MainViewer() {
                     <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
                         <ScrollContainer>
                             {recipes.map(({name, time, image}, index) => (
-                                <RecipeButton key={index} label={name} icon={image} time={time} />
+                                <RecipeButton key={index} label={name} icon={image} time={time} onPress={() => console.log('test')} />
                             ))}
                         </ScrollContainer>
                     </ScrollView>
@@ -84,7 +86,7 @@ export default function MainViewer() {
                     <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
                         <ScrollContainer>
                             {recipes.map(({name, time, image}, index) => (
-                                <RecipeButton key={index} label={name} icon={image} time={time} />
+                                <RecipeButton key={index} label={name} icon={image} time={time} onPress={() => console.log('test')} />
                             ))}
                         </ScrollContainer>
                     </ScrollView>
@@ -94,12 +96,13 @@ export default function MainViewer() {
                     <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
                         <ScrollContainer>
                             {recipes.map(({name, time, image}, index) => (
-                                <RecipeButton key={index} label={name} icon={image} time={time} />
+                                <RecipeButton key={index} label={name} icon={image} time={time} onPress={() => console.log('test')} />
                             ))}
                         </ScrollContainer>
                     </ScrollView>
                 </TextContainer>
             </Container>
+            <BottomBar />
         </ScrollView>
     )
 }

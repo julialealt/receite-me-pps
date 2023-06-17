@@ -1,4 +1,4 @@
-import { ScrollView, Text } from "react-native";
+import {CustomScrollView as ScrollView } from "../../../globalStyles";
 import { Container, ContainerButtons, ContainerFirstLayer, ContainerInformations, ContainerIngredientsAmounts, ContainerMacroNutrients, ContainerPreparationMethod, ImageIcon, ImageRecipe, IngredientsAmountsUnit, NumberMacroNutrients, PrepationMethodCircle, QuantityIngredientValue, SeparateIcons, SepareteMacroNutrients, TextFirstLayer, TextIngredientAmount, TextMacroNutrients, TextPrepationMethod, TitleInformations, UnitPrepationMethod } from "./styles";
 import TradeColorButton from "../../components/TradeColorButton";
 import { useState } from "react";
