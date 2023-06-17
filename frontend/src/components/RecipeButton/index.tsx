@@ -5,11 +5,12 @@ interface RecipeProps {
     icon?: any,
     time?: string,
     size?: string,
+    onPress?: () => void
 }
 
-export default function RecipeButton({label, icon, time, size}: RecipeProps) {
+export default function RecipeButton({label, icon, time, size, onPress}: RecipeProps) {
     return(
-        <Container size={size}>
+        <Container size={size} onPress={onPress}>
             <ImageRecipe size={size} source={icon} />
             <TextRecipe>{label}</TextRecipe>
             <ContainerTimer>
