@@ -3,6 +3,7 @@ import InitialSliders from '../pages/InitialSliders';
 import SignUp from '../pages/SignUp';
 import Login from '../pages/Login';
 import MainViewer from '../pages/MainViewer';
+import RecipeInformations from '../pages/RecipeInformations';
 
 const { Screen, Navigator } = createNativeStackNavigator();
 
@@ -29,7 +30,10 @@ export default function StackRoutes() {
                 name='mainViewer'
                 component={MainViewer}
             />
-            
+            <Screen
+                name='recipeInformations'
+                component={RecipeInformations}
+            />
         </Navigator>
     )
 }
