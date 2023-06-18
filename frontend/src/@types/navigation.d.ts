@@ -5,6 +5,9 @@ export declare global {
             signUp: undefined;
             login: undefined;
             mainViewer: undefined;
+            recipeInformations: {
+                id: number;
+            }
         }
     }
 }
