@@ -14,12 +14,6 @@ export const LoginText = styled.Text`
     margin: 0 0 55px 0 ;
 `
 
-export const SubText = styled.Text`
-    font-size: 12px;
-    font-weight: 500;
-    color: #686868;
-`
-
 export const ContainerButton = styled.View`
     align-items: center;
     gap: 30px;
