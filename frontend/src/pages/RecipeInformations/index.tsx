@@ -11,6 +11,7 @@ type ParamsProps = {
 interface RecipeData {
     id: number;
     name: string;
+    category: string;
     time: string;
     image: string;
     calories: number;
@@ -49,7 +50,7 @@ export default function RecipeInformations() {
     return(
         <ScrollView>
             <Container>
-                <ImageRecipe source={{ uri: recipeData?.image }} />
+                <ImageRecipe source={require('../../assets/recipes/Ramen2.png')} />
                 <ContainerInformations>
                     <TitleInformations>{recipeData?.name}</TitleInformations>
                     <ContainerFirstLayer>
