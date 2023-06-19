@@ -5,7 +5,8 @@ import CategoryButton from "../../components/CategoryButton";
 import RecipeButton from "../../components/RecipeButton";
 import BottomBar from "../../components/BottomBar";
 import { useNavigation } from "@react-navigation/native";
-
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 const categories = [
     { name: 'Veggie', 
@@ -19,21 +20,51 @@ const categories = [
     { name: 'Mexicano', 
       image: require('../../assets/categories/Taco.png')}
   ];
-  
-  const recipes = [
-    { id: 1, name: 'Ramen Coreano', time: '10-15 min', image: require('../../assets/recipes/Ramen.png') },
-    { id: 2, name: 'Feijoada', time: '10-15 min', image: require('../../assets/recipes/Feijoada.png') },
-    { id: 3, name: 'Filé Mignon', time: '10-15 min', image: require('../../assets/cat-logo.png') },
-    { id: 4, name: 'Hamburguer', time: '10-15 min', image: require('../../assets/recipes/Hamburguer.png') },
-    { id: 5, name: 'Cachorro Quente', time: '10-15 min', image: require('../../assets/recipes/HotDog.png') },
-    { id: 6, name: 'Coxinha', time: '10-15 min', image: require('../../assets/recipes/Coxinha.png') },
-    { id: 7, name: 'Spaghetti', time: '10-15 min', image: require('../../assets/recipes/Spaghetti.png') },
-    { id: 8, name: 'Sushi', time: '10-15 min', image: require('../../assets/recipes/Sushi.png') },
-    { id: 9, name: 'Yakissoba', time: '10-15 min', image: require('../../assets/recipes/Yakissoba.png') },
-  ];
+
+  interface RecipeData {
+    id: number;
+    name: string;
+    time: string;
+    image: string;
+  }
 
 export default function MainViewer() {
     const navigation = useNavigation();
+    const [recipeData, setRecipeData] = useState<RecipeData[] | null>([{ 
+        id: 0, 
+        name: '', 
+        time: '', 
+        image: '' 
+    }]);
+
+        const getRecipeInformations = async () => {
+            try {
+              const response = await axios.get<RecipeData[]>('http://localhost:3000/recipes');
+              const updatedRecipeData = response.data.map(({id, image, name, time}) => {
+                if(name.length >= 15) {
+                    name = name.slice(0, 14) + '...';
+                }
+
+                return {
+                    id: id,
+                    name: name,
+                    time: time,
+                    image: image
+                }
+              })
+              setRecipeData(updatedRecipeData);
+
+            } catch (error) {
+              console.error('Error fetching recipe data:', error);
+            }
+          };
+
+    useEffect(() => {
+        getRecipeInformations();
+    }, [])
+    console.log(recipeData)
+    // console.log(recipeData && recipeData[0] && `../../assets/recipes/${recipeData[0].image}`);
+
     return(
         <ScrollView>
             <Container>
@@ -49,7 +80,7 @@ export default function MainViewer() {
                     <TitleText>Categorias</TitleText>
                     <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
                         <ScrollCategoryContainer>
-                            {categories.map(({ name, image }, index) => (
+                        {categories.map(({ name, image }, index) => (
                                 <CategoryButton key={index} label={name} Icon={image} onPress={() => console.log('test')} />
                             ))}
                         </ScrollCategoryContainer>
@@ -59,8 +90,8 @@ export default function MainViewer() {
                     <TitleText>Recomendações</TitleText>
                     <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
                         <ScrollContainer>
-                            {recipes.map(({ id ,name, time, image}) => (
-                                <RecipeButton key={id} label={name} icon={image} time={time} onPress={() => navigation.navigate("recipeInformations", {id: id})} />
+                            {recipeData?.map(({ id ,name, time, image}) => (
+                                <RecipeButton key={id} label={name} icon={require('../../assets/recipes/Ramen2.png')} time={time} onPress={() => navigation.navigate("recipeInformations", {id: id})} />
                             ))}
                         </ScrollContainer>
                     </ScrollView>
@@ -69,8 +100,8 @@ export default function MainViewer() {
                     <TitleText>Receitas recentes</TitleText>
                     <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
                         <ScrollContainer>
-                            {recipes.map(({ id ,name, time, image}) => (
-                                <RecipeButton key={id} label={name} icon={image} time={time} onPress={() => navigation.navigate("recipeInformations", {id: id})} />
+                            {recipeData?.map(({ id ,name, time, image}) => (
+                                <RecipeButton key={id} label={name} icon={require('../../assets/recipes/Ramen2.png')} time={time} onPress={() => navigation.navigate("recipeInformations", {id: id})} />
                             ))}
                         </ScrollContainer>
                     </ScrollView>
@@ -79,8 +110,8 @@ export default function MainViewer() {
                     <TitleText>Receitas da semana</TitleText>
                     <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
                         <ScrollContainer>
-                            {recipes.map(({ id ,name, time, image}) => (
-                                <RecipeButton key={id} label={name} icon={image} time={time} onPress={() => navigation.navigate("recipeInformations", {id: id})} />
+                            {recipeData?.map(({ id ,name, time, image}) => (
+                                <RecipeButton key={id} label={name} icon={require('../../assets/recipes/Ramen2.png')} time={time} onPress={() => navigation.navigate("recipeInformations", {id: id})} />
                             ))}
                         </ScrollContainer>
                     </ScrollView>
