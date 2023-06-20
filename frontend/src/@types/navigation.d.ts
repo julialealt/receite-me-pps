@@ -8,6 +8,9 @@ export declare global {
             recipeInformations: {
                 id: number;
             }
+            categoryRecipes: {
+                category: string;
+            }
         }
     }
 }
