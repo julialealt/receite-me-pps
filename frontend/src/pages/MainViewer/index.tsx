@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 const categories = [
-    { name: 'Veggie', 
+    { name: 'Vegano', 
       image: require('../../assets/categories/Broccoli.png')},
     { name: 'Doces', 
       image: require('../../assets/categories/Shortcake.png')},
@@ -81,7 +81,7 @@ export default function MainViewer() {
                     <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
                         <ScrollCategoryContainer>
                         {categories.map(({ name, image }, index) => (
-                                <CategoryButton key={index} label={name} Icon={image} onPress={() => console.log('test')} />
+                                <CategoryButton key={index} label={name} Icon={image} onPress={() => navigation.navigate('categoryRecipes', { category: name })} />
                             ))}
                         </ScrollCategoryContainer>
                     </ScrollView>
