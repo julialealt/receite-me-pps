@@ -1,9 +1,10 @@
 import {CustomScrollView as ScrollView } from "../../../globalStyles";
-import { Container, ContainerButtons, ContainerFirstLayer, ContainerInformations, ContainerIngredientsAmounts, ContainerMacroNutrients, ContainerPreparationMethod, ImageIcon, ImageRecipe, IngredientsAmountsUnit, NumberMacroNutrients, PrepationMethodCircle, QuantityIngredientValue, SeparateIcons, SepareteMacroNutrients, TextFirstLayer, TextIngredientAmount, TextMacroNutrients, TextPrepationMethod, TitleInformations, UnitPrepationMethod } from "./styles";
+import { BackArrow, BackThePage, Container, ContainerButtons, ContainerFirstLayer, ContainerInformations, ContainerIngredientsAmounts, ContainerMacroNutrients, ContainerPreparationMethod, HeartImage, ImageIcon, ImageRecipe, IngredientsAmountsUnit, NumberMacroNutrients, PrepationMethodCircle, QuantityIngredientValue, SeparateIcons, SepareteMacroNutrients, TextFirstLayer, TextIngredientAmount, TextMacroNutrients, TextPrepationMethod, TitleInformations, UnitPrepationMethod } from "./styles";
 import TradeColorButton from "../../components/TradeColorButton";
 import { useEffect, useState } from "react";
-import { useRoute } from '@react-navigation/native'
+import { useNavigation, useRoute } from '@react-navigation/native'
 import axios from "axios";
+import { TouchableOpacity } from "react-native";
 
 type ParamsProps = {
   id: number;
@@ -31,11 +32,20 @@ interface RecipeData {
     }[];
   }
 
+
+  const imagePaths = {
+    hearthColorTrue: require('../../assets/geral/hearthGreen.png'),
+    hearthColorFalse: require('../../assets/geral/hearthWhite.png'),
+  };
+
 export default function RecipeInformations() {
     const [tradeInformation, setTradeInformation] = useState(false);
+    const [hearthColor, setHearthColor] = useState(false)
+    const navigation = useNavigation();
     const route = useRoute();
     const { id } = route.params as ParamsProps;
     const [recipeData, setRecipeData] = useState<RecipeData | undefined>();
+    // const source = hearthColor ? hearthWhite : hearthGreen;
 
   const getRecipeInformations = async () => {
     const response = await axios.get(`http://localhost:3000/recipes/${id}`);
@@ -46,11 +56,24 @@ export default function RecipeInformations() {
   useEffect(() => {
     getRecipeInformations();
     }, []);
+    const hearthWhite = require('../../assets/geral/hearthWhite.png');
+    const hearthGreen = require('../../assets/geral/hearthGreen.png');
+    const source = hearthColor ? hearthWhite : hearthGreen;
+    console.log(recipeData)
+
 
     return(
         <ScrollView>
+            <BackThePage>
+                <TouchableOpacity onPress={() => navigation.navigate("mainViewer")} >
+                    <BackArrow source={require("../../assets/geral/arrowLeftWhite.png")} />
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => setHearthColor(!hearthColor)}>
+                    <HeartImage source={source} />
+                </TouchableOpacity>
+            </BackThePage>
             <Container>
-                <ImageRecipe source={require('../../assets/recipes/Ramen2.png')} />
+                <ImageRecipe source={recipeData?.image} />
                 <ContainerInformations>
                     <TitleInformations>{recipeData?.name}</TitleInformations>
                     <ContainerFirstLayer>
