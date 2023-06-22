@@ -1,7 +1,8 @@
-import { useRoute } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import { CustomScrollView as ScrollView } from "../../../globalStyles";
 import RecipeButton from "../../components/RecipeButton";
-import { Container, RecipeContainer, TextRecentlyRecipes } from "./styles";
+import { BackArrow, BackThePage, Container, RecipeContainer, TextRecentlyRecipes } from "./styles";
+import { Text, TouchableOpacity } from "react-native";
 
 type ParamsProps = {
     category: string;
@@ -39,18 +40,25 @@ const recipes = [
 
 export default function CategoryRecipes() {
     const route = useRoute();
+    const navigation = useNavigation()
     const { category } = route.params as ParamsProps;
 
     return(
-    <Container>
-        <TextRecentlyRecipes>{category}</TextRecentlyRecipes>
-        <ScrollView>
+      <ScrollView>
+        <Container>
+          <BackThePage>
+            <TouchableOpacity onPress={() => navigation.goBack()} >
+                <BackArrow source={require("../../assets/geral/arrowLeft.png")} />
+            </TouchableOpacity>
+              <TextRecentlyRecipes>{category}</TextRecentlyRecipes>
+            <Text>‎ ‎ ‎ ‎ </Text>
+          </BackThePage>
           <RecipeContainer>
             {recipes.map(({name, time, image}, index) => (
                 <RecipeButton key={index} label={name} icon={image} time={time} size="bigger" />
             ))}
           </RecipeContainer>
-        </ScrollView>
-    </Container>
+        </Container>
+      </ScrollView>
     )
 }
