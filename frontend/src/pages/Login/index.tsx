@@ -31,11 +31,12 @@ export default function Login() {
     }
 
     const handleLogin = async() => {
-        const response = await axios.get("http://localhost:3000/users")
-        const users = response.data;
-        const account = formData;
-        const findUserInAccount = !!users.find((item: UserFormData) => item.email === account.email && item.password === account.password);
-        if(findUserInAccount) navigation.navigate('mainViewer');
+    //     const response = await axios.get("http://localhost:3000/users")
+    //     const users = response.data;
+    //     const account = formData;
+    //     const findUserInAccount = !!users.find((item: UserFormData) => item.email === account.email && item.password === account.password);
+        // if(findUserInAccount) 
+        navigation.navigate('mainViewer');
     };
 
     return(
