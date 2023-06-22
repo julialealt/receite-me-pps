@@ -65,7 +65,7 @@ export default function RecipeInformations() {
     return(
         <ScrollView>
             <BackThePage>
-                <TouchableOpacity onPress={() => navigation.navigate("mainViewer")} >
+                <TouchableOpacity onPress={() => navigation.goBack()} >
                     <BackArrow source={require("../../assets/geral/arrowLeftWhite.png")} />
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => setHearthColor(!hearthColor)}>
