@@ -16,6 +16,8 @@ export declare global {
             //Profile
             favoriteBook: undefined;
             profile: undefined;
+            editProfile: undefined;
+            recentlyViewed: undefined;
         }
     }
 }
