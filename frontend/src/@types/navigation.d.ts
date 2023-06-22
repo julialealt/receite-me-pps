@@ -11,6 +11,11 @@ export declare global {
             categoryRecipes: {
                 category: string;
             }
+            searchByIngredients: undefined;
+
+            //Profile
+            favoriteBook: undefined;
+            profile: undefined;
         }
     }
 }
