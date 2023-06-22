@@ -1,9 +1,11 @@
 import styled from 'styled-components/native';
+import { Dimensions } from 'react-native';
 
 //View
 export const Container = styled.View`
     align-items: center;
     margin-top: 100px;
+    min-height: ${Dimensions.get('window').height}px;
 `
 
 export const UserContainer = styled.View`
