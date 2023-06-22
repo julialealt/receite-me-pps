@@ -1,4 +1,5 @@
 import styled from 'styled-components/native';
+import { Dimensions } from 'react-native';
 
 //View 
 export const Container = styled.View`
@@ -8,7 +9,7 @@ export const Container = styled.View`
     margin-top: 64px;
     margin-bottom: 90px;
     padding: 0 30px;
-    height: 100%;
+    min-height: ${Dimensions.get('window').height + 35}px;
 `
 
 export const UserContainer = styled.View`
@@ -47,6 +48,15 @@ export const BottomBarContainer = styled.View`
     z-index: 999;
     bottom: 0;
 `
+
+export const RecipeContainer = styled.View`
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+    gap: 20px;
+`;
+
 
 
 // Text
