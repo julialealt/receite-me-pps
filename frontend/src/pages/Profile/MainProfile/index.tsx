@@ -1,4 +1,6 @@
+import { View } from "react-native";
 import {CustomScrollView as ScrollView } from "../../../../globalStyles";
+import BottomBar from "../../../components/BottomBar";
 import { Container, UserContainer, UserFunctionsIconContainer, UserFunctionsList, UserFunctionsText, UserIcon, UserLogo, UserName, UserStatus } from "./styles";
 
 const profiles = [
@@ -16,6 +18,7 @@ const profiles = [
 
 export default function MainProfile() {
     return(
+      <View>
         <ScrollView>
             <Container>
                 <UserContainer>
@@ -33,5 +36,7 @@ export default function MainProfile() {
                 </UserFunctionsList>
             </Container>
         </ScrollView>
+        <BottomBar />
+      </View>
     )
 }
