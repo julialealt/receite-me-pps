@@ -21,7 +21,7 @@ export const UserFunctionsList = styled.View`
     margin-top: 54px;
     gap: 34px;
 `
-export const UserFunctionsIconContainer = styled.View`
+export const UserFunctionsIconContainer = styled.TouchableOpacity`
     display: flex;
     flex-direction: row;
     align-items: center;
