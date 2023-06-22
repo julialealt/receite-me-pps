@@ -45,7 +45,7 @@ export default function MainProfile() {
       },
       { 
         id: 5,
-        text: "Apagar Conta", 
+        text: "Excluir Conta", 
         icon: require("../../../assets/profileIcons/bin.png"),
         navigation: () => navigation.navigate("favoriteBook") 
 
