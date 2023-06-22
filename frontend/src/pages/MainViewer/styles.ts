@@ -6,8 +6,9 @@ export const Container = styled.View`
     flex-direction: column;
     gap: 30px;
     margin-top: 64px;
-    margin-bottom: 40px;
+    margin-bottom: 90px;
     padding: 0 30px;
+    height: 100%;
 `
 
 export const UserContainer = styled.View`
@@ -39,6 +40,12 @@ export const ScrollCategoryContainer = styled.View`
     display: flex;
     flex-direction: row;
     gap: 10px;
+`
+
+export const BottomBarContainer = styled.View`
+    position: absolute;
+    z-index: 999;
+    bottom: 0;
 `
 
 
