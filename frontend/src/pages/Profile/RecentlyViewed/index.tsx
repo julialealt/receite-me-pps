@@ -1,6 +1,8 @@
 import {CustomScrollView as ScrollView } from "../../../../globalStyles";
-import { Container, RecipeContainer, TextRecentlyRecipes } from "./styles";
+import { BackArrow, BackThePage, Container, RecipeContainer, TextRecentlyRecipes } from "./styles";
 import RecipeButton from "../../../components/RecipeButton";
+import { Text, TouchableOpacity } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 const recipes = [
     { name: 'Coxinha', 
@@ -33,16 +35,24 @@ const recipes = [
     ];
 
 export default function RecentlyViewed() {
+    const navigation = useNavigation()
+
     return(
+      <ScrollView>
         <Container>
+          <BackThePage>
+            <TouchableOpacity onPress={() => navigation.goBack()} >
+              <BackArrow source={require("../../../assets/geral/arrowLeft.png")} />
+            </TouchableOpacity>
             <TextRecentlyRecipes>Receitas recentemente visualizadas</TextRecentlyRecipes>
-            <ScrollView>
-              <RecipeContainer>
-                {recipes.map(({name, time, image}, index) => (
-                    <RecipeButton key={index} label={name} icon={image} time={time} size="bigger" />
-                ))}
-              </RecipeContainer>
-            </ScrollView>
+            <Text>‎ ‎ ‎ ‎ ‎ </Text>
+          </BackThePage>
+            <RecipeContainer>
+              {recipes.map(({name, time, image}, index) => (
+                  <RecipeButton key={index} label={name} icon={image} time={time} size="bigger" />
+              ))}
+            </RecipeContainer>
         </Container>
+      </ScrollView>
     )
 }
