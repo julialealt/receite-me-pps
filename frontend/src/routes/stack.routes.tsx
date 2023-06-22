@@ -8,6 +8,8 @@ import CategoryRecipes from '../pages/CategoryRecipes';
 import SearchByIngredients from '../pages/SearchByIngredients';
 import MainProfile from '../pages/Profile/MainProfile';
 import FavoriteBook from '../pages/FavoriteBook';
+import EditProfile from '../pages/Profile/EditProfile';
+import RecentlyViewed from '../pages/Profile/RecentlyViewed';
 
 const { Screen, Navigator } = createNativeStackNavigator();
 
@@ -53,6 +55,14 @@ export default function StackRoutes() {
             <Screen
                 name='profile'
                 component={MainProfile}
+            />
+            <Screen
+                name='editProfile'
+                component={EditProfile}
+            />
+            <Screen
+                name='recentlyViewed'
+                component={RecentlyViewed}
             />
         </Navigator>
     )
