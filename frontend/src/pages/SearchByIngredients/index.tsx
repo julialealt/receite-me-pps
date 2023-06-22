@@ -2,10 +2,12 @@ import {CustomScrollView as ScrollView } from "../../../globalStyles";
 import AddIngredientsButton from "../../components/AddIngredientsButton";
 import AddIngredients from "../../components/AddIngredientsButton";
 import SelectFilter from "../../components/SelectFilter";
-import { ButtonContainer, Container, IngredientsContainer, TitleText } from "./styles";
+import { ButtonContainer, Container, ContainerScrollView, IngredientsContainer, TitleText } from "./styles";
 import SelectedIngredient from "../../components/SelectedIngredient";
 import Button from "../../components/Button";
 import { useEffect, useState } from "react";
+import { View } from "react-native";
+import BottomBar from "../../components/BottomBar";
 
 interface Ingredient {
     id: number;
@@ -40,20 +42,23 @@ export default function SearchByIngredients() {
     }
 
     return(
-        <ScrollView>
-            <Container>
-                <TitleText>Quais ingredientes você tem disponíveis ?</TitleText>
-                <AddIngredientsButton onPress={() => setAddIngredient(!addIngredient)} />
-                <SelectFilter show={addIngredient ? 'flex' : 'none'} arrayIngredients={data} ingredientsArray={ingredientsArray} addIngredient={setIngredientsArray}/>
-                <IngredientsContainer>
-                    {ingredientsArray.map(({id, ingredients}) => (
-                        <SelectedIngredient key={id} label={ingredients} onPress={() => handleRemoveIngredientsArray(id)} />
-                    ))}
-                </IngredientsContainer>
-                <ButtonContainer>
-                    <Button labelButton="Pesquisar  >" height={70} width={240} radius={50}/>
-                </ButtonContainer>
-            </Container>
-        </ScrollView>
+        <View>
+            <ContainerScrollView>
+                <Container>
+                    <TitleText>Quais ingredientes você tem disponíveis ?</TitleText>
+                    <AddIngredientsButton onPress={() => setAddIngredient(!addIngredient)} />
+                    <SelectFilter show={addIngredient ? 'flex' : 'none'} arrayIngredients={data} ingredientsArray={ingredientsArray} addIngredient={setIngredientsArray}/>
+                    <IngredientsContainer>
+                        {ingredientsArray.map(({id, ingredients}) => (
+                            <SelectedIngredient key={id} label={ingredients} onPress={() => handleRemoveIngredientsArray(id)} />
+                        ))}
+                    </IngredientsContainer>
+                    <ButtonContainer>
+                        <Button labelButton="Pesquisar  >" height={70} width={240} radius={50}/>
+                    </ButtonContainer>
+                </Container>
+            </ContainerScrollView>
+            <BottomBar />
+        </View>
     )
 }
