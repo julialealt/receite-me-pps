@@ -4,6 +4,17 @@ export const Container = styled.View`
     display: flex;
     flex-direction: column;
     margin-bottom: 20px;
+    top: -40px;
+`
+
+export const BackThePage = styled.View`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0 25px;
+    justify-content: space-between;
+    top: 50px;
+    z-index: 999; 
 `
 
 export const ImageRecipe = styled.Image`
@@ -142,4 +153,14 @@ export const PrepationMethodCircle = styled.Image`
     width: 8px;
     height: 8px;
     margin-top: 7px;
+`
+
+export const BackArrow = styled.Image`
+    width: 25px;
+    height: 25px;
+`
+
+export const HeartImage = styled.Image`
+    width: 40px;
+    height: 40px;
 `
