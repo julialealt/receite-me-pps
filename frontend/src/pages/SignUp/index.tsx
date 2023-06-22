@@ -67,7 +67,7 @@ export default function SignUp() {
             <ContainerButton>
                 <Button labelButton="CADASTRAR" onPress={handleSignUp} width={290} height={47} radius={10} />
                 <SubText>Já possui uma conta ? <Weight700 
-                style={{color: "green"}} 
+                style={{color: "#22A36D"}} 
                 onPress={() => navigation.navigate('login')}>Entre agora</Weight700></SubText>
             </ContainerButton>
         </Container>

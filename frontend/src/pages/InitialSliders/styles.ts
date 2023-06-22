@@ -25,10 +25,10 @@ export const ImageWrapper = styled.View`
 `;
 
 export const ContainerLogo = styled.View`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
 `;
 
 export const ContainerButton = styled.View`
@@ -39,17 +39,17 @@ export const ContainerButton = styled.View`
 `
 
 export const ImageLogo = styled.Image`
-    width: 36px;
-    height: 41px;
+  width: 36px;
+  height: 41px;
 `;
 
 export const TextIntroduction = styled.Text`
-    font-size: 18px;
-    font-weight: 500;
-    text-align: center;
-    color: #8F8F8F;
-    margin-top: 10px;
-    width: 300px
+  font-size: 18px;
+  font-weight: 500;
+  text-align: center;
+  color: #8F8F8F;
+  margin-top: 10px;
+  width: 300px
 `;
 
 export const TitleText = styled.Text`
