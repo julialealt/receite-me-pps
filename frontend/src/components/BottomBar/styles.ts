@@ -10,6 +10,7 @@ export const Container = styled.View`
     background: #FFFFFF;
     border-top-left-radius: 15px ;
     border-top-right-radius: 15px ;
+    elevation: 10
 `
 
 export const BottomBarIcon = styled.Image`
