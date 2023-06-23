@@ -12,7 +12,10 @@ export declare global {
                 category: string;
             }
             searchByIngredients: undefined;
-
+            recipesByIngredients: {[
+                id: number,
+                ingredients: string,
+            ]}
             //Profile
             favoriteBook: undefined;
             profile: undefined;
