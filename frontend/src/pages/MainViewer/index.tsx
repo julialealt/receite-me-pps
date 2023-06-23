@@ -1,4 +1,4 @@
-import { BottomBarContainer, Container, GreetingText, GreetingUserContainer, RecipeContainer, ScrollCategoryContainer, ScrollContainer, TextContainer, TitleText, UserContainer, UserLogo } from "./styles";
+import { BottomBarContainer, Container, GreetingText, GreetingUserContainer, NotFoundText, RecipeContainer, ScrollCategoryContainer, ScrollContainer, TextContainer, TitleText, UserContainer, UserLogo } from "./styles";
 import {CustomScrollView as ScrollView } from "../../../globalStyles";
 import Search from "../../components/Search";
 import CategoryButton from "../../components/CategoryButton";
@@ -81,6 +81,7 @@ export default function MainViewer() {
     const navigation = useNavigation();
     const [searchInput, setSearchInput] = useState('');
     const [mainOrSearch, setMainOrSearch] = useState(true)
+    const [notFound, setNotFound] = useState(true);
     const [recipeData, setRecipeData] = useState<RecipeData[] | null>([{ 
         id: 0, 
         name: '', 
@@ -120,8 +121,10 @@ export default function MainViewer() {
         const trimmedValue = value.trim()
         if(trimmedValue.length !== 0 ) {
             const filteredData = recipes.filter(({name}) => name.toLowerCase().includes(trimmedValue.toLowerCase()));
+            const booleanData = !!filteredData.length
             setAllRecipes(filteredData);
             setMainOrSearch(false)
+            setNotFound(booleanData)
         } else {
             setMainOrSearch(true)
         }
@@ -133,10 +136,6 @@ export default function MainViewer() {
 
     useEffect(() => {
         filterRecipes(searchInput);
-    }, [searchInput])
-
-    useEffect(() => {
-        console.log(searchInput)
     }, [searchInput])
 
     return(
@@ -196,9 +195,14 @@ export default function MainViewer() {
                         </TextContainer>
                             </> ) : (
                     <RecipeContainer>
-                        {allRecipes?.map(({id, image, name, time}) => (
-                            <RecipeButton key={id} label={name} icon={image} time={time} size="bigger" />
-                        ))}
+                        {notFound ? (
+                            allRecipes?.map(({id, image, name, time}) => (
+                                <RecipeButton key={id} label={name} icon={image} time={time} size="bigger" />
+                            ))
+                            ) : (
+                            <NotFoundText>Não encontramos receitas com os ingredientes selecionados...</NotFoundText>
+                        )}
+                        
                     </RecipeContainer>   )}
                 </Container>
             </ScrollView>
