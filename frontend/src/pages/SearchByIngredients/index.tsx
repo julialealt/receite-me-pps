@@ -45,7 +45,7 @@ export default function SearchByIngredients() {
         <View>
             <ContainerScrollView>
                 <Container>
-                    <TitleText>Quais ingredientes você tem disponíveis ?</TitleText>
+                    <TitleText>Quais ingredientes você tem disponíveis?</TitleText>
                     <AddIngredientsButton onPress={() => setAddIngredient(!addIngredient)} />
                     <SelectFilter show={addIngredient ? 'flex' : 'none'} arrayIngredients={data} ingredientsArray={ingredientsArray} addIngredient={setIngredientsArray}/>
                     <IngredientsContainer>

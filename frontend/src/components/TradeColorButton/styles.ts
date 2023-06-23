@@ -15,8 +15,8 @@ export const ScopeButton = styled.TouchableOpacity<ScopeButtonProps>`
 `
 
 export const TextButton = styled.Text<ScopeButtonProps>`
+    fontFamily: 'Poppins-Bold';
     flex: 1;
     font-size: 15px;
-    font-weight: 700;
     color: ${({ colorButton }: ScopeButtonProps) => (colorButton ? '#FFFFFF' : '#A9A9A9')};
 `

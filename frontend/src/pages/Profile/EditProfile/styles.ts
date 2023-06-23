@@ -29,8 +29,8 @@ export const ContainerEditProfileInputs = styled.View`
 `
 
 export const EditProfileText = styled.Text`
+    fontFamily: 'Poppins-Bold';
     font-size: 20px;
-    font-weight: 700;
 `
 
 export const BackArrow = styled.Image`

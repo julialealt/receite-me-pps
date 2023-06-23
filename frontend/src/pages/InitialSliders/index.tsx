@@ -10,7 +10,7 @@ import Button from '../../components/Button';
 const slides: Item[] = [
   {
     key: '1',
-    title: <Text style={{fontSize: 35}}>Receite<Weight700>.Me</Weight700></Text>,
+    title: <Text style={{fontFamily: 'Poppins-Regular', fontSize: 35}}>Receite<Weight700>.Me</Weight700></Text>,
     logo: require('../../assets/logo/logoBlack.png'),
     text: <TextIntroduction>O seu app favorito de receitas!</TextIntroduction>,
     image: require('../../assets/HomeScreens/introductionOne.png'),

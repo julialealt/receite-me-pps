@@ -9,6 +9,8 @@ export const Container = styled.View`
 `
 
 export const InputText = styled.TextInput`
+    fontFamily: 'Poppins-Regular';
+    font-size: 12px;
     width: 100%;
     height: 48px;
     padding: 0 15px;
@@ -20,7 +22,7 @@ export const InputText = styled.TextInput`
 `
 
 export const TextMain = styled.Text`
+    fontFamily: 'Poppins-Medium';
     font-size: 12px;
-    font-weight: 500;
     color: #686868;
 `

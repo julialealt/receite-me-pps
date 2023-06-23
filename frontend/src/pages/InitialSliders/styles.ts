@@ -44,6 +44,7 @@ export const ImageLogo = styled.Image`
 `;
 
 export const TextIntroduction = styled.Text`
+  fontFamily: 'Poppins-Medium';
   font-size: 18px;
   font-weight: 500;
   text-align: center;
@@ -53,8 +54,7 @@ export const TextIntroduction = styled.Text`
 `;
 
 export const TitleText = styled.Text`
+  fontFamily: 'Poppins-Bold';
   font-size: 35px;
-  font-weight: bold;
   text-align: center;
-
 `;

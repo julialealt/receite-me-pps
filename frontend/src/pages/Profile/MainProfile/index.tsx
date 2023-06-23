@@ -17,7 +17,7 @@ export default function MainProfile() {
     const profiles: ProfileProps[] = [
       { 
         id: 1,
-        text: "Editar Perfil", 
+        text: "Editar perfil", 
         icon: require("../../../assets/profileIcons/Pencil.png"),
         navigation: () => navigation.navigate("editProfile") 
 
@@ -31,7 +31,7 @@ export default function MainProfile() {
       },
       { 
         id: 3,
-        text: "Recentemente Visualizadas", 
+        text: "Recentemente visualizadas", 
         icon: require("../../../assets/profileIcons/Document.png"),
         navigation: () => navigation.navigate("recentlyViewed") 
 
@@ -45,7 +45,7 @@ export default function MainProfile() {
       },
       { 
         id: 5,
-        text: "Excluir Conta", 
+        text: "Excluir conta", 
         icon: require("../../../assets/profileIcons/bin.png"),
         navigation: () => navigation.navigate("favoriteBook") 
 

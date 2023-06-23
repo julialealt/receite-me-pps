@@ -10,15 +10,15 @@ import axios from "axios";
 import { View } from "react-native";
 
 const categories = [
-    { name: 'Vegano', 
+    { name: 'Veggie', 
       image: require('../../assets/categories/Broccoli.png')},
     { name: 'Doces', 
       image: require('../../assets/categories/Shortcake.png')},
-    { name: 'Fast Food', 
+    { name: 'Sem lactose', 
       image: require('../../assets/categories/Hamburger.png')},
-    { name: 'Drinks', 
+    { name: 'Salgadas', 
       image: require('../../assets/cat-logo.png')},
-    { name: 'Mexicano', 
+    { name: 'Sem glúten', 
       image: require('../../assets/categories/Taco.png')}
   ];
 
@@ -71,7 +71,7 @@ export default function MainViewer() {
                     <UserContainer>
                         <GreetingUserContainer>
                             <GreetingText>Olá, Rossana</GreetingText>
-                            <TitleText>Vamos Cozinhar uma boa receita hoje!</TitleText>
+                            <TitleText>Vamos cozinhar uma boa receita hoje!</TitleText>
                         </GreetingUserContainer>
                         <UserLogo source={require('../../assets/Users/Janet.png')} />
                     </UserContainer>

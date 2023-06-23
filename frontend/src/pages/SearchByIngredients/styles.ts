@@ -23,14 +23,13 @@ export const IngredientsContainer = styled.View`
 `
 
 export const TitleText = styled.Text`
+    fontFamily: 'Poppins-Bold';
     font-size: 30px;
-    font-weight: 700;
     width: 220px;
 `
 
 export const ButtonContainer = styled.View`
-display: flex;
-width: 100%;
-align-items: center;
-
+    display: flex;
+    width: 100%;
+    align-items: center;
 `

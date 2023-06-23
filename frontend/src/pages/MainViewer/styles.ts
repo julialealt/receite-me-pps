@@ -51,21 +51,21 @@ export const BottomBarContainer = styled.View`
 
 // Text
 export const GreetingText = styled.Text`
+    fontFamily: 'Poppins-SemiBold';
     font-size: 14px;
-    font-weight: 600;
     color: #a9a9a9;
 
 `
 
 export const TitleText = styled.Text `
+    fontFamily: 'Poppins-Bold';
     font-size: 20px;
-    font-weight: 700;
     width: 230px;
 `
 
 
 // Image
 export const UserLogo = styled.Image `
-    width: 100px;
-    height: 100px;
+    width: 50px;
+    height: 50px;
 `

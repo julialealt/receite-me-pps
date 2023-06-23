@@ -23,6 +23,7 @@ export const ImageSearch = styled.Image`
 `
 
 export const InputSearch = styled.TextInput`
+    fontFamily: 'Poppins-SemiBold';
     width: 85%;
     height: 48px;
     padding: 0;

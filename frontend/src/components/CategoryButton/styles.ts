@@ -18,7 +18,6 @@ export const IconCategory = styled.Image`
 `
 
 export const TextCategory = styled.Text`
-    font-size: 10px;
-    font-weight: 600;
-
+    fontFamily: 'Poppins-SemiBold';
+    font-size: 9px;
 `

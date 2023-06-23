@@ -15,7 +15,7 @@ export default function EditProfile() {
                     <TouchableOpacity onPress={() => navigation.goBack()} >
                         <BackArrow source={require("../../../assets/geral/arrowLeft.png")} />
                     </TouchableOpacity>
-                    <EditProfileText>Editar Perfil</EditProfileText>
+                    <EditProfileText>Editar perfil</EditProfileText>
                     <Text>‎ ‎ ‎ ‎ </Text>
                 </BackThePage>
                 <ContainerEditProfileInputs>

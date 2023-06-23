@@ -74,18 +74,18 @@ export const BottomSideRightImage = styled.Image`
 
 //Text
 export const MainTitle = styled.Text`
+    fontFamily: 'Poppins-Bold';
     font-size: 25px;
-    font-weight: 700;
 `
 
 export const TitleFavoriteBook = styled.Text`
+    fontFamily: 'Poppins-Bold';
     font-size: 19px;
-    font-weight: 700;
 `
 
 export const SeeMore = styled.Text`
+    fontFamily: 'Poppins-Medium';
     font-size: 14px;
-    font-weight: 500;
     color: #22A36D;
 `
 
