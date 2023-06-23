@@ -54,7 +54,7 @@ export default function SearchByIngredients() {
                         ))}
                     </IngredientsContainer>
                     <ButtonContainer>
-                        <Button labelButton="Pesquisar  >" height={70} width={240} radius={50}/>
+                        <Button labelButton="Pesquisar  >" height={50} width={200} radius={50}/>
                     </ButtonContainer>
                 </Container>
             </ContainerScrollView>

@@ -11,14 +11,15 @@ export const SelectButtonScope = styled.View`
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 80px;
+    gap: 90px;
     background: #F8F8F8;
-    padding: 24px;
+    padding: 18px 25px;
     border-top-left-radius: 25px ;
     border-bottom-left-radius: ${(props: { styleIsFocused: boolean; }) => (props.styleIsFocused ? '0' : '25px')};
     border-top-right-radius: 25px;
     border-bottom-right-radius: ${(props: { styleIsFocused: boolean; }) => (props.styleIsFocused ? '0' : '25px')};
     width: 100%;
+    justify-content: space-between;
 `
 
 export const SelectButtonImage = styled.Image`
@@ -27,7 +28,7 @@ export const SelectButtonImage = styled.Image`
 `
 
 export const SelectButtonTextInput = styled.TextInput`
-fontFamily: 'Poppins-Medium';
+    fontFamily: 'Poppins-Medium';
     font-size: 14px;
     color: #a9a9a9;
     flex-grow: 1;

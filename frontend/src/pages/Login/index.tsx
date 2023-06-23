@@ -49,7 +49,7 @@ export default function Login() {
                 value={formData.password}
                 onChangeText={value => handleInputChange('password', value)} />
             <ContainerButton>
-                <Button labelButton="ENTRAR" width={290} height={47} radius={10} onPress={handleLogin} />
+                <Button labelButton="ENTRAR" width={200} height={47} radius={10} onPress={handleLogin} />
             </ContainerButton>
         </Container>
     )

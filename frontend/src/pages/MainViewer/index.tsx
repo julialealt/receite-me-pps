@@ -15,11 +15,11 @@ const categories = [
     { name: 'Doces', 
       image: require('../../assets/categories/Shortcake.png')},
     { name: 'Sem lactose', 
-      image: require('../../assets/categories/Hamburger.png')},
+      image: require('../../assets/categories/GlassOfMilk.png')},
     { name: 'Salgadas', 
-      image: require('../../assets/cat-logo.png')},
+      image: require('../../assets/categories/Spaghetti.png')},
     { name: 'Sem glúten', 
-      image: require('../../assets/categories/Taco.png')}
+      image: require('../../assets/categories/Bread.png')}
   ];
 
   interface RecipeData {

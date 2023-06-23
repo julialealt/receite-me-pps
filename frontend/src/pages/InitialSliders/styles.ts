@@ -55,6 +55,6 @@ export const TextIntroduction = styled.Text`
 
 export const TitleText = styled.Text`
   fontFamily: 'Poppins-Bold';
-  font-size: 35px;
+  font-size: 30px;
   text-align: center;
 `;
