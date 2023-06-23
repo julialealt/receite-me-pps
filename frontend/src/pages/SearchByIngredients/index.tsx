@@ -1,13 +1,15 @@
+import { ButtonContainer, Container, ContainerScrollView, IngredientsContainer, TitleText } from "./styles";
 import {CustomScrollView as ScrollView } from "../../../globalStyles";
 import AddIngredientsButton from "../../components/AddIngredientsButton";
 import AddIngredients from "../../components/AddIngredientsButton";
 import SelectFilter from "../../components/SelectFilter";
-import { ButtonContainer, Container, ContainerScrollView, IngredientsContainer, TitleText } from "./styles";
 import SelectedIngredient from "../../components/SelectedIngredient";
 import Button from "../../components/Button";
 import { useEffect, useState } from "react";
 import { View } from "react-native";
 import BottomBar from "../../components/BottomBar";
+import { useNavigation } from "@react-navigation/native";
+import axios from "axios";
 
 interface Ingredient {
     id: number;
@@ -33,13 +35,28 @@ const data: Ingredient[] = [
 ];
 
 export default function SearchByIngredients() {
+    const navigation = useNavigation();
     const [addIngredient, setAddIngredient] = useState(false);
-    const [ingredientsArray, setIngredientsArray] = useState<Ingredient[]>([])
+    const [allIngredients, setAllIngredients] = useState<Ingredient[]>([]);
+    const [ingredientsArray, setIngredientsArray] = useState<Ingredient[]>([]);
 
+    const getIngredients = async () => {
+        try {
+            const response = await axios.get<Ingredient[]>('http://localhost:3000/ingredients');
+            setAllIngredients(response.data);
+        } catch (error) {
+            console.error('Erro ao obter ingredientes:', error);
+        }
+    };
+    
     const handleRemoveIngredientsArray = (id: number) => {
         const FilteredIngredientsArray = ingredientsArray.filter(value => value.id !== id);
         setIngredientsArray(FilteredIngredientsArray);
     }
+    
+    useEffect(() => {
+        getIngredients()
+    }, [])
 
     return(
         <View>
@@ -47,14 +64,14 @@ export default function SearchByIngredients() {
                 <Container>
                     <TitleText>Quais ingredientes você tem disponíveis ?</TitleText>
                     <AddIngredientsButton onPress={() => setAddIngredient(!addIngredient)} />
-                    <SelectFilter show={addIngredient ? 'flex' : 'none'} arrayIngredients={data} ingredientsArray={ingredientsArray} addIngredient={setIngredientsArray}/>
+                    <SelectFilter show={addIngredient ? 'flex' : 'none'} arrayIngredients={allIngredients} ingredientsArray={ingredientsArray} addIngredient={setIngredientsArray}/>
                     <IngredientsContainer>
                         {ingredientsArray.map(({id, ingredients}) => (
                             <SelectedIngredient key={id} label={ingredients} onPress={() => handleRemoveIngredientsArray(id)} />
                         ))}
                     </IngredientsContainer>
                     <ButtonContainer>
-                        <Button labelButton="Pesquisar  >" height={70} width={240} radius={50}/>
+                        <Button labelButton="Pesquisar  >" height={70} width={240} radius={50} onPress={() => navigation.navigate('recipesByIngredients', {ingredients: ingredientsArray})}/>
                     </ButtonContainer>
                 </Container>
             </ContainerScrollView>
