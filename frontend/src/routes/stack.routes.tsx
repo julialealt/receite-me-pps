@@ -10,6 +10,7 @@ import MainProfile from '../pages/Profile/MainProfile';
 import FavoriteBook from '../pages/FavoriteBook';
 import EditProfile from '../pages/Profile/EditProfile';
 import RecentlyViewed from '../pages/Profile/RecentlyViewed';
+import RecipesByIngredients from '../pages/RecipesByIngredients';
 
 const { Screen, Navigator } = createNativeStackNavigator();
 
@@ -63,6 +64,10 @@ export default function StackRoutes() {
             <Screen
                 name='recentlyViewed'
                 component={RecentlyViewed}
+            />
+            <Screen
+                name='recipesByIngredients'
+                component={RecipesByIngredients}
             />
         </Navigator>
     )
