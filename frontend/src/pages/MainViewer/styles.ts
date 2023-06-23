@@ -73,6 +73,12 @@ export const TitleText = styled.Text `
     width: 230px;
 `
 
+export const NotFoundText = styled.Text`
+    font-size: 16px;
+    font-weight: 500;
+    color: #878787;
+`
+
 
 // Image
 export const UserLogo = styled.Image `
