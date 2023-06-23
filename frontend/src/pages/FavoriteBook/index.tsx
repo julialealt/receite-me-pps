@@ -1,4 +1,4 @@
-import { View } from "react-native";
+import { TouchableOpacity, View } from "react-native";
 import {CustomScrollView as ScrollView } from "../../../globalStyles";
 import BottomBar from "../../components/BottomBar";
 import { BottomSideRightImage, Container, ContainerFavoriteBook, ContainerImages, LeftContainerImages, LeftImage, MainTitle, RightContainerImages, ScrollViewContainer, SeeMore, TitleContainer, TitleFavoriteBook, TopSideRightImage } from "./styles";
@@ -12,7 +12,9 @@ export default function FavoriteBook() {
                     <ContainerFavoriteBook>
                         <TitleContainer>
                             <TitleFavoriteBook>Favoritos</TitleFavoriteBook>
-                            <SeeMore>Ver mais</SeeMore>
+                            <TouchableOpacity>
+                                <SeeMore>Ver mais</SeeMore>
+                            </TouchableOpacity>
                         </TitleContainer>
                         <ContainerImages>
                             <LeftContainerImages>
@@ -27,8 +29,10 @@ export default function FavoriteBook() {
                     <ContainerFavoriteBook>
                         <TitleContainer>
                             <TitleFavoriteBook>Nova Pasta</TitleFavoriteBook>
-                            <SeeMore style={{color: 'gray'}}
-                            onPress={() => console.log("ola")}>Ver mais</SeeMore>
+                            <TouchableOpacity  onPress={() => console.log("ola")}>
+                                <SeeMore style={{color: 'gray'}}>Ver mais</SeeMore>
+                            </TouchableOpacity>
+                            
                         </TitleContainer>
                         <ContainerImages>
                             <LeftContainerImages>
