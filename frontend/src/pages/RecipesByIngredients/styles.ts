@@ -36,3 +36,17 @@ export const IngredientsIcons = styled.View`
     flex-direction: row;
     gap: 7px;
 `
+
+export const BackThePage = styled.View`
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0 30px;
+    width: 100%;
+`
+
+export const BackArrow = styled.Image`
+    margin-top: 10px;
+    width: 25px;
+    height: 25px;
+`
