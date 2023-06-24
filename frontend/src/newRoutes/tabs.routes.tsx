@@ -1,9 +1,9 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
-import HomeSvg from "../assets/tabNavigation/Home.svg"
-import SearchSvg from "../assets/tabNavigation/Search.svg"
-import FavoritesSvg from "../assets/tabNavigation/Heart.svg"
-import ProfileSvg from "../assets/tabNavigation/Profile.svg"
+import HomeSvg from "../assets/tabNavigation/GreenHome.svg"
+import SearchSvg from "../assets/tabNavigation/BlackSearch.svg"
+import FavoritesSvg from "../assets/tabNavigation/BlackHeart.svg"
+import ProfileSvg from "../assets/tabNavigation/BlackProfile.svg"
 import { HomeRoutes } from "./home.routes";
 import SearchByIngredients from "../pages/SearchByIngredients";
 import Favorites from "../pages/FavoriteBook";
