@@ -1,13 +1,14 @@
 import { BottomBarContainer, Container, GreetingText, GreetingUserContainer, NotFoundText, RecipeContainer, ScrollCategoryContainer, ScrollContainer, TextContainer, TitleText, UserContainer, UserLogo } from "./styles";
 import {CustomScrollView as ScrollView } from "../../../globalStyles";
-import Search from "../../components/Search";
 import CategoryButton from "../../components/CategoryButton";
-import RecipeButton from "../../components/RecipeButton";
-import BottomBar from "../../components/BottomBar";
 import { useNavigation } from "@react-navigation/native";
-import { useEffect, useState } from "react";
-import axios from "axios";
+import RecipeButton from "../../components/RecipeButton";
+import { useEffect, useState, useContext } from "react";
+import BottomBar from "../../components/BottomBar";
+import Search from "../../components/Search";
 import { View } from "react-native";
+import axios from "axios";
+import { AuthContext } from "../../context/auth"
 
 const categories = [
     { name: 'Vegano', 
@@ -79,6 +80,7 @@ const categories = [
 
 export default function MainViewer() {
     const navigation = useNavigation();
+    const { data } = useContext(AuthContext);
     const [searchInput, setSearchInput] = useState('');
     const [mainOrSearch, setMainOrSearch] = useState(true)
     const [notFound, setNotFound] = useState(true);
@@ -144,7 +146,7 @@ export default function MainViewer() {
                 <Container>
                     <UserContainer>
                         <GreetingUserContainer>
-                            <GreetingText>Olá, Rossana</GreetingText>
+                            <GreetingText>Olá, {data.name?.split(' ')[0]}</GreetingText>
                             <TitleText>Vamos Cozinhar uma boa receita hoje!</TitleText>
                         </GreetingUserContainer>
                         <UserLogo source={require('../../assets/Users/Janet.png')} />
