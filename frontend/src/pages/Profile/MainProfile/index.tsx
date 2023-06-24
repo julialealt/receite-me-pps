@@ -1,6 +1,5 @@
 import { View } from "react-native";
 import {CustomScrollView as ScrollView } from "../../../../globalStyles";
-import BottomBar from "../../../components/BottomBar";
 import { Container, UserContainer, UserFunctionsIconContainer, UserFunctionsList, UserFunctionsText, UserIcon, UserLogo, UserName, UserStatus } from "./styles";
 import { useNavigation } from "@react-navigation/native";
 
@@ -11,8 +10,8 @@ interface ProfileProps {
   navigation: () => void
 }
 
-export default function MainProfile() {
-    const navigation = useNavigation();
+export default function MainProfile({navigation}) {
+    //const navigation = useNavigation();
 
     const profiles: ProfileProps[] = [
       { 
@@ -40,14 +39,14 @@ export default function MainProfile() {
         id: 4,
         text: "Logout", 
         icon: require("../../../assets/profileIcons/Logout.png"),
-        navigation: () => navigation.navigate("favoriteBook") 
+        navigation: () => navigation.navigate("Initial") 
 
       },
       { 
         id: 5,
         text: "Excluir conta", 
         icon: require("../../../assets/profileIcons/bin.png"),
-        navigation: () => navigation.navigate("favoriteBook") 
+        navigation: () => navigation.navigate("Initial") 
 
       },
     ];
@@ -71,7 +70,6 @@ export default function MainProfile() {
                 </UserFunctionsList>
             </Container>
         </ScrollView>
-        <BottomBar />
       </View>
     )
 }

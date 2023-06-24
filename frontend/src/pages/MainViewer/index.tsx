@@ -3,7 +3,6 @@ import {CustomScrollView as ScrollView } from "../../../globalStyles";
 import Search from "../../components/Search";
 import CategoryButton from "../../components/CategoryButton";
 import RecipeButton from "../../components/RecipeButton";
-import BottomBar from "../../components/BottomBar";
 import { useNavigation } from "@react-navigation/native";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -118,7 +117,6 @@ export default function MainViewer() {
                     </TextContainer>
                 </Container>
             </ScrollView>
-            <BottomBar />
         </View>
     )
 }

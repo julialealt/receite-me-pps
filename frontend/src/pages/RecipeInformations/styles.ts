@@ -156,8 +156,8 @@ export const PrepationMethodCircle = styled.Image`
 `
 
 export const BackArrow = styled.Image`
-    width: 25px;
-    height: 25px;
+    width: 20px;
+    height: 20px;
 `
 
 export const HeartImage = styled.Image`

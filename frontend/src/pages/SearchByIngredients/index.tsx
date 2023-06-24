@@ -7,7 +7,6 @@ import SelectedIngredient from "../../components/SelectedIngredient";
 import Button from "../../components/Button";
 import { useEffect, useState } from "react";
 import { View } from "react-native";
-import BottomBar from "../../components/BottomBar";
 
 interface Ingredient {
     id: number;
@@ -58,7 +57,6 @@ export default function SearchByIngredients() {
                     </ButtonContainer>
                 </Container>
             </ContainerScrollView>
-            <BottomBar />
         </View>
     )
 }

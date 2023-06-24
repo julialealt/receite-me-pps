@@ -14,10 +14,10 @@ interface FormData {
 interface UserFormData extends FormData {
     nome: string;
     id: number;
-  }
+}
 
-export default function Login() {
-    const navigation = useNavigation();
+export default function Login({navigation}) {
+    //const navigation = useNavigation();
     const [formData, setFormData] = useState({
         email: "",
         password: ""
@@ -36,7 +36,8 @@ export default function Login() {
     //     const account = formData;
     //     const findUserInAccount = !!users.find((item: UserFormData) => item.email === account.email && item.password === account.password);
         // if(findUserInAccount) 
-        navigation.navigate('mainViewer');
+        //navigation.navigate('mainViewer');
+        navigation.navigate('Home');
     };
 
     return(

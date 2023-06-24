@@ -12,31 +12,12 @@ import SearchByIngredients from './src/pages/SearchByIngredients';
 import RecipesByIngredients from './src/pages/RecipesByIngredients';
 import RecipeInformations from './src/pages/RecipeInformations';
 import FavoriteBook from './src/pages/FavoriteBook';
-import BottomBar from './src/components/BottomBar';
 import { Routes } from './src/routes';
 import CategoryRecipes from './src/pages/CategoryRecipes';
 
-/*import { useFonts } from 'expo-font';
-
-export default function App() {
-  const [fontsLoaded] = useFonts({
-    'Poppins-Regular': require('./src/assets/fonts/Poppins-Regular.ttf'),
-    'Poppins-Medium': require('./src/assets/fonts/Poppins-Medium.ttf'),
-    'Poppins-Bold': require('./src/assets/fonts/Poppins-Bold.ttf'),
-    'Poppins-SemiBold': require('./src/assets/fonts/Poppins-SemiBold.ttf'),
-  });
-  return (
-    <Routes />
-  );
-}
-*/
-
-
-
-
-
-import React from 'react';
+import * as React from 'react';
 import * as Font from 'expo-font';
+import { NewRoutes } from './src/newRoutes';
 
 let customFonts = {
   'Poppins-Regular': require('./src/assets/fonts/Poppins-Regular.ttf'),
@@ -65,25 +46,7 @@ export default class App extends React.Component {
     }
 
     return (
-      <Routes />
-      /*
-      <View style={styles.container}>
-        <Text style={{ fontFamily: 'Inter-Black', fontSize: 30 }}>Inter Black</Text>
-        <Text style={{ fontFamily: 'Inter-SemiBoldItalic', fontSize: 30 }}>
-          Inter SemiBoldItalic
-        </Text>
-        <Text style={{ fontSize: 30 }}>Platform Default</Text>
-      </View>
-      */
+      <NewRoutes />
     );
   }
 }
-/*
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-});
-*/

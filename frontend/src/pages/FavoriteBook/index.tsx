@@ -1,6 +1,5 @@
 import { View } from "react-native";
 import {CustomScrollView as ScrollView } from "../../../globalStyles";
-import BottomBar from "../../components/BottomBar";
 import { BottomSideRightImage, Container, ContainerFavoriteBook, ContainerImages, LeftContainerImages, LeftImage, MainTitle, RightContainerImages, ScrollViewContainer, SeeMore, TitleContainer, TitleFavoriteBook, TopSideRightImage } from "./styles";
 
 export default function FavoriteBook() {
@@ -42,7 +41,6 @@ export default function FavoriteBook() {
                     </ContainerFavoriteBook>
                 </Container>
             </ScrollViewContainer>
-            <BottomBar />
         </View>
     )
 }
