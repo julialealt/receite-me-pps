@@ -3,8 +3,9 @@ import { Weight700 } from "../../../globalStyles";
 import Button from "../../components/Button";
 import Input from "../../components/Input";
 import { Container, ContainerButton, LoginText } from "./styles";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import axios from "axios";
+import { AuthContext } from "../../context/auth"
 
 interface FormData {
     email: string;
@@ -18,6 +19,7 @@ interface UserFormData extends FormData {
 
 export default function Login() {
     const navigation = useNavigation();
+    const { signIn } = useContext(AuthContext)
     const [formData, setFormData] = useState({
         email: "",
         password: ""
@@ -31,12 +33,16 @@ export default function Login() {
     }
 
     const handleLogin = async() => {
-    //     const response = await axios.get("http://localhost:3000/users")
-    //     const users = response.data;
-    //     const account = formData;
-    //     const findUserInAccount = !!users.find((item: UserFormData) => item.email === account.email && item.password === account.password);
-        // if(findUserInAccount) 
-        navigation.navigate('mainViewer');
+        signIn(formData.email, formData.password)
+        .then((result) => {
+            if (result) {
+                console.log(result)
+                navigation.navigate('mainViewer');
+            }
+        })
+        .catch((error) => {
+            console.error('Sign-in error:', error);
+        });
     };
 
     return(
