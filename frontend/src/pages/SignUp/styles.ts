@@ -8,14 +8,14 @@ export const Container = styled.View`
 `
 
 export const LoginText = styled.Text`
-    fontFamily: 'Poppins-Bold';
+    font-family: 'Poppins-Bold';
     font-size: 25px;
     color: #272727;
     margin: 0 0 8px 0 ;
 `
 
 export const SubText = styled.Text`
-    fontFamily: 'Poppins-Medium';
+    font-family: 'Poppins-Medium';
     font-size: 12px;
     color: #686868;
 `

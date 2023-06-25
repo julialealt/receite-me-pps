@@ -8,7 +8,7 @@ export const Container = styled.View`
 `
 
 export const LoginText = styled.Text`
-    fontFamily: 'Poppins-Bold';
+    font-family: 'Poppins-Bold';
     font-size: 25px;
     color: #272727;
     margin: 0 0 50px 0 ;

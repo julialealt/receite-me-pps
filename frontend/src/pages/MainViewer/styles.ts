@@ -51,14 +51,14 @@ export const BottomBarContainer = styled.View`
 
 // Text
 export const GreetingText = styled.Text`
-    fontFamily: 'Poppins-SemiBold';
+    font-family: 'Poppins-SemiBold';
     font-size: 14px;
     color: #a9a9a9;
 
 `
 
 export const TitleText = styled.Text `
-    fontFamily: 'Poppins-Bold';
+    font-family: 'Poppins-Bold';
     font-size: 20px;
     width: 230px;
 `

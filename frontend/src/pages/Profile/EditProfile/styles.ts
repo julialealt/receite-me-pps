@@ -29,7 +29,7 @@ export const ContainerEditProfileInputs = styled.View`
 `
 
 export const EditProfileText = styled.Text`
-    fontFamily: 'Poppins-Bold';
+    font-family: 'Poppins-Bold';
     font-size: 20px;
 `
 

@@ -30,14 +30,14 @@ export const UserFunctionsIconContainer = styled.TouchableOpacity`
 
 //Text
 export const UserName = styled.Text`
-    fontFamily: 'Poppins-Bold';
+    font-family: 'Poppins-Bold';
     font-size: 20px;
     width: 240px;
     text-align: center;
 `
 
 export const UserStatus = styled.Text`
-    fontFamily: 'Poppins-Medium';
+    font-family: 'Poppins-Medium';
     font-size: 14px;
     color: #A9A9A9;
     width: 180px;
@@ -45,7 +45,7 @@ export const UserStatus = styled.Text`
 `
 
 export const UserFunctionsText = styled.Text`
-    fontFamily: 'Poppins-Medium';
+    font-family: 'Poppins-Medium';
     font-size: 16px;
 `
 

@@ -10,10 +10,11 @@ export const Container = styled.View `
 `
 
 export const TextRecentlyRecipes = styled.Text `
-    fontFamily: 'Poppins-Bold';
-    font-size: 20px;
+    font-Family: 'Poppins-Bold';
+    font-size: 18px;
     text-align: center;
     width: 250px;
+    margin-top: 20px;
 `
 
 export const RecipeContainer = styled.View`

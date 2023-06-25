@@ -23,7 +23,7 @@ export const IngredientsContainer = styled.View`
 `
 
 export const TitleText = styled.Text`
-    fontFamily: 'Poppins-Bold';
+    font-family: 'Poppins-Bold';
     font-size: 30px;
     width: 220px;
 `

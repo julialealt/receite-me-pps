@@ -9,7 +9,7 @@ export const Container = styled.View`
 `
 
 export const TextTitle = styled.Text`
-    fontFamily: 'Poppins-Bold';
+    font-family: 'Poppins-Bold';
     font-size: 20px;
     width: 272px;
     text-align: center;

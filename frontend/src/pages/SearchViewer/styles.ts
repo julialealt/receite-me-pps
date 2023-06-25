@@ -33,15 +33,15 @@ export const RecipeContainer = styled.View`
 //Text
 
 export const GreetingText = styled.Text`
+    font-family: 'Poppins-SemiBold';
     font-size: 14px;
-    font-weight: 600;
     color: #a9a9a9;
 
 `
 
 export const TitleText = styled.Text `
+    font-family: 'Poppins-Bold';
     font-size: 20px;
-    font-weight: 700;
     width: 230px;
 `
 
