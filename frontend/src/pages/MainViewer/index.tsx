@@ -28,47 +28,47 @@ const categories = [
       id: 2,
       name: 'Coxinha', 
       time: '10-15 min',
-      image: require('../../assets/recipes/Coxinha.png') },
+      image: "https://i.postimg.cc/WzKWFG1x/Coxinha.png" },
     { 
       id: 3,
       name: 'Feijoada', 
       time: '10-15 min',
-      image: require('../../assets/recipes/Feijoada.png') },
+      image: "https://i.postimg.cc/26kXPjt9/Feijoada.png" },
     { 
       id: 4,
       name: 'Filé Mignon', 
       time: '10-15 min',
-      image: require('../../assets/cat-logo.png') },
+      image: "https://i.postimg.cc/tJ7v4Sph/fmignon.png"},
     { 
       id: 5,
       name: 'Hamburguer', 
       time: '10-15 min',
-      image: require('../../assets/recipes/Hamburguer.png') },
+      image: "https://i.postimg.cc/zBxP5ZZz/Hamburguer.png" },
     { 
       id: 6,
       name: 'Cachorro Quente', 
       time: '10-15 min',
-      image: require('../../assets/recipes/HotDog.png') },
+      image: "https://i.postimg.cc/W46HWq5J/HotDog.png" },
     { 
       id: 7,
       name: 'Ramen Coreano', 
       time: '10-15 min',
-      image: require('../../assets/recipes/Ramen.png') },
+      image: "https://i.postimg.cc/Wp9QcrTG/Ramen2.png" },
     { 
       id: 8,
       name: 'Spaghetti', 
       time: '10-15 min',
-      image: require('../../assets/recipes/Spaghetti.png') },
+      image: "https://i.postimg.cc/NjXVXzTD/Spaghetti.png" },
     { 
       id: 9,
       name: 'Sushi', 
       time: '10-15 min',
-      image: require('../../assets/recipes/Sushi.png') },
+      image: "https://i.postimg.cc/xThhc2kq/Sushi.png" },
     { 
       id: 10,
       name: 'Yakissoba', 
       time: '10-15 min',
-      image: require('../../assets/recipes/Yakissoba.png') },
+      image: "https://i.postimg.cc/rFK7Vmwv/Yakissoba.png" },
     ];
 
   interface RecipeData {
@@ -99,7 +99,7 @@ export default function MainViewer() {
 
     const getRecipeInformations = async () => {
         try {
-            const response = await axios.get<RecipeData[]>('http://localhost:3000/recipes');
+            const response = await axios.get<RecipeData[]>('https://json-test-phi.vercel.app/recipes');
             const updatedRecipeData = response.data.map(({id, image, name, time}) => {
             if(name.length >= 15) {
                 name = name.slice(0, 14) + '...';
@@ -198,8 +198,8 @@ export default function MainViewer() {
                             </> ) : (
                     <RecipeContainer>
                         {notFound ? (
-                            allRecipes?.map(({id, image, name, time}) => (
-                                <RecipeButton key={id} label={name} icon={image} time={time} size="bigger" />
+                            recipeData?.map(({id, image, name, time}) => (
+                                <RecipeButton key={id} label={name} icon={image} time={time} size="bigger" onPress={() => navigation.navigate("recipeInformations", { id: id })} />
                             ))
                             ) : (
                             <NotFoundText>Não encontramos receitas com os ingredientes selecionados...</NotFoundText>
