@@ -11,7 +11,7 @@ interface RecipeProps {
 export default function RecipeButton({label, icon, time, size, onPress}: RecipeProps) {
     return(
         <Container size={size} onPress={onPress}>
-            <ImageRecipe size={size} source={icon} />
+            <ImageRecipe size={size} source={{uri: icon}} />
             <TextRecipe>{label}</TextRecipe>
             <ContainerTimer>
                 <ImageTimer source={require('../../assets/geral/clock.png')} />
