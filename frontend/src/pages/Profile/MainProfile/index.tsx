@@ -3,6 +3,8 @@ import {CustomScrollView as ScrollView } from "../../../../globalStyles";
 import BottomBar from "../../../components/BottomBar";
 import { Container, UserContainer, UserFunctionsIconContainer, UserFunctionsList, UserFunctionsText, UserIcon, UserLogo, UserName, UserStatus } from "./styles";
 import { useNavigation } from "@react-navigation/native";
+import { useContext } from "react";
+import { AuthContext } from "../../../context/auth";
 
 interface ProfileProps {
   id: number,
@@ -13,6 +15,7 @@ interface ProfileProps {
 
 export default function MainProfile() {
     const navigation = useNavigation();
+    const { data } = useContext(AuthContext)
 
     const profiles: ProfileProps[] = [
       { 
@@ -59,7 +62,7 @@ export default function MainProfile() {
                 <UserContainer>
                     <UserLogo source={require('../../../assets/Users/Janet.png')} />
                     <UserName>Rossana Andrade</UserName>
-                    <UserStatus>Apaixonada por não morrer de fome</UserStatus>
+                    <UserStatus>{data.bio}</UserStatus>
                 </UserContainer>
                 <UserFunctionsList>
                     {profiles.map(({id, icon, text, navigation}) => (
