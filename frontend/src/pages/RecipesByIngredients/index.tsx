@@ -4,6 +4,9 @@ import SelectIngredientButton from "../../components/SelectIngredientButton";
 import {CustomScrollView as ScrollView } from "../../../globalStyles";
 import RecipeButton from "../../components/RecipeButton";
 
+import { propsStack } from '../../routes/Models';
+import { useNavigation } from "@react-navigation/native";
+
 const recipes = [
     { name: 'Coxinha', 
       time: '10-15 min',
@@ -35,6 +38,8 @@ const recipes = [
     ];
 
 export default function RecipesByIngredients() {
+  const navigation = useNavigation<propsStack>();
+
     return(
       <ScrollView>
         <Container>

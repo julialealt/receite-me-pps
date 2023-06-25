@@ -7,6 +7,10 @@ import SelectedIngredient from "../../components/SelectedIngredient";
 import Button from "../../components/Button";
 import { useEffect, useState } from "react";
 import { View } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+
+import { propsStack } from '../../routes/Models';
+
 
 interface Ingredient {
     id: number;
@@ -32,6 +36,7 @@ const data: Ingredient[] = [
 ];
 
 export default function SearchByIngredients() {
+    const navigation = useNavigation<propsStack>();
     const [addIngredient, setAddIngredient] = useState(false);
     const [ingredientsArray, setIngredientsArray] = useState<Ingredient[]>([])
 
@@ -53,7 +58,7 @@ export default function SearchByIngredients() {
                         ))}
                     </IngredientsContainer>
                     <ButtonContainer>
-                        <Button labelButton="Pesquisar  >" height={50} width={200} radius={50}/>
+                        <Button labelButton="Pesquisar  >" height={50} width={200} radius={50} onPress={() => navigation.navigate("RecipesByIngredients")}/>
                     </ButtonContainer>
                 </Container>
             </ContainerScrollView>

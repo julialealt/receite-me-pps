@@ -12,12 +12,11 @@ import SearchByIngredients from './src/pages/SearchByIngredients';
 import RecipesByIngredients from './src/pages/RecipesByIngredients';
 import RecipeInformations from './src/pages/RecipeInformations';
 import FavoriteBook from './src/pages/FavoriteBook';
-import { Routes } from './src/routes';
 import CategoryRecipes from './src/pages/CategoryRecipes';
 
 import * as React from 'react';
 import * as Font from 'expo-font';
-import { NewRoutes } from './src/newRoutes';
+import Routes from './src/routes';
 
 let customFonts = {
   'Poppins-Regular': require('./src/assets/fonts/Poppins-Regular.ttf'),
@@ -46,7 +45,7 @@ export default class App extends React.Component {
     }
 
     return (
-      <NewRoutes />
+      <Routes />
     );
   }
 }

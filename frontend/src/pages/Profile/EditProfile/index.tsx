@@ -5,8 +5,10 @@ import Button from "../../../components/Button";
 import { useNavigation } from "@react-navigation/native";
 import { Text, TouchableOpacity, View } from "react-native";
 
+import { propsStack } from '../../../routes/Models';
+
 export default function EditProfile() {
-    const navigation = useNavigation()
+    const navigation = useNavigation<propsStack>()
 
     return(
         <ScrollView>
@@ -26,7 +28,7 @@ export default function EditProfile() {
                     <Input label="Nova senha" />
                     <Input label="confirme nova senha" />
                 </ContainerEditProfileInputs>
-                <Button labelButton="Salvar alterações" width={290} height={47} radius={12} />
+                <Button labelButton="Salvar alterações" width={290} height={47} radius={12} onPress={() => navigation.goBack()}/>
             </Container>
         </ScrollView>
     )

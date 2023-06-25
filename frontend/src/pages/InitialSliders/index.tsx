@@ -6,6 +6,8 @@ import { Weight700 } from '../../../globalStyles';
 import AppIntroSlider from 'react-native-app-intro-slider';
 import IntroductionButton from '../../components/Button';
 import Button from '../../components/Button';
+import HeartSvg from "../../assets/tabNavigation/GreenHeart.svg"
+import { propsStack } from '../../routes/Models';
 
 const slides: Item[] = [
   {
@@ -53,7 +55,7 @@ interface Item {
 
 export default function InitialSliders() {
   const [showScreen, setShowScreen] = useState(false);
-  const navigation = useNavigation();
+  const navigation = useNavigation<propsStack>();
   
   const renderSlides = ({ item }: {item: Item}) => {
       if(Object.keys(item).length == 7) {
@@ -100,7 +102,7 @@ export default function InitialSliders() {
               </BackgroundImage>
               <ContainerButton>
                 {item.title}
-                <Button labelButton='JUNTE-SE A NÓS' onPress={() => navigation.navigate('signUp')}  width={290} height={65} radius={20} />
+                <Button labelButton='JUNTE-SE A NÓS' onPress={() => navigation.navigate('SignUp')}  width={290} height={65} radius={20} />
               </ContainerButton>
             </Container>
           </ScrollView>

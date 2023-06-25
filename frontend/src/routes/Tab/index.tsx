@@ -1,25 +1,28 @@
+import React from 'react';
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { propsNavigationStack } from '../Models';
 
-import GreenHomeSvg from "../assets/tabNavigation/GreenHome.svg"
-import BlackHomeSvg from "../assets/tabNavigation/BlackHome.svg"
-import GreenSearchSvg from "../assets/tabNavigation/GreenSearch.svg"
-import BlackSearchSvg from "../assets/tabNavigation/BlackSearch.svg"
-import GreenHeartSvg from "../assets/tabNavigation/GreenHeart.svg"
-import BlackHeartSvg from "../assets/tabNavigation/BlackHeart.svg"
-import GreenProfileSvg from "../assets/tabNavigation/GreenProfile.svg"
-import BlackProfileSvg from "../assets/tabNavigation/BlackProfile.svg"
-import { HomeRoutes } from "./home.routes";
-import SearchByIngredients from "../pages/SearchByIngredients";
-import Favorites from "../pages/FavoriteBook";
-import { ProfileRoutes } from "./profile.routes";
+import GreenHomeSvg from "../../assets/tabNavigation/GreenHome.svg"
+import BlackHomeSvg from "../../assets/tabNavigation/BlackHome.svg"
+import GreenSearchSvg from "../../assets/tabNavigation/GreenSearch.svg"
+import BlackSearchSvg from "../../assets/tabNavigation/BlackSearch.svg"
+import GreenHeartSvg from "../../assets/tabNavigation/GreenHeart.svg"
+import BlackHeartSvg from "../../assets/tabNavigation/BlackHeart.svg"
+import GreenProfileSvg from "../../assets/tabNavigation/GreenProfile.svg"
+import BlackProfileSvg from "../../assets/tabNavigation/BlackProfile.svg"
+import MainViewer from '../../pages/MainViewer';
+import SearchByIngredients from '../../pages/SearchByIngredients';
+import FavoriteBook from '../../pages/FavoriteBook';
+import MainProfile from '../../pages/Profile/MainProfile';
 
+const { Navigator, Screen } = createBottomTabNavigator<propsNavigationStack>();
 
-export function TabsRoutes() {
-
-    const { Navigator, Screen } = createBottomTabNavigator();
+export default function Tab() {
 
     return (
-        <Navigator screenOptions={{ 
+        <Navigator 
+        initialRouteName='MainViewer'
+        screenOptions={{
             headerShown: false, tabBarShowLabel: false,
             tabBarStyle: {
                 position: "absolute",
@@ -31,8 +34,8 @@ export function TabsRoutes() {
             }
          }}>
             <Screen 
-                name="homeRoutes" 
-                component={HomeRoutes}
+                name="MainViewer" 
+                component={MainViewer}
                 options={{ 
                     tabBarIcon: ({ focused }) => {
                         if (focused) {
@@ -44,7 +47,7 @@ export function TabsRoutes() {
             />
 
             <Screen 
-                name="search"  
+                name="SearchByIngredients"  
                 component={SearchByIngredients}
                 options={{
                     tabBarIcon: ({ focused }) => {
@@ -57,8 +60,8 @@ export function TabsRoutes() {
             />
 
             <Screen 
-                name="favorites" 
-                component={Favorites}
+                name="Favorites" 
+                component={FavoriteBook}
                 options={{
                     tabBarIcon: ({ focused }) => {
                         if (focused) {
@@ -70,8 +73,8 @@ export function TabsRoutes() {
             />
 
             <Screen 
-                name="profileRoutes" 
-                component={ProfileRoutes}
+                name="Profile" 
+                component={MainProfile}
                 options={{
                     tabBarIcon: ({ focused }) => {
                         if (focused) {
@@ -84,5 +87,4 @@ export function TabsRoutes() {
 
         </Navigator>
     );
-
 }

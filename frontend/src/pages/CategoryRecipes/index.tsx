@@ -3,6 +3,7 @@ import { CustomScrollView as ScrollView } from "../../../globalStyles";
 import RecipeButton from "../../components/RecipeButton";
 import { BackArrow, BackThePage, Container, RecipeContainer, TextRecentlyRecipes } from "./styles";
 import { Text, TouchableOpacity } from "react-native";
+import { propsStack } from '../../routes/Models';
 
 type ParamsProps = {
     category: string;
@@ -40,7 +41,7 @@ const recipes = [
 
 export default function CategoryRecipes() {
     const route = useRoute();
-    const navigation = useNavigation()
+    const navigation = useNavigation<propsStack>()
     const { category } = route.params as ParamsProps;
 
     return(

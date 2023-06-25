@@ -7,6 +7,7 @@ import { useNavigation } from "@react-navigation/native";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { View } from "react-native";
+import { propsStack } from '../../routes/Models';
 
 const categories = [
     { name: 'Veggie', 
@@ -29,7 +30,7 @@ const categories = [
   }
 
 export default function MainViewer() {
-    const navigation = useNavigation();
+    const navigation = useNavigation<propsStack>();
     const [recipeData, setRecipeData] = useState<RecipeData[] | null>([{ 
         id: 0, 
         name: '', 
@@ -80,7 +81,7 @@ export default function MainViewer() {
                         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
                             <ScrollCategoryContainer>
                             {categories.map(({ name, image }, index) => (
-                                    <CategoryButton key={index} label={name} Icon={image} onPress={() => navigation.navigate('categoryRecipes', { category: name })} />
+                                    <CategoryButton key={index} label={name} Icon={image} onPress={() => navigation.navigate('CategoryRecipes', { category: name })} />
                                 ))}
                             </ScrollCategoryContainer>
                         </ScrollView>
@@ -90,7 +91,7 @@ export default function MainViewer() {
                         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
                             <ScrollContainer>
                                 {recipeData?.map(({ id ,name, time, image}) => (
-                                    <RecipeButton key={id} label={name} icon={image} time={time} onPress={() => navigation.navigate("recipeInformations", {id: id})} />
+                                    <RecipeButton key={id} label={name} icon={image} time={time} onPress={() => navigation.navigate("RecipeInformations", {id: id})} />
                                 ))}
                             </ScrollContainer>
                         </ScrollView>
@@ -100,7 +101,7 @@ export default function MainViewer() {
                         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
                             <ScrollContainer>
                                 {recipeData?.map(({ id ,name, time, image}) => (
-                                    <RecipeButton key={id} label={name} icon={image} time={time} onPress={() => navigation.navigate("recipeInformations", {id: id})} />
+                                    <RecipeButton key={id} label={name} icon={image} time={time} onPress={() => navigation.navigate("RecipeInformations", {id: id})} />
                                 ))}
                             </ScrollContainer>
                         </ScrollView>
@@ -110,7 +111,7 @@ export default function MainViewer() {
                         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
                             <ScrollContainer>
                                 {recipeData?.map(({ id ,name, time, image}) => (
-                                    <RecipeButton key={id} label={name} icon={image} time={time} onPress={() => navigation.navigate("recipeInformations", {id: id})} />
+                                    <RecipeButton key={id} label={name} icon={image} time={time} onPress={() => navigation.navigate("RecipeInformations", {id: id})} />
                                 ))}
                             </ScrollContainer>
                         </ScrollView>

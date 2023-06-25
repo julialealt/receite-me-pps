@@ -5,6 +5,7 @@ import Input from "../../components/Input";
 import { Container, ContainerButton, LoginText } from "./styles";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { propsStack } from '../../routes/Models';
 
 interface FormData {
     email: string;
@@ -16,8 +17,8 @@ interface UserFormData extends FormData {
     id: number;
 }
 
-export default function Login({navigation}) {
-    //const navigation = useNavigation();
+export default function Login() {
+    const navigation = useNavigation<propsStack>();
     const [formData, setFormData] = useState({
         email: "",
         password: ""
@@ -37,7 +38,7 @@ export default function Login({navigation}) {
     //     const findUserInAccount = !!users.find((item: UserFormData) => item.email === account.email && item.password === account.password);
         // if(findUserInAccount) 
         //navigation.navigate('mainViewer');
-        navigation.navigate('Home');
+        navigation.navigate("Tab");
     };
 
     return(

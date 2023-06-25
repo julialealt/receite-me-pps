@@ -4,6 +4,8 @@ import RecipeButton from "../../../components/RecipeButton";
 import { Text, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
+import { propsStack } from '../../../routes/Models';
+
 const recipes = [
     { name: 'Coxinha', 
       time: '10-15 min',
@@ -35,7 +37,7 @@ const recipes = [
     ];
 
 export default function RecentlyViewed() {
-    const navigation = useNavigation()
+    const navigation = useNavigation<propsStack>()
 
     return(
       <ScrollView>

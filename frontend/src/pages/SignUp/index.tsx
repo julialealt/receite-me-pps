@@ -6,6 +6,8 @@ import { Container, ContainerButton, LoginText, SubText } from "./styles";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Text } from "react-native";
+import { propsStack } from '../../routes/Models';
+
 interface FormData {
     nome: string;
     email: string;
@@ -13,7 +15,7 @@ interface FormData {
   }
 
 export default function SignUp() {
-    const navigation = useNavigation()
+    const navigation = useNavigation<propsStack>()
 
     const [formData, setFormData] = useState<FormData>({
         nome: '',
@@ -45,7 +47,7 @@ export default function SignUp() {
     
       useEffect(() => {
         if (success) {
-          navigation.navigate("login");
+          navigation.navigate("Login");
         }
       }, [success, navigation]);
 
@@ -68,7 +70,7 @@ export default function SignUp() {
                 <Button labelButton="CADASTRAR" onPress={handleSignUp} width={200} height={47} radius={10} />
                 <SubText>Já possui uma conta? <Weight700 
                 style={{color: "#22A36D"}} 
-                onPress={() => navigation.navigate('login')}>Entre agora</Weight700></SubText>
+                onPress={() => navigation.navigate('Login')}>Entre agora</Weight700></SubText>
             </ContainerButton>
         </Container>
     )
