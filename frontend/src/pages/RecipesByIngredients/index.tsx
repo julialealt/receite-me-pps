@@ -6,47 +6,64 @@ import RecipeButton from "../../components/RecipeButton";
 import { Text, TouchableOpacity } from "react-native";
 import { useNavigation, useRoute } from "@react-navigation/native";
 
-type ParamsProps = {
-  ingredients: {
-    id: number;
-    ingredient: string;
-  }[];
-}[];
+interface ParamsProps {
+  ingredients: string[]
+}
 
 const recipes = [
-  { name: 'Coxinha', 
+  { 
+    id: 2,
+    name: 'Coxinha', 
     time: '10-15 min',
-    image: require('../../assets/recipes/Coxinha.png') },
-  { name: 'Feijoada', 
+    image: "https://i.postimg.cc/WzKWFG1x/Coxinha.png" },
+  { 
+    id: 3,
+    name: 'Feijoada', 
     time: '10-15 min',
-    image: require('../../assets/recipes/Feijoada.png') },
-  { name: 'Filé Mignon', 
+    image: "https://i.postimg.cc/26kXPjt9/Feijoada.png" },
+  { 
+    id: 4,
+    name: 'Filé Mignon', 
     time: '10-15 min',
-    image: require('../../assets/cat-logo.png') },
-  { name: 'Hamburguer', 
+    image: "https://i.postimg.cc/tJ7v4Sph/fmignon.png"},
+  { 
+    id: 5,
+    name: 'Hamburguer', 
     time: '10-15 min',
-    image: require('../../assets/recipes/Hamburguer.png') },
-  { name: 'Cachorro Quente', 
+    image: "https://i.postimg.cc/zBxP5ZZz/Hamburguer.png" },
+  { 
+    id: 6,
+    name: 'Cachorro Quente', 
     time: '10-15 min',
-    image: require('../../assets/recipes/HotDog.png') },
-  { name: 'Ramen Coreano', 
+    image: "https://i.postimg.cc/W46HWq5J/HotDog.png" },
+  { 
+    id: 7,
+    name: 'Ramen Coreano', 
     time: '10-15 min',
-    image: require('../../assets/recipes/Ramen.png') },
-  { name: 'Spaghetti', 
+    image: "https://i.postimg.cc/Wp9QcrTG/Ramen2.png" },
+  { 
+    id: 8,
+    name: 'Spaghetti', 
     time: '10-15 min',
-    image: require('../../assets/recipes/Spaghetti.png') },
-  { name: 'Sushi', 
+    image: "https://i.postimg.cc/NjXVXzTD/Spaghetti.png" },
+  { 
+    id: 9,
+    name: 'Sushi', 
     time: '10-15 min',
-    image: require('../../assets/recipes/Sushi.png') },
-  { name: 'Yakissoba', 
+    image: "https://i.postimg.cc/xThhc2kq/Sushi.png" },
+  { 
+    id: 10,
+    name: 'Yakissoba', 
     time: '10-15 min',
-    image: require('../../assets/recipes/Yakissoba.png') },
+    image: "https://i.postimg.cc/rFK7Vmwv/Yakissoba.png" },
   ];
 
 
 export default function RecipesByIngredients() {
   const navigation = useNavigation();
   const route = useRoute();
+  const { ingredients } = route.params as ParamsProps;
+  console.log(ingredients)
 
   return(
     <ScrollView>
@@ -61,13 +78,9 @@ export default function RecipesByIngredients() {
           <IngredientsContainer>
             <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
               <IngredientsIcons>
-                {/* {routeParams.map(({id, ingredient}) => (
-                  <SelectIngredientButton key={id} name={ingredient} />
-                ))} */}
-                  <SelectIngredientButton name="Terra Seca"/>
-                  <SelectIngredientButton name="Terra Seca"/>
-                  <SelectIngredientButton name="Terra Seca"/>
-                  <SelectIngredientButton name="Terra Seca"/>
+                {ingredients.map((item, index) => (
+                  <SelectIngredientButton key={index} name={item} />
+                ))}
               </IngredientsIcons>
             </ScrollView>
           </IngredientsContainer>
