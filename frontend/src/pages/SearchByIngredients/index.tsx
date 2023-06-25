@@ -42,7 +42,7 @@ export default function SearchByIngredients() {
 
     const getIngredients = async () => {
         try {
-            const response = await axios.get<Ingredient[]>('http://localhost:3000/ingredients');
+            const response = await axios.get<Ingredient[]>('https://json-test-phi.vercel.app/ingredients');
             setAllIngredients(response.data);
         } catch (error) {
             console.error('Erro ao obter ingredientes:', error);
@@ -71,7 +71,7 @@ export default function SearchByIngredients() {
                         ))}
                     </IngredientsContainer>
                     <ButtonContainer>
-                        <Button labelButton="Pesquisar  >" height={70} width={240} radius={50} onPress={() => navigation.navigate('recipesByIngredients', {ingredients: ingredientsArray})}/>
+                        <Button labelButton="Pesquisar  >" height={70} width={240} radius={50} onPress={() => navigation.navigate('recipesByIngredients', {ingredients: ingredientsArray.map(item => item.ingredients)})}/>
                     </ButtonContainer>
                 </Container>
             </ContainerScrollView>
