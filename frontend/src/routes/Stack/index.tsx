@@ -46,18 +46,15 @@ export default function() {
 
             <Screen
             name='RecipesByIngredients'
-            component={RecipesByIngredients}
-            />
+            component={RecipesByIngredients}/>
 
             <Screen
             name='EditProfile'
-            component={EditProfile}
-            />
+            component={EditProfile}/>
 
             <Screen
             name='RecentlyViewed'
-            component={RecentlyViewed}
-            />
+            component={RecentlyViewed}/>
 
         </Navigator>
     )
