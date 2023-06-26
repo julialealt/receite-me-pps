@@ -48,7 +48,7 @@ export default function RecipeInformations() {
     // const source = hearthColor ? hearthWhite : hearthGreen;
 
   const getRecipeInformations = async () => {
-    const response = await axios.get(`http://localhost:3000/recipes/${id}`);
+    const response = await axios.get(`https://json-test-phi.vercel.app/recipes/${id}`);
     const responseData = response.data as RecipeData;
     setRecipeData(responseData);
   };
@@ -73,7 +73,7 @@ export default function RecipeInformations() {
                 </TouchableOpacity>
             </BackThePage>
             <Container>
-                <ImageRecipe source={recipeData?.image} />
+                <ImageRecipe source={{ uri: recipeData?.image }} />
                 <ContainerInformations>
                     <TitleInformations>{recipeData?.name}</TitleInformations>
                     <ContainerFirstLayer>
