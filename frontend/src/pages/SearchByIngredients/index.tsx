@@ -7,7 +7,6 @@ import SelectedIngredient from "../../components/SelectedIngredient";
 import Button from "../../components/Button";
 import { useEffect, useState } from "react";
 import { View } from "react-native";
-import BottomBar from "../../components/BottomBar";
 import { useNavigation } from "@react-navigation/native";
 import axios from "axios";
 
