@@ -20,7 +20,7 @@ export const IconCategory = styled.Image`
 `
 
 export const TextCategory = styled.Text`
-    fontFamily: 'Poppins-SemiBold';
+    font-family: 'Poppins-SemiBold';
     font-size: 9px;
     
 `

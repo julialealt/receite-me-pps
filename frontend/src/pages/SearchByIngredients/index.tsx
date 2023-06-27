@@ -7,7 +7,6 @@ import SelectedIngredient from "../../components/SelectedIngredient";
 import Button from "../../components/Button";
 import { useEffect, useState } from "react";
 import { View } from "react-native";
-import BottomBar from "../../components/BottomBar";
 import { useNavigation } from "@react-navigation/native";
 import axios from "axios";
 
@@ -74,7 +73,7 @@ export default function SearchByIngredients() {
                         ))}
                     </IngredientsContainer>
                     <ButtonContainer>
-                        <Button labelButton="Pesquisar  >" height={70} width={240} radius={50} onPress={() => navigation.navigate('RecipesByIngredients', {ingredients: ingredientsArray.map(item => item.ingredients)})}/>
+                        <Button labelButton="Pesquisar  >" height={55} width={200} radius={50} onPress={() => navigation.navigate('RecipesByIngredients', {ingredients: ingredientsArray.map(item => item.ingredients)})}/>
                     </ButtonContainer>
                 </Container>
             </ContainerScrollView>

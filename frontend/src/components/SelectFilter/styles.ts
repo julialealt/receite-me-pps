@@ -28,7 +28,7 @@ export const SelectButtonImage = styled.Image`
 `
 
 export const SelectButtonTextInput = styled.TextInput`
-    fontFamily: 'Poppins-Medium';
+    font-family: 'Poppins-Medium';
     font-size: 14px;
     color: #a9a9a9;
     flex-grow: 1;
@@ -42,7 +42,7 @@ export const SelectButtonFlatList = styled.FlatList`
 `
 
 export const SelectButttonFlatListText = styled.Text`
-    fontFamily: 'Poppins-Medium';
+    font-family: 'Poppins-Medium';
     display: flex;
     align-self: center;
     color: #A9A9A9; 

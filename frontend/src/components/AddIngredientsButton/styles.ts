@@ -7,7 +7,7 @@ export const ScopeButton = styled.TouchableOpacity`
 `
 
 export const TextButton = styled.Text`
-    fontFamily: 'Poppins-Medium';
+    font-family: 'Poppins-Medium';
     font-size: 16px;
     color: #a9a9a9;
     padding: 10px 15px;

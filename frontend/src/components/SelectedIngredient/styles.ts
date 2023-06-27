@@ -11,7 +11,7 @@ export const ScopeButton = styled.View`
 `
 
 export const TextButton = styled.Text`
-    fontFamily: 'Poppins-Medium';
+    font-family: 'Poppins-Medium';
     font-size: 14px;
     color: #A9A9A9;
 `

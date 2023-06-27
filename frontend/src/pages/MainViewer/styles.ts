@@ -71,6 +71,7 @@ export const TitleText = styled.Text `
     font-family: 'Poppins-Bold';
     white-space: nowrap;
     font-size: 20px;
+    width: 230px;
 `
 
 export const NotFoundText = styled.Text`
