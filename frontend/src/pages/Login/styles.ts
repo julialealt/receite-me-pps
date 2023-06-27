@@ -11,11 +11,25 @@ export const LoginText = styled.Text`
     font-family: 'Poppins-Bold';
     font-size: 25px;
     color: #272727;
-    margin: 0 0 50px 0 ;
 `
 
 export const ContainerButton = styled.View`
     align-items: center;
     gap: 30px;
     margin-top:13px;
+`
+
+export const BackThePage = styled.View`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    width: 100%;
+    margin: 0 0 50px 0 ;
+`;
+
+export const BackArrow = styled.Image`
+    width: 20px;
+    height: 20px;
 `

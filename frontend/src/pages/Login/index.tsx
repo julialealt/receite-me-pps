@@ -2,11 +2,12 @@ import { useNavigation } from "@react-navigation/native";
 import { Weight700 } from "../../../globalStyles";
 import Button from "../../components/Button";
 import Input from "../../components/Input";
-import { Container, ContainerButton, LoginText } from "./styles";
+import { BackArrow, BackThePage, Container, ContainerButton, LoginText } from "./styles";
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { AuthContext } from "../../context/auth"
 import { propsStack } from '../../routes/Models';
+import { Text, TouchableOpacity } from "react-native";
 
 interface FormData {
     email: string;
@@ -49,7 +50,13 @@ export default function Login() {
 
     return(
         <Container>
-            <LoginText>Login</LoginText>
+            <BackThePage>
+                <TouchableOpacity onPress={() => navigation.goBack()} >
+                <BackArrow source={require("../../assets/geral/arrowLeft.png")} />
+                </TouchableOpacity>
+                <LoginText>Login</LoginText>
+                <Text>‎ ‎ ‎ ‎ ‎ </Text>
+            </BackThePage>
             <Input label="Email" type="email" placeholder="joao@gmail.com" 
                 value={formData.email}
                 onChangeText={value => handleInputChange('email', value)} />
