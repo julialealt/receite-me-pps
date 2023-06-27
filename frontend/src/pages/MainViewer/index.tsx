@@ -198,7 +198,7 @@ export default function MainViewer() {
                             </> ) : (
                     <RecipeContainer>
                         {notFound ? (
-                            recipeData?.map(({id, image, name, time}) => (
+                            allRecipes?.map(({id, image, name, time}) => (
                                 <RecipeButton key={id} label={name} icon={image} time={time} size="bigger" onPress={() => navigation.navigate("RecipeInformations", { id: id })} />
                             ))
                             ) : (
