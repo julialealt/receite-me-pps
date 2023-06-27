@@ -1,4 +1,4 @@
-import { BottomBarContainer, Container, GreetingText, GreetingUserContainer, NotFoundText, RecipeContainer, ScrollCategoryContainer, ScrollContainer, TextContainer, TitleText, UserContainer, UserLogo } from "./styles";
+import { Container, GreetingText, GreetingUserContainer, NotFoundText, RecipeContainer, ScrollCategoryContainer, ScrollContainer, TextContainer, TitleText, UserContainer, UserLogo } from "./styles";
 import {CustomScrollView as ScrollView } from "../../../globalStyles";
 import CategoryButton from "../../components/CategoryButton";
 import { useNavigation } from "@react-navigation/native";

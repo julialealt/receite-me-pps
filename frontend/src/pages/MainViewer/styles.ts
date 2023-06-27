@@ -43,12 +43,6 @@ export const ScrollCategoryContainer = styled.View`
     gap: 10px;
 `
 
-export const BottomBarContainer = styled.View`
-    position: absolute;
-    z-index: 999;
-    bottom: 0;
-`
-
 export const RecipeContainer = styled.View`
     display: flex;
     flex-wrap: wrap;
