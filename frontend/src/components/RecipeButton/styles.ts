@@ -23,14 +23,14 @@ export const ContainerTimer = styled.View`
 `
 
 export const TextRecipe = styled.Text`
-    fontFamily: 'Poppins-Bold';
+    font-family: 'Poppins-Bold';
     font-size: 11px;
     text-align: left;
     margin-top: 2px;
 `
 
 export const TextTimer = styled.Text`
-    fontFamily: 'Poppins-SemiBold';
+    font-family: 'Poppins-SemiBold';
     font-size: 10px;
     color: #A9A9A9;
     text-align: left;

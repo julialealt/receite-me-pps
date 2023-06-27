@@ -34,6 +34,8 @@ export const UserName = styled.Text`
     font-size: 20px;
     width: 240px;
     text-align: center;
+    margin-top: 10px;
+    margin-bottom: 3px;
 `
 
 export const UserStatus = styled.Text`

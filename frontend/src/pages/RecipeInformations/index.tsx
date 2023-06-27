@@ -90,7 +90,7 @@ export default function RecipeInformations() {
                     <ContainerMacroNutrients>
                         {recipeData?.macroNutrients.map(({ id, Quantity, MacroNutrient }) => (
                             <SepareteMacroNutrients key={id}>
-                                <NumberMacroNutrients>{Quantity}G</NumberMacroNutrients>
+                                <NumberMacroNutrients>{Quantity}g</NumberMacroNutrients>
                                 <TextMacroNutrients>{MacroNutrient}</TextMacroNutrients>
                             </SepareteMacroNutrients>
                         ))}

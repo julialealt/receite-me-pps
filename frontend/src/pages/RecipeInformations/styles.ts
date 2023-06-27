@@ -61,6 +61,7 @@ export const SeparateIcons = styled.View`
 export const ImageIcon = styled.Image`
     width: 20px;
     height: 20px;
+    margin-bottom: 5px;
 `
 
 export const ContainerMacroNutrients = styled.View`
