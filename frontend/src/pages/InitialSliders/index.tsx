@@ -6,11 +6,13 @@ import { Weight700 } from '../../../globalStyles';
 import AppIntroSlider from 'react-native-app-intro-slider';
 import IntroductionButton from '../../components/Button';
 import Button from '../../components/Button';
+import HeartSvg from "../../assets/tabNavigation/GreenHeart.svg"
+import { propsStack } from '../../routes/Models';
 
 const slides: Item[] = [
   {
     key: '1',
-    title: <Text style={{fontSize: 35}}>Receite<Weight700>.Me</Weight700></Text>,
+    title: <Text style={{fontFamily: 'Poppins-Regular', fontSize: 35}}>Receite<Weight700>.Me</Weight700></Text>,
     logo: require('../../assets/logo/logoBlack.png'),
     text: <TextIntroduction>O seu app favorito de receitas!</TextIntroduction>,
     image: require('../../assets/HomeScreens/introductionOne.png'),
@@ -53,7 +55,7 @@ interface Item {
 
 export default function InitialSliders() {
   const [showScreen, setShowScreen] = useState(false);
-  const navigation = useNavigation();
+  const navigation = useNavigation<propsStack>();
   
   const renderSlides = ({ item }: {item: Item}) => {
       if(Object.keys(item).length == 7) {
@@ -100,7 +102,7 @@ export default function InitialSliders() {
               </BackgroundImage>
               <ContainerButton>
                 {item.title}
-                <Button labelButton='JUNTE-SE A NÓS' onPress={() => navigation.navigate('signUp')}  width={290} height={65} radius={20} />
+                <Button labelButton='JUNTE-SE A NÓS' onPress={() => navigation.navigate('SignUp')}  width={290} height={65} radius={20} />
               </ContainerButton>
             </Container>
           </ScrollView>

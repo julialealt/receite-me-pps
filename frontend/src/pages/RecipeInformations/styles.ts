@@ -34,8 +34,8 @@ export const ContainerInformations = styled.View`
 `
 
 export const TitleInformations = styled.Text`
-    font-size: 26px;
-    font-weight: 700;
+    font-family: 'Poppins-Bold';
+    font-size: 24px;
     margin-top: 46px;
 `
 
@@ -46,8 +46,8 @@ export const ContainerFirstLayer = styled.View`
 `
 
 export const TextFirstLayer = styled.Text`
+    font-family: 'Poppins-SemiBold';
     font-size: 18px;
-    font-weight: 600;
     color: #a9a9a9;
 `
 
@@ -82,14 +82,14 @@ export const SepareteMacroNutrients = styled.View`
 `
 
 export const NumberMacroNutrients = styled.Text`
+    font-family: 'Poppins-Bold';
     font-size: 20px;
-    font-weight: 700;
     color: #22A36D;
 `
 
 export const TextMacroNutrients = styled.Text`
+    font-family: 'Poppins-SemiBold';
     font-size: 16px;
-    font-weight: 600;
     color: #a9a9a9;
 `
 
@@ -121,13 +121,13 @@ export const IngredientsAmountsUnit = styled.View`
 `
 
 export const TextIngredientAmount = styled.Text`
+    font-family: 'Poppins-Medium';
     font-size: 14px;
-    font-weight: 500;
 `
 
 export const QuantityIngredientValue = styled.Text`
+    font-family: 'Poppins-Medium';
     font-size: 14px;
-    font-weight: 500;
     color: #A9A9A9;
 `
 
@@ -145,8 +145,8 @@ export const UnitPrepationMethod = styled.View`
 `
 
 export const TextPrepationMethod = styled.Text`
+    font-family: 'Poppins-Medium';
     font-size: 14px;
-    font-weight: 500;
 `
 
 export const PrepationMethodCircle = styled.Image`
@@ -156,8 +156,8 @@ export const PrepationMethodCircle = styled.Image`
 `
 
 export const BackArrow = styled.Image`
-    width: 25px;
-    height: 25px;
+    width: 20px;
+    height: 20px;
 `
 
 export const HeartImage = styled.Image`

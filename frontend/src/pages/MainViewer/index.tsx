@@ -4,23 +4,23 @@ import CategoryButton from "../../components/CategoryButton";
 import { useNavigation } from "@react-navigation/native";
 import RecipeButton from "../../components/RecipeButton";
 import { useEffect, useState, useContext } from "react";
-import BottomBar from "../../components/BottomBar";
 import Search from "../../components/Search";
 import { View } from "react-native";
 import axios from "axios";
 import { AuthContext } from "../../context/auth"
+import { propsStack } from '../../routes/Models';
 
 const categories = [
-    { name: 'Vegano', 
+    { name: 'Veggie', 
       image: require('../../assets/categories/Broccoli.png')},
     { name: 'Doces', 
       image: require('../../assets/categories/Shortcake.png')},
-    { name: 'Fast Food', 
-      image: require('../../assets/categories/Hamburger.png')},
-    { name: 'Drinks', 
-      image: require('../../assets/cat-logo.png')},
-    { name: 'Mexicano', 
-      image: require('../../assets/categories/Taco.png')}
+    { name: 'Sem lactose', 
+      image: require('../../assets/categories/GlassOfMilk.png')},
+    { name: 'Salgadas', 
+      image: require('../../assets/categories/Spaghetti.png')},
+    { name: 'Sem glúten', 
+      image: require('../../assets/categories/Bread.png')}
   ];
 
   const recipes = [
@@ -79,7 +79,7 @@ const categories = [
   }
 
 export default function MainViewer() {
-    const navigation = useNavigation();
+    const navigation = useNavigation<propsStack>();
     const { data } = useContext(AuthContext);
     const [searchInput, setSearchInput] = useState('');
     const [mainOrSearch, setMainOrSearch] = useState(true)
@@ -101,8 +101,8 @@ export default function MainViewer() {
         try {
             const response = await axios.get<RecipeData[]>('https://json-test-phi.vercel.app/recipes');
             const updatedRecipeData = response.data.map(({id, image, name, time}) => {
-            if(name.length >= 15) {
-                name = name.slice(0, 14) + '...';
+            if(name.length >= 14) {
+                name = name.slice(0, 13) + '...';
             }
 
             return {
@@ -147,7 +147,7 @@ export default function MainViewer() {
                     <UserContainer>
                         <GreetingUserContainer>
                             <GreetingText>Olá, {data.name?.split(' ')[0]}</GreetingText>
-                            <TitleText>Vamos Cozinhar uma boa receita hoje!</TitleText>
+                            <TitleText>Vamos cozinhar uma boa receita hoje!</TitleText>
                         </GreetingUserContainer>
                         <UserLogo source={require('../../assets/Users/Janet.png')} />
                     </UserContainer>
@@ -160,7 +160,7 @@ export default function MainViewer() {
                             <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
                                 <ScrollCategoryContainer>
                                     {categories.map(({ name, image }, index) => (
-                                        <CategoryButton key={index} label={name} Icon={image} onPress={() => navigation.navigate('categoryRecipes', { category: name })} />
+                                        <CategoryButton key={index} label={name} Icon={image} onPress={() => navigation.navigate('CategoryRecipes', { category: name })} />
                                     ))}
                                 </ScrollCategoryContainer>
                             </ScrollView>
@@ -170,7 +170,7 @@ export default function MainViewer() {
                             <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
                                 <ScrollContainer>
                                     {recipeData?.map(({ id, name, time, image }) => (
-                                        <RecipeButton key={id} label={name} icon={image} time={time} onPress={() => navigation.navigate("recipeInformations", { id: id })} />
+                                        <RecipeButton key={id} label={name} icon={image} time={time} onPress={() => navigation.navigate("RecipeInformations", { id: id })} />
                                     ))}
                                 </ScrollContainer>
                             </ScrollView>
@@ -180,7 +180,7 @@ export default function MainViewer() {
                             <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
                                 <ScrollContainer>
                                     {recipeData?.map(({ id, name, time, image }) => (
-                                        <RecipeButton key={id} label={name} icon={image} time={time} onPress={() => navigation.navigate("recipeInformations", { id: id })} />
+                                        <RecipeButton key={id} label={name} icon={image} time={time} onPress={() => navigation.navigate("RecipeInformations", { id: id })} />
                                     ))}
                                 </ScrollContainer>
                             </ScrollView>
@@ -190,7 +190,7 @@ export default function MainViewer() {
                             <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
                                 <ScrollContainer>
                                     {recipeData?.map(({ id, name, time, image }) => (
-                                        <RecipeButton key={id} label={name} icon={image} time={time} onPress={() => navigation.navigate("recipeInformations", { id: id })} />
+                                        <RecipeButton key={id} label={name} icon={image} time={time} onPress={() => navigation.navigate("RecipeInformations", { id: id })} />
                                     ))}
                                 </ScrollContainer>
                             </ScrollView>
@@ -199,7 +199,7 @@ export default function MainViewer() {
                     <RecipeContainer>
                         {notFound ? (
                             recipeData?.map(({id, image, name, time}) => (
-                                <RecipeButton key={id} label={name} icon={image} time={time} size="bigger" onPress={() => navigation.navigate("recipeInformations", { id: id })} />
+                                <RecipeButton key={id} label={name} icon={image} time={time} size="bigger" onPress={() => navigation.navigate("RecipeInformations", { id: id })} />
                             ))
                             ) : (
                             <NotFoundText>Não encontramos receitas com os ingredientes selecionados...</NotFoundText>
@@ -208,7 +208,6 @@ export default function MainViewer() {
                     </RecipeContainer>   )}
                 </Container>
             </ScrollView>
-            <BottomBar />
         </View>
     )
 }

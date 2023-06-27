@@ -8,15 +8,15 @@ export const Container = styled.View`
 `
 
 export const LoginText = styled.Text`
+    font-family: 'Poppins-Bold';
     font-size: 25px;
-    font-weight: 700;
     color: #272727;
     margin: 0 0 8px 0 ;
 `
 
 export const SubText = styled.Text`
+    font-family: 'Poppins-Medium';
     font-size: 12px;
-    font-weight: 500;
     color: #686868;
 `
 

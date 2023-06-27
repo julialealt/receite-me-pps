@@ -4,7 +4,7 @@ import { Dimensions } from 'react-native';
 export const ContainerScrollView = styled.ScrollView`
     background: #ffffff;
     min-height: ${Dimensions.get('window').height + 35}px;
-    `
+`
 
 export const Container = styled.View`
     display: flex;
@@ -23,14 +23,17 @@ export const IngredientsContainer = styled.View`
 `
 
 export const TitleText = styled.Text`
+    font-family: 'Poppins-Bold';
     font-size: 30px;
-    font-weight: 700;
     width: 220px;
 `
 
 export const ButtonContainer = styled.View`
-display: flex;
-width: 100%;
-align-items: center;
-
+    display: flex;
+    width: 100%;
+    padding: 10px 20px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
 `

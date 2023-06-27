@@ -10,15 +10,17 @@ export const Container = styled.TouchableOpacity`
     border: 1px solid #878787;
     border-radius: 10px;
 
+    flex-shrink: 0;
 `
 
 export const IconCategory = styled.Image`
-    width: 30px;
-    height: 30px;
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
 `
 
 export const TextCategory = styled.Text`
-    font-size: 10px;
-    font-weight: 600;
-
+    fontFamily: 'Poppins-SemiBold';
+    font-size: 9px;
+    
 `

@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { useNavigation, useRoute } from '@react-navigation/native'
 import axios from "axios";
 import { TouchableOpacity } from "react-native";
+import { propsStack } from '../../routes/Models';
 
 type ParamsProps = {
   id: number;
@@ -41,7 +42,7 @@ interface RecipeData {
 export default function RecipeInformations() {
     const [tradeInformation, setTradeInformation] = useState(false);
     const [hearthColor, setHearthColor] = useState(false)
-    const navigation = useNavigation();
+    const navigation = useNavigation<propsStack>();
     const route = useRoute();
     const { id } = route.params as ParamsProps;
     const [recipeData, setRecipeData] = useState<RecipeData | undefined>();

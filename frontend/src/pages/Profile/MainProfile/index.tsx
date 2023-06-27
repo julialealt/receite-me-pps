@@ -1,10 +1,11 @@
 import { View } from "react-native";
 import {CustomScrollView as ScrollView } from "../../../../globalStyles";
-import BottomBar from "../../../components/BottomBar";
 import { Container, UserContainer, UserFunctionsIconContainer, UserFunctionsList, UserFunctionsText, UserIcon, UserLogo, UserName, UserStatus } from "./styles";
 import { useNavigation } from "@react-navigation/native";
 import { useContext } from "react";
 import { AuthContext } from "../../../context/auth";
+
+import { propsStack } from '../../../routes/Models';
 
 interface ProfileProps {
   id: number,
@@ -14,43 +15,43 @@ interface ProfileProps {
 }
 
 export default function MainProfile() {
-    const navigation = useNavigation();
+    const navigation = useNavigation<propsStack>();
     const { data } = useContext(AuthContext)
 
     const profiles: ProfileProps[] = [
       { 
         id: 1,
-        text: "Editar Perfil", 
+        text: "Editar perfil", 
         icon: require("../../../assets/profileIcons/Pencil.png"),
-        navigation: () => navigation.navigate("editProfile") 
+        navigation: () => navigation.navigate("EditProfile") 
 
       },
       { 
         id: 2,
         text: "Favoritos", 
         icon: require("../../../assets/profileIcons/Favorite.png"),
-        navigation: () => navigation.navigate("favoriteBook") 
+        navigation: () => navigation.navigate("Favorites") 
 
       },
       { 
         id: 3,
-        text: "Recentemente Visualizadas", 
+        text: "Recentemente visualizadas", 
         icon: require("../../../assets/profileIcons/Document.png"),
-        navigation: () => navigation.navigate("recentlyViewed") 
+        navigation: () => navigation.navigate("RecentlyViewed") 
 
       },
       { 
         id: 4,
         text: "Logout", 
         icon: require("../../../assets/profileIcons/Logout.png"),
-        navigation: () => navigation.navigate("favoriteBook") 
+        navigation: () => navigation.navigate("SignUp") 
 
       },
       { 
         id: 5,
-        text: "Excluir Conta", 
+        text: "Excluir conta", 
         icon: require("../../../assets/profileIcons/bin.png"),
-        navigation: () => navigation.navigate("favoriteBook") 
+        navigation: () => navigation.navigate("SignUp") 
 
       },
     ];
@@ -74,7 +75,6 @@ export default function MainProfile() {
                 </UserFunctionsList>
             </Container>
         </ScrollView>
-        <BottomBar />
       </View>
     )
 }

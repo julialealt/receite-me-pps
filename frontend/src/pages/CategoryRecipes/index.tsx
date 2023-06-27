@@ -3,45 +3,57 @@ import { CustomScrollView as ScrollView } from "../../../globalStyles";
 import RecipeButton from "../../components/RecipeButton";
 import { BackArrow, BackThePage, Container, RecipeContainer, TextRecentlyRecipes } from "./styles";
 import { Text, TouchableOpacity } from "react-native";
+import { propsStack } from '../../routes/Models';
+import axios from "axios";
+import { useEffect, useState } from "react";
 
 type ParamsProps = {
     category: string;
   }
 
-const recipes = [
-    { name: 'Coxinha', 
-      time: '10-15 min',
-      image: require('../../assets/recipes/Coxinha.png') },
-    { name: 'Feijoada', 
-      time: '10-15 min',
-      image: require('../../assets/recipes/Feijoada.png') },
-    { name: 'Filé Mignon', 
-      time: '10-15 min',
-      image: require('../../assets/cat-logo.png') },
-    { name: 'Hamburguer', 
-      time: '10-15 min',
-      image: require('../../assets/recipes/Hamburguer.png') },
-    { name: 'Cachorro Quente', 
-      time: '10-15 min',
-      image: require('../../assets/recipes/HotDog.png') },
-    { name: 'Ramen Coreano', 
-      time: '10-15 min',
-      image: require('../../assets/recipes/Ramen.png') },
-    { name: 'Spaghetti', 
-      time: '10-15 min',
-      image: require('../../assets/recipes/Spaghetti.png') },
-    { name: 'Sushi', 
-      time: '10-15 min',
-      image: require('../../assets/recipes/Sushi.png') },
-    { name: 'Yakissoba', 
-      time: '10-15 min',
-      image: require('../../assets/recipes/Yakissoba.png') },
-    ];
+interface RecipeData {
+  id: number;    
+  name: string;
+  time: string;
+  image: string;
+}
 
 export default function CategoryRecipes() {
     const route = useRoute();
-    const navigation = useNavigation()
+    const navigation = useNavigation<propsStack>()
     const { category } = route.params as ParamsProps;
+    const [allRecipes, setAllRecipes] = useState<RecipeData[] | null>([{ 
+      id: 0, 
+      name: '', 
+      time: '', 
+      image: '' 
+    }]);
+
+    const getRecipeInformations = async () => {
+      try {
+          const response = await axios.get<RecipeData[]>('https://json-test-phi.vercel.app/recipes');
+          const updatedRecipeData = response.data.map(({id, image, name, time}) => {
+          if(name.length >= 14) {
+              name = name.slice(0, 13) + '...';
+          }
+
+          return {
+              id: id,
+              name: name,
+              time: time,
+              image: image
+          }
+          })
+          setAllRecipes(updatedRecipeData);
+
+      } catch (error) {
+          console.error('Error fetching recipe data:', error);
+      }
+    }
+
+    useEffect(() => {
+      getRecipeInformations()
+    }, [])
 
     return(
       <ScrollView>
@@ -54,8 +66,8 @@ export default function CategoryRecipes() {
             <Text>‎ ‎ ‎ ‎ </Text>
           </BackThePage>
           <RecipeContainer>
-            {recipes.map(({name, time, image}, index) => (
-                <RecipeButton key={index} label={name} icon={image} time={time} size="bigger" />
+            {allRecipes?.map(({name, time, image, id}) => (
+                <RecipeButton key={id} label={name} icon={image} time={time} size="bigger" onPress={() => navigation.navigate("RecipeInformations", { id: id })} />
             ))}
           </RecipeContainer>
         </Container>

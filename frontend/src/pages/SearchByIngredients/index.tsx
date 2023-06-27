@@ -11,6 +11,9 @@ import BottomBar from "../../components/BottomBar";
 import { useNavigation } from "@react-navigation/native";
 import axios from "axios";
 
+import { propsStack } from '../../routes/Models';
+
+
 interface Ingredient {
     id: number;
     ingredients: string;
@@ -35,7 +38,7 @@ const data: Ingredient[] = [
 ];
 
 export default function SearchByIngredients() {
-    const navigation = useNavigation();
+    const navigation = useNavigation<propsStack>();
     const [addIngredient, setAddIngredient] = useState(false);
     const [allIngredients, setAllIngredients] = useState<Ingredient[]>([]);
     const [ingredientsArray, setIngredientsArray] = useState<Ingredient[]>([]);
@@ -62,7 +65,7 @@ export default function SearchByIngredients() {
         <View>
             <ContainerScrollView>
                 <Container>
-                    <TitleText>Quais ingredientes você tem disponíveis ?</TitleText>
+                    <TitleText>Quais ingredientes você tem disponíveis?</TitleText>
                     <AddIngredientsButton onPress={() => setAddIngredient(!addIngredient)} />
                     <SelectFilter show={addIngredient ? 'flex' : 'none'} arrayIngredients={allIngredients} ingredientsArray={ingredientsArray} addIngredient={setIngredientsArray}/>
                     <IngredientsContainer>
@@ -71,11 +74,10 @@ export default function SearchByIngredients() {
                         ))}
                     </IngredientsContainer>
                     <ButtonContainer>
-                        <Button labelButton="Pesquisar  >" height={70} width={240} radius={50} onPress={() => navigation.navigate('recipesByIngredients', {ingredients: ingredientsArray.map(item => item.ingredients)})}/>
+                        <Button labelButton="Pesquisar  >" height={70} width={240} radius={50} onPress={() => navigation.navigate('RecipesByIngredients', {ingredients: ingredientsArray.map(item => item.ingredients)})}/>
                     </ButtonContainer>
                 </Container>
             </ContainerScrollView>
-            <BottomBar />
         </View>
     )
 }

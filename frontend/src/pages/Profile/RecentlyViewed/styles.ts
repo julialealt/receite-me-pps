@@ -10,10 +10,11 @@ export const Container = styled.View `
 `
 
 export const TextRecentlyRecipes = styled.Text `
-    font-size: 20px;
-    font-weight: 700;
+    font-Family: 'Poppins-Bold';
+    font-size: 18px;
     text-align: center;
     width: 250px;
+    margin-top: 20px;
 `
 
 export const RecipeContainer = styled.View`
@@ -35,6 +36,6 @@ export const BackThePage = styled.View`
 `;
 
 export const BackArrow = styled.Image`
-    width: 25px;
-    height: 25px;
+    width: 20px;
+    height: 20px;
 `

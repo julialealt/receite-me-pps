@@ -29,11 +29,11 @@ export const ContainerEditProfileInputs = styled.View`
 `
 
 export const EditProfileText = styled.Text`
+    font-family: 'Poppins-Bold';
     font-size: 20px;
-    font-weight: 700;
 `
 
 export const BackArrow = styled.Image`
-    width: 25px;
-    height: 25px;
+    width: 20px;
+    height: 20px;
 `

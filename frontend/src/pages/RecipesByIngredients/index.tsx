@@ -1,4 +1,5 @@
 import { BackArrow, BackThePage, Container, IngredientsContainer, IngredientsIcons, RecipeContainer, TextTitle } from "./styles";
+import { propsStack } from '../../routes/Models';
 import Button from "../../components/Button";
 import SelectIngredientButton from "../../components/SelectIngredientButton";
 import {CustomScrollView as ScrollView } from "../../../globalStyles";
@@ -9,6 +10,7 @@ import { useNavigation, useRoute } from "@react-navigation/native";
 interface ParamsProps {
   ingredients: string[]
 }
+
 
 const recipes = [
   { 
@@ -60,7 +62,7 @@ const recipes = [
 
 
 export default function RecipesByIngredients() {
-  const navigation = useNavigation();
+  const navigation = useNavigation<propsStack>();
   const route = useRoute();
   const { ingredients } = route.params as ParamsProps;
   console.log(ingredients)

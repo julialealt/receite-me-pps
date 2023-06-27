@@ -16,7 +16,7 @@ export const UserContainer = styled.View`
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
 `
 
 export const GreetingUserContainer = styled.View`
@@ -61,16 +61,16 @@ export const RecipeContainer = styled.View`
 
 // Text
 export const GreetingText = styled.Text`
+    font-family: 'Poppins-SemiBold';
     font-size: 14px;
-    font-weight: 600;
     color: #a9a9a9;
 
 `
 
 export const TitleText = styled.Text `
+    font-family: 'Poppins-Bold';
+    white-space: nowrap;
     font-size: 20px;
-    font-weight: 700;
-    width: 230px;
 `
 
 export const NotFoundText = styled.Text`
@@ -82,6 +82,6 @@ export const NotFoundText = styled.Text`
 
 // Image
 export const UserLogo = styled.Image `
-    width: 100px;
-    height: 100px;
+    width: 50px;
+    height: 50px;
 `

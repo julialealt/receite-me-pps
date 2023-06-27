@@ -13,8 +13,10 @@ interface FormData {
     email: string;
 }
 
+import { propsStack } from '../../../routes/Models';
+
 export default function EditProfile() {
-    const navigation = useNavigation()
+    const navigation = useNavigation<propsStack>()
     const { data } = useContext(AuthContext)
     const [formData, setFormData] = useState({
         nome: data.name,
@@ -40,7 +42,7 @@ export default function EditProfile() {
                     <TouchableOpacity onPress={() => navigation.goBack()} >
                         <BackArrow source={require("../../../assets/geral/arrowLeft.png")} />
                     </TouchableOpacity>
-                    <EditProfileText>Editar Perfil</EditProfileText>
+                    <EditProfileText>Editar perfil</EditProfileText>
                     <Text>‎ ‎ ‎ ‎ </Text>
                 </BackThePage>
                 <ContainerEditProfileInputs>
@@ -66,7 +68,7 @@ export default function EditProfile() {
                     <Input label="Nova senha" />
                     <Input label="confirme nova senha" />
                 </ContainerEditProfileInputs>
-                <Button labelButton="Salvar alterações" width={290} height={47} radius={12} />
+                <Button labelButton="Salvar alterações" width={290} height={47} radius={12} onPress={() => navigation.goBack()}/>
             </Container>
         </ScrollView>
     )
