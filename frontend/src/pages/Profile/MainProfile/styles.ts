@@ -25,7 +25,7 @@ export const UserFunctionsIconContainer = styled.TouchableOpacity`
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 10px;
+    gap: 15px;
 `
 
 //Text

@@ -1,5 +1,6 @@
 import { GestureResponderEvent, TouchableOpacity } from "react-native";
 import { IconButton, IconTouchableOpacity, ScopeButton, TextButton } from "./styles";
+import { FontAwesome5 } from '@expo/vector-icons';
 
 interface SelectedIngedientProps {
     label: string,
@@ -11,7 +12,7 @@ export default function SelectedIngredient({label, onPress}: SelectedIngedientPr
         <ScopeButton>
             <TextButton>{label}</TextButton>
             <IconTouchableOpacity onPress={onPress}>
-                <IconButton source={require('../../assets/geral/bin.png')} />
+                <FontAwesome5 name="trash" size={20} color="#E74444" />
             </IconTouchableOpacity>
         </ScopeButton>
     )

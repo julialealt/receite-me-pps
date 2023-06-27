@@ -4,12 +4,13 @@ import { Container, UserContainer, UserFunctionsIconContainer, UserFunctionsList
 import { useNavigation } from "@react-navigation/native";
 import { useContext } from "react";
 import { AuthContext } from "../../../context/auth";
+import { Ionicons } from '@expo/vector-icons';
 
 import { propsStack } from '../../../routes/Models';
 
 interface ProfileProps {
   id: number,
-  text: string
+  text: string,
   icon: any,
   navigation: () => void
 }
@@ -22,35 +23,35 @@ export default function MainProfile() {
       { 
         id: 1,
         text: "Editar perfil", 
-        icon: require("../../../assets/profileIcons/Pencil.png"),
+        icon: "md-pencil-sharp",
         navigation: () => navigation.navigate("EditProfile") 
 
       },
       { 
         id: 2,
         text: "Favoritos", 
-        icon: require("../../../assets/profileIcons/Favorite.png"),
+        icon: "heart-outline",
         navigation: () => navigation.navigate("Favorites") 
 
       },
       { 
         id: 3,
         text: "Recentemente visualizadas", 
-        icon: require("../../../assets/profileIcons/Document.png"),
+        icon: "ios-newspaper-outline",
         navigation: () => navigation.navigate("RecentlyViewed") 
 
       },
       { 
         id: 4,
         text: "Logout", 
-        icon: require("../../../assets/profileIcons/Logout.png"),
+        icon: "log-out-outline",
         navigation: () => navigation.navigate("SignUp") 
 
       },
       { 
         id: 5,
         text: "Excluir conta", 
-        icon: require("../../../assets/profileIcons/bin.png"),
+        icon: "ios-trash-outline",
         navigation: () => navigation.navigate("SignUp") 
 
       },
@@ -68,7 +69,7 @@ export default function MainProfile() {
                 <UserFunctionsList>
                     {profiles.map(({id, icon, text, navigation}) => (
                         <UserFunctionsIconContainer onPress={navigation} key={id}>
-                            <UserIcon source={icon} />
+                            <Ionicons name={icon} size={22} color="black" />
                             <UserFunctionsText>{text}</UserFunctionsText>
                         </UserFunctionsIconContainer>
                     ))}
