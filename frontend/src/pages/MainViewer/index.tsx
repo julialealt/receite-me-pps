@@ -9,67 +9,25 @@ import { View } from "react-native";
 import axios from "axios";
 import { AuthContext } from "../../context/auth"
 import { propsStack } from '../../routes/Models';
+import { apiURL } from "../../../api";
 
 const categories = [
     { name: 'Veggie', 
+      value: 'vegetariano',
       image: require('../../assets/categories/Broccoli.png')},
     { name: 'Doces', 
+      value: 'doce',
       image: require('../../assets/categories/Shortcake.png')},
     { name: 'Sem lactose', 
+      value: 'lactose',
       image: require('../../assets/categories/GlassOfMilk.png')},
     { name: 'Salgadas', 
+      value: 'salgado',
       image: require('../../assets/categories/Spaghetti.png')},
     { name: 'Sem glúten', 
+      value: 'gluten',
       image: require('../../assets/categories/Bread.png')}
   ];
-
-  const recipes = [
-    { 
-      id: 2,
-      name: 'Coxinha', 
-      time: '10-15 min',
-      image: "https://i.postimg.cc/WzKWFG1x/Coxinha.png" },
-    { 
-      id: 3,
-      name: 'Feijoada', 
-      time: '10-15 min',
-      image: "https://i.postimg.cc/26kXPjt9/Feijoada.png" },
-    { 
-      id: 4,
-      name: 'Filé Mignon', 
-      time: '10-15 min',
-      image: "https://i.postimg.cc/tJ7v4Sph/fmignon.png"},
-    { 
-      id: 5,
-      name: 'Hamburguer', 
-      time: '10-15 min',
-      image: "https://i.postimg.cc/zBxP5ZZz/Hamburguer.png" },
-    { 
-      id: 6,
-      name: 'Cachorro Quente', 
-      time: '10-15 min',
-      image: "https://i.postimg.cc/W46HWq5J/HotDog.png" },
-    { 
-      id: 7,
-      name: 'Ramen Coreano', 
-      time: '10-15 min',
-      image: "https://i.postimg.cc/Wp9QcrTG/Ramen2.png" },
-    { 
-      id: 8,
-      name: 'Spaghetti', 
-      time: '10-15 min',
-      image: "https://i.postimg.cc/NjXVXzTD/Spaghetti.png" },
-    { 
-      id: 9,
-      name: 'Sushi', 
-      time: '10-15 min',
-      image: "https://i.postimg.cc/xThhc2kq/Sushi.png" },
-    { 
-      id: 10,
-      name: 'Yakissoba', 
-      time: '10-15 min',
-      image: "https://i.postimg.cc/rFK7Vmwv/Yakissoba.png" },
-    ];
 
   interface RecipeData {
     id: number;    
@@ -98,8 +56,9 @@ export default function MainViewer() {
     }]);
 
     const getRecipeInformations = async () => {
+      //feito
         try {
-            const response = await axios.get<RecipeData[]>('https://c708-2804-d4b-9488-2d00-a190-6452-3398-36ba.ngrok-free.app/receitas');
+            const response = await axios.get<RecipeData[]>(`${apiURL}/receitas`);
             const updatedRecipeData = response.data.map(({id, nome, tempoDePreparo, pathImagem}) => {
             if(nome.length >= 14) {
                 nome = nome.slice(0, 13) + '...';
@@ -159,8 +118,8 @@ export default function MainViewer() {
                             <TitleText>Categorias</TitleText>
                             <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
                                 <ScrollCategoryContainer>
-                                    {categories.map(({ name, image }, index) => (
-                                        <CategoryButton key={index} label={name} Icon={image} onPress={() => navigation.navigate('CategoryRecipes', { category: name })} />
+                                    {categories.map(({ name, image, value }, index) => (
+                                        <CategoryButton key={index} label={name} Icon={image} onPress={() => navigation.navigate('CategoryRecipes', { category: value })} />
                                     ))}
                                 </ScrollCategoryContainer>
                             </ScrollView>
