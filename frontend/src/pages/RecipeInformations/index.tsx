@@ -7,6 +7,7 @@ import axios from "axios";
 import { TouchableOpacity } from "react-native";
 import { propsStack } from '../../routes/Models';
 import { AuthContext } from "../../context/auth";
+import { apiURL } from "../../../api";
 
 type ParamsProps = {
   id: number;
@@ -55,7 +56,8 @@ export default function RecipeInformations() {
     const source = hearthColor ? hearthWhite : hearthGreen;
 
   const getRecipeInformations = async () => {
-    const response = await axios.get(`https://c708-2804-d4b-9488-2d00-a190-6452-3398-36ba.ngrok-free.app/receitas/findById/${id}`);
+    //Feito
+    const response = await axios.get(`${apiURL}/receitas/findById/${id}`);
     const responseData = response.data as RecipeData;
     console.log(responseData)
     const macroNutrients = [

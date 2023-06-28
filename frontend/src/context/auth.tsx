@@ -3,6 +3,7 @@ import axios from "axios";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { createContext, ReactNode, useState } from "react";
 import RecentlyViewed from "../pages/Profile/RecentlyViewed";
+import { apiURL } from "../../api";
 
 
 interface AuthContextProps {
@@ -51,8 +52,9 @@ export default function AuthProvider({children}: AuthProviderProps) {
     })
 
     const signIn = async (email: string, password: string) => {
+      //Feito
         try {
-          const response = await axios.get<UserFormData[]>("https://json-test-phi.vercel.app/users");
+          const response = await axios.get<UserFormData[]>(`${apiURL}/users`);
           const users = response.data;
           const findUserInAccount = users.find(
             (item: UserFormData) => item.email === email && item.password === password

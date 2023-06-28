@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { Text } from "react-native";
 import { propsStack } from '../../routes/Models';
+import { apiURL } from "../../../api";
 
 interface FormData {
     nome: string;
@@ -34,7 +35,7 @@ export default function SignUp() {
 
     const handleSignUp = () => {
         axios
-          .post("http://localhost:3000/users", formData)
+          .post(`${apiURL}/usuario`, formData)
           .then((response) => {
             console.log(response.data);
             setSuccess(true);

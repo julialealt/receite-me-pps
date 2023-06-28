@@ -8,6 +8,7 @@ import { propsStack } from '../../../routes/Models';
 import axios, { all } from "axios";
 import { useEffect, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { apiURL } from "../../../../api";
 
 interface RecipeData {
   id: number;    
@@ -30,7 +31,8 @@ export default function RecentlyViewed() {
         const recentlyViewedArray = await AsyncStorage.getItem("recentlyViewed");
         const ids = JSON.parse(recentlyViewedArray || "[]");
         const recipePromises = ids.map(async (id: number) => {
-          const response = await axios.get<RecipeData>(`https://c708-2804-d4b-9488-2d00-a190-6452-3398-36ba.ngrok-free.app/receitas/findById/${id}`);
+          //feito
+          const response = await axios.get<RecipeData>(`${apiURL}/receitas/findById/${id}`);
           const { nome, pathImagem, tempoDePreparo} = response.data;
           let updatedName = nome;
           if (nome.length >= 14) {
