@@ -1,38 +1,39 @@
 import {CustomScrollView as ScrollView } from "../../../globalStyles";
 import { BackArrow, BackThePage, Container, ContainerButtons, ContainerFirstLayer, ContainerInformations, ContainerIngredientsAmounts, ContainerMacroNutrients, ContainerPreparationMethod, HeartImage, ImageIcon, ImageRecipe, IngredientsAmountsUnit, NumberMacroNutrients, PrepationMethodCircle, QuantityIngredientValue, SeparateIcons, SepareteMacroNutrients, TextFirstLayer, TextIngredientAmount, TextMacroNutrients, TextPrepationMethod, TitleInformations, UnitPrepationMethod } from "./styles";
 import TradeColorButton from "../../components/TradeColorButton";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigation, useRoute } from '@react-navigation/native'
 import axios from "axios";
 import { TouchableOpacity } from "react-native";
 import { propsStack } from '../../routes/Models';
+import { AuthContext } from "../../context/auth";
 
 type ParamsProps = {
   id: number;
 }
 interface RecipeData {
     id: number;
-    name: string;
-    category: string;
-    time: string;
-    image: string;
-    calories: number;
-    macroNutrients: {
+    nome: string;
+    caloriasTotais: number;
+    proteinasTotais: number;
+    carboidratosTotais: number;
+    gordurasTotais: number;
+    ingredientes: {
       id: number;
-      MacroNutrient: string;
-      Quantity: number;
+      nome: string;
+      quantidade: string;
+      medida: string;
     }[];
-    ingredients: {
-      id: number;
-      ingredient: string;
-      quantity: string;
-    }[];
-    instructions: {
-      id: number;
-      instruction: string;
-    }[];
+    tempoDePreparo: string;
+    pathImagem: string;
+    modoDePreparo: string;
   }
 
+  interface MacroNutrients {
+    id: number;
+    nome: string;
+    quantidade: number
+  }
 
   const imagePaths = {
     hearthColorTrue: require('../../assets/geral/hearthGreen.png'),
@@ -40,28 +41,55 @@ interface RecipeData {
   };
 
 export default function RecipeInformations() {
-    const [tradeInformation, setTradeInformation] = useState(false);
-    const [hearthColor, setHearthColor] = useState(false)
-    const navigation = useNavigation<propsStack>();
     const route = useRoute();
+    const { saveId } = useContext(AuthContext);
+    const navigation = useNavigation<propsStack>();
+    const [tradeInformation, setTradeInformation] = useState(true);
+    const [hearthColor, setHearthColor] = useState(false)
     const { id } = route.params as ParamsProps;
     const [recipeData, setRecipeData] = useState<RecipeData | undefined>();
-    // const source = hearthColor ? hearthWhite : hearthGreen;
+    const [macroNutrients, setMacroNutrients] = useState<MacroNutrients[]>()
+    
+    const hearthWhite = require('../../assets/geral/hearthWhite.png');
+    const hearthGreen = require('../../assets/geral/hearthGreen.png');
+    const source = hearthColor ? hearthWhite : hearthGreen;
 
   const getRecipeInformations = async () => {
-    const response = await axios.get(`https://json-test-phi.vercel.app/recipes/${id}`);
+    const response = await axios.get(`https://c708-2804-d4b-9488-2d00-a190-6452-3398-36ba.ngrok-free.app/receitas/findById/${id}`);
     const responseData = response.data as RecipeData;
+    console.log(responseData)
+    const macroNutrients = [
+      {
+        id: 1,
+        nome: 'carboidratos',
+        quantidade: Math.round(responseData.carboidratosTotais)
+      },
+      {
+        id: 2,
+        nome: 'proteínas',
+        quantidade: Math.round(responseData.proteinasTotais),
+      },
+      {
+        id: 3,
+        nome: 'gorduras',
+        quantidade: Math.round(responseData.gordurasTotais),
+      },
+
+    ]
+    saveId(id)
     setRecipeData(responseData);
+    setMacroNutrients(macroNutrients)
   };
 
   useEffect(() => {
     getRecipeInformations();
     }, []);
-    const hearthWhite = require('../../assets/geral/hearthWhite.png');
-    const hearthGreen = require('../../assets/geral/hearthGreen.png');
-    const source = hearthColor ? hearthWhite : hearthGreen;
-    console.log(recipeData)
 
+  useEffect(() => {
+    console.log(macroNutrients);
+  }, [macroNutrients])
+
+  // quantidade: Math.round(recipeData?.caloriasTotais),
 
     return(
         <ScrollView>
@@ -74,24 +102,24 @@ export default function RecipeInformations() {
                 </TouchableOpacity>
             </BackThePage>
             <Container>
-                <ImageRecipe source={{ uri: recipeData?.image }} />
+                <ImageRecipe source={{ uri: recipeData?.pathImagem }} />
                 <ContainerInformations>
-                    <TitleInformations>{recipeData?.name}</TitleInformations>
+                    <TitleInformations>{recipeData?.nome}</TitleInformations>
                     <ContainerFirstLayer>
                         <SeparateIcons>
                             <ImageIcon source={require("../../assets/geral/clock.png")} />
-                            <TextFirstLayer>{recipeData?.time}</TextFirstLayer>
+                            <TextFirstLayer>{recipeData?.tempoDePreparo} min</TextFirstLayer>
                         </SeparateIcons>
                         <SeparateIcons>
                             <ImageIcon source={require("../../assets/geral/fire.png")} />
-                            <TextFirstLayer>{recipeData?.calories} kcal</TextFirstLayer>
+                            <TextFirstLayer>{recipeData?.caloriasTotais ? Math.round(recipeData?.caloriasTotais) : 0} kcal</TextFirstLayer>
                         </SeparateIcons>
                     </ContainerFirstLayer>
                     <ContainerMacroNutrients>
-                        {recipeData?.macroNutrients.map(({ id, Quantity, MacroNutrient }) => (
+                        {macroNutrients?.map(({ id, nome, quantidade }) => (
                             <SepareteMacroNutrients key={id}>
-                                <NumberMacroNutrients>{Quantity}g</NumberMacroNutrients>
-                                <TextMacroNutrients>{MacroNutrient}</TextMacroNutrients>
+                                <NumberMacroNutrients>{quantidade}g</NumberMacroNutrients>
+                                <TextMacroNutrients>{nome}</TextMacroNutrients>
                             </SepareteMacroNutrients>
                         ))}
                     </ContainerMacroNutrients>
@@ -101,19 +129,19 @@ export default function RecipeInformations() {
                     </ContainerButtons>
                     {tradeInformation ? (
                     <ContainerIngredientsAmounts>
-                        {recipeData?.ingredients.map(({id, ingredient, quantity}) => (
+                        {recipeData?.ingredientes.map(({id, nome, quantidade, medida}) => (
                             <IngredientsAmountsUnit key={id} >
-                                <TextIngredientAmount>{ingredient}</TextIngredientAmount>
-                                <QuantityIngredientValue>{quantity}</QuantityIngredientValue>
+                                <TextIngredientAmount>{nome}</TextIngredientAmount>
+                                <QuantityIngredientValue> {medida === 'A gosto' ? medida : `${quantidade} ${medida}`}</QuantityIngredientValue>
                             </IngredientsAmountsUnit>
                         ))}
                     </ContainerIngredientsAmounts>
                     ) : (
                     <ContainerPreparationMethod>
-                        {recipeData?.instructions.map(({id, instruction}) => (
-                            <UnitPrepationMethod key={id} >
+                        {recipeData?.modoDePreparo.split("\n").map((item, index) => (
+                            <UnitPrepationMethod key={index} >
                                 <PrepationMethodCircle source={require('../../assets/geral/circle.png')} />
-                                <TextPrepationMethod>{instruction}</TextPrepationMethod>
+                                <TextPrepationMethod>{item}</TextPrepationMethod>
                             </UnitPrepationMethod>
                         ))}
                     </ContainerPreparationMethod>
