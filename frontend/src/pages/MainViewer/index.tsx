@@ -73,9 +73,9 @@ const categories = [
 
   interface RecipeData {
     id: number;    
-    name: string;
-    time: string;
-    image: string;
+    nome: string;
+    tempoDePreparo: number;
+    pathImagem: string;
   }
 
 export default function MainViewer() {
@@ -86,30 +86,30 @@ export default function MainViewer() {
     const [notFound, setNotFound] = useState(true);
     const [recipeData, setRecipeData] = useState<RecipeData[] | null>([{ 
         id: 0, 
-        name: '', 
-        time: '', 
-        image: '' 
+        nome: '', 
+        tempoDePreparo: 0, 
+        pathImagem: '' 
     }]);
     const [allRecipes, setAllRecipes] = useState<RecipeData[] | null>([{ 
         id: 0, 
-        name: '', 
-        time: '', 
-        image: '' 
+        nome: '', 
+        tempoDePreparo: 0, 
+        pathImagem: '' 
     }]);
 
     const getRecipeInformations = async () => {
         try {
-            const response = await axios.get<RecipeData[]>('https://json-test-phi.vercel.app/recipes');
-            const updatedRecipeData = response.data.map(({id, image, name, time}) => {
-            if(name.length >= 14) {
-                name = name.slice(0, 13) + '...';
+            const response = await axios.get<RecipeData[]>('https://c708-2804-d4b-9488-2d00-a190-6452-3398-36ba.ngrok-free.app/receitas');
+            const updatedRecipeData = response.data.map(({id, nome, tempoDePreparo, pathImagem}) => {
+            if(nome.length >= 14) {
+                nome = nome.slice(0, 13) + '...';
             }
 
             return {
                 id: id,
-                name: name,
-                time: time,
-                image: image
+                nome: nome,
+                tempoDePreparo: tempoDePreparo,
+                pathImagem: pathImagem
             }
             })
             setRecipeData(updatedRecipeData);
@@ -122,9 +122,9 @@ export default function MainViewer() {
     const filterRecipes = (value: string) => {
         const trimmedValue = value.trim()
         if(trimmedValue.length !== 0 ) {
-            const filteredData = recipes.filter(({name}) => name.toLowerCase().includes(trimmedValue.toLowerCase()));
-            const booleanData = !!filteredData.length
-            setAllRecipes(filteredData);
+            const filteredData = recipeData?.filter(({nome}) => nome.toLowerCase().includes(trimmedValue.toLowerCase()));
+            const booleanData = !!filteredData?.length
+            setAllRecipes(filteredData ?? null);
             setMainOrSearch(false)
             setNotFound(booleanData)
         } else {
@@ -169,8 +169,8 @@ export default function MainViewer() {
                             <TitleText>Recomendações</TitleText>
                             <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
                                 <ScrollContainer>
-                                    {recipeData?.map(({ id, name, time, image }) => (
-                                        <RecipeButton key={id} label={name} icon={image} time={time} onPress={() => navigation.navigate("RecipeInformations", { id: id })} />
+                                    {recipeData?.map(({ id, nome, tempoDePreparo, pathImagem }) => (
+                                        <RecipeButton key={id} label={nome} icon={pathImagem} time={tempoDePreparo} onPress={() => navigation.navigate("RecipeInformations", { id: id })} />
                                     ))}
                                 </ScrollContainer>
                             </ScrollView>
@@ -179,8 +179,8 @@ export default function MainViewer() {
                             <TitleText>Receitas recentes</TitleText>
                             <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
                                 <ScrollContainer>
-                                    {recipeData?.map(({ id, name, time, image }) => (
-                                        <RecipeButton key={id} label={name} icon={image} time={time} onPress={() => navigation.navigate("RecipeInformations", { id: id })} />
+                                    {recipeData?.map(({ id, nome, tempoDePreparo, pathImagem }) => (
+                                        <RecipeButton key={id} label={nome} icon={pathImagem} time={tempoDePreparo} onPress={() => navigation.navigate("RecipeInformations", { id: id })} />
                                     ))}
                                 </ScrollContainer>
                             </ScrollView>
@@ -189,8 +189,8 @@ export default function MainViewer() {
                             <TitleText>Receitas da semana</TitleText>
                             <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
                                 <ScrollContainer>
-                                    {recipeData?.map(({ id, name, time, image }) => (
-                                        <RecipeButton key={id} label={name} icon={image} time={time} onPress={() => navigation.navigate("RecipeInformations", { id: id })} />
+                                    {recipeData?.map(({ id, nome, tempoDePreparo, pathImagem }) => (
+                                        <RecipeButton key={id} label={nome} icon={pathImagem} time={tempoDePreparo} onPress={() => navigation.navigate("RecipeInformations", { id: id })} />
                                     ))}
                                 </ScrollContainer>
                             </ScrollView>
@@ -198,8 +198,8 @@ export default function MainViewer() {
                             </> ) : (
                     <RecipeContainer>
                         {notFound ? (
-                            allRecipes?.map(({id, image, name, time}) => (
-                                <RecipeButton key={id} label={name} icon={image} time={time} size="bigger" onPress={() => navigation.navigate("RecipeInformations", { id: id })} />
+                            allRecipes?.map(({ id, nome, tempoDePreparo, pathImagem }) => (
+                                <RecipeButton key={id} label={nome} icon={pathImagem} time={tempoDePreparo} size="bigger" onPress={() => navigation.navigate("RecipeInformations", { id: id })} />
                             ))
                             ) : (
                             <NotFoundText>Não encontramos receitas com os ingredientes selecionados...</NotFoundText>
