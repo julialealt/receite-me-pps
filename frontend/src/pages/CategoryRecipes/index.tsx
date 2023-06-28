@@ -14,7 +14,7 @@ type ParamsProps = {
 interface RecipeData {
   id: number;    
   name: string;
-  time: string;
+  time: number;
   image: string;
 }
 
@@ -25,7 +25,7 @@ export default function CategoryRecipes() {
     const [allRecipes, setAllRecipes] = useState<RecipeData[] | null>([{ 
       id: 0, 
       name: '', 
-      time: '', 
+      time: 0, 
       image: '' 
     }]);
 

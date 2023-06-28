@@ -42,6 +42,7 @@ export default function SelectFilter({show, arrayIngredients, ingredientsArray, 
             item.ingredients.toLowerCase().includes(text.toLowerCase())
         );
         setFormatedData(filteredData);
+        setIsFocused(true);
     };
 
     const handleAddIngredientsArray = (ingredient: Ingredient) => {

@@ -3,7 +3,7 @@ import { Container, ContainerTimer, ImageRecipe, ImageTimer, TextRecipe, TextTim
 interface RecipeProps {
     label?: string,
     icon?: any,
-    time?: string,
+    time?: number,
     size?: string,
     onPress?: () => void
 }
@@ -15,7 +15,7 @@ export default function RecipeButton({label, icon, time, size, onPress}: RecipeP
             <TextRecipe>{label}</TextRecipe>
             <ContainerTimer>
                 <ImageTimer source={require('../../assets/geral/clock.png')} />
-                <TextTimer>{time}</TextTimer>
+                <TextTimer>{time} min</TextTimer>
             </ContainerTimer>
         </Container>
     )

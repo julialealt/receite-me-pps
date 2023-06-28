@@ -32,6 +32,7 @@ export const SelectButtonTextInput = styled.TextInput`
     font-size: 14px;
     color: #a9a9a9;
     flex-grow: 1;
+    width: 210px;
 `
 
 export const SelectButtonFlatList = styled.FlatList`
@@ -53,11 +54,9 @@ export const SelectButttonFlatListText = styled.Text`
 export const SelectButtonTouchableOpacity = styled.TouchableOpacity`
     display: flex;
     align-items: center;
-    width: 50px;
 `
 
 export const TouchableWithoutFeedbackFlatList = styled.TouchableWithoutFeedback`
     display:flex;
     align-self: center;
-    width: 50%;
 `
