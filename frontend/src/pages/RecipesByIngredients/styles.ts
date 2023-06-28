@@ -13,7 +13,7 @@ export const TextTitle = styled.Text`
     font-size: 20px;
     width: 272px;
     text-align: center;
-    margin-bottom: 22px;
+    margin-bottom: 5px;
 `
 
 export const IngredientsContainer = styled.View`

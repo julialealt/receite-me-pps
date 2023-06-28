@@ -5,7 +5,7 @@ export const ScopeButton = styled.TouchableOpacity`
     align-items: center;
     justify-content: center;
     background: #22A36D;
-    padding: 10px 15px;
+    padding: 8px 15px;
     border-radius: 50px;
 `
 

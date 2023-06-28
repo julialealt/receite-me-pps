@@ -84,13 +84,13 @@ export const SepareteMacroNutrients = styled.View`
 
 export const NumberMacroNutrients = styled.Text`
     font-family: 'Poppins-Bold';
-    font-size: 20px;
+    font-size: 16px;
     color: #22A36D;
 `
 
 export const TextMacroNutrients = styled.Text`
     font-family: 'Poppins-SemiBold';
-    font-size: 16px;
+    font-size: 14px;
     color: #a9a9a9;
 `
 

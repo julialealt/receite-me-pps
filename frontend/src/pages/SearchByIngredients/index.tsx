@@ -73,7 +73,7 @@ export default function SearchByIngredients() {
                         ))}
                     </IngredientsContainer>
                     <ButtonContainer>
-                        <Button labelButton="Pesquisar  >" height={55} width={200} radius={50} onPress={() => navigation.navigate('RecipesByIngredients', {ingredients: ingredientsArray.map(item => item.ingredients)})}/>
+                        <Button labelButton="PESQUISAR  >" height={50} width={200} radius={50} onPress={() => navigation.navigate('RecipesByIngredients', {ingredients: ingredientsArray.map(item => item.ingredients)})}/>
                     </ButtonContainer>
                 </Container>
             </ContainerScrollView>
