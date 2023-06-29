@@ -11,41 +11,38 @@ import { useNavigation } from "@react-navigation/native";
 import axios from "axios";
 
 import { propsStack } from '../../routes/Models';
+import { apiURL } from "../../../api";
 
 
-interface Ingredient {
+interface IngredientName {
     id: number;
     ingredients: string;
 }
 
-const data: Ingredient[] = [
-    { id: 1, ingredients: "Farinha" },
-    { id: 2, ingredients: "Açúcar" },
-    { id: 3, ingredients: "Leite" },
-    { id: 4, ingredients: "Ovos" },
-    { id: 5, ingredients: "Manteiga" },
-    { id: 6, ingredients: "Fermento em pó" },
-    { id: 7, ingredients: "Sal" },
-    { id: 8, ingredients: "Chocolate" },
-    { id: 9, ingredients: "Canela" },
-    { id: 10, ingredients: "Óleo vegetal" },
-    { id: 11, ingredients: "Framboesas" },
-    { id: 12, ingredients: "Amêndoas" },
-    { id: 13, ingredients: "Baunilha" },
-    { id: 14, ingredients: "Limão" },
-    { id: 15, ingredients: "Coco ralado" },
-];
+interface Ingredient {
+    calorias: number,
+    carboidratos: number,
+    gorduras: number,
+    id: number,
+    medida: string,
+    nome: string,
+    proteinas: number,
+    quantidade: number,
+    map: any
+}
+
 
 export default function SearchByIngredients() {
     const navigation = useNavigation<propsStack>();
     const [addIngredient, setAddIngredient] = useState(false);
-    const [allIngredients, setAllIngredients] = useState<Ingredient[]>([]);
-    const [ingredientsArray, setIngredientsArray] = useState<Ingredient[]>([]);
+    const [allIngredients, setAllIngredients] = useState<IngredientName[]>([]);
+    const [ingredientsArray, setIngredientsArray] = useState<IngredientName[]>([]);
 
     const getIngredients = async () => {
         try {
-            const response = await axios.get<Ingredient[]>('https://json-test-phi.vercel.app/ingredients');
-            setAllIngredients(response.data);
+            const response = await axios.get<Ingredient>(`${apiURL}/ingredientes`);
+            const ingredients: IngredientName[] = response.data.map(({ id, nome }: { id: number, nome: string }) => ({ id, ingredients: nome }));
+            setAllIngredients(ingredients);
         } catch (error) {
             console.error('Erro ao obter ingredientes:', error);
         }
