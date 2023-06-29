@@ -32,67 +32,14 @@ interface RecipeData {
   modoDePreparo: string;
 }
 
-
-const recipes = [
-  { 
-    id: 2,
-    nome: 'Coxinha', 
-    time: 10,
-    pathImagem: "https://i.postimg.cc/WzKWFG1x/Coxinha.png" },
-  { 
-    id: 3,
-    nome: 'Feijoada', 
-    tempoDePreparo: 10,
-    pathImagem: "https://i.postimg.cc/26kXPjt9/Feijoada.png" },
-  { 
-    id: 4,
-    nome: 'Filé Mignon', 
-    tempoDePreparo: 10,
-    pathImagem: "https://i.postimg.cc/tJ7v4Sph/fmignon.png"},
-  { 
-    id: 5,
-    nome: 'Hamburguer', 
-    tempoDePreparo: 10,
-    pathImagem: "https://i.postimg.cc/zBxP5ZZz/Hamburguer.png" },
-  { 
-    id: 6,
-    nome: 'Cachorro Quente', 
-    tempoDePreparo: 10,
-    pathImagem: "https://i.postimg.cc/W46HWq5J/HotDog.png" },
-  { 
-    id: 7,
-    nome: 'Ramen Coreano', 
-    tempoDePreparo: 10,
-    pathImagem: "https://i.postimg.cc/Wp9QcrTG/Ramen2.png" },
-  { 
-    id: 8,
-    nome: 'Spaghetti', 
-    tempoDePreparo: 10,
-    pathImagem: "https://i.postimg.cc/NjXVXzTD/Spaghetti.png" },
-  { 
-    id: 9,
-    nome: 'Sushi', 
-    tempoDePreparo: 10,
-    pathImagem: "https://i.postimg.cc/xThhc2kq/Sushi.png" },
-  { 
-    id: 10,
-    nome: 'Yakissoba', 
-    tempoDePreparo: 10,
-    pathImagem: "https://i.postimg.cc/rFK7Vmwv/Yakissoba.png" },
-  ];
-
-
-
-
 export default function RecipesByIngredients() {
   const navigation = useNavigation<propsStack>();
   const route = useRoute();
   const { ingredients } = route.params as ParamsProps;
   const [allRecipes, setAllRecipes] = useState<RecipeData[]>()
-  console.log(ingredients)
 
   const getRecipes = async() => {
-    axios.post(`${apiURL}/receitas/filtro`, ["Cacau em Po", "Óleo de Soja", "Açúcar", "Milho de Pipoca", "Leite Condensado", "Arroz"])
+    axios.post(`${apiURL}/receitas/filtro`, ingredients)
       .then(response => {
         setAllRecipes(response.data);
       })
@@ -105,9 +52,6 @@ export default function RecipesByIngredients() {
     getRecipes()
   }, [])
 
-  useEffect(() => {
-    console.log(allRecipes)
-  }, [allRecipes])
   return(
     <ScrollView>
       <Container>
