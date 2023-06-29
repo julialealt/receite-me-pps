@@ -12,7 +12,7 @@ import { propsStack } from '../../routes/Models';
 import { apiURL } from "../../../api";
 
 const categories = [
-    { name: 'Veggie', 
+    { name: 'Vegetariano', 
       value: 'vegetariano',
       image: require('../../assets/categories/Broccoli.png')},
     { name: 'Doces', 
@@ -42,7 +42,25 @@ export default function MainViewer() {
     const [searchInput, setSearchInput] = useState('');
     const [mainOrSearch, setMainOrSearch] = useState(true)
     const [notFound, setNotFound] = useState(true);
-    const [recipeData, setRecipeData] = useState<RecipeData[] | null>([{ 
+    const [recipeData, setRecipeData]= useState<RecipeData[] | null>([{ 
+        id: 0, 
+        nome: '', 
+        tempoDePreparo: 0, 
+        pathImagem: '' 
+    }]);
+    const [recipeRecomendations, setRecipeRecomendations] = useState<RecipeData[] | null>([{ 
+        id: 0, 
+        nome: '', 
+        tempoDePreparo: 0, 
+        pathImagem: '' 
+    }]);
+    const [recipeRecently, setRecipeRecently] = useState<RecipeData[] | null>([{ 
+        id: 0, 
+        nome: '', 
+        tempoDePreparo: 0, 
+        pathImagem: '' 
+    }]);
+    const [recipeWeek, setRecipeWeek] = useState<RecipeData[] | null>([{ 
         id: 0, 
         nome: '', 
         tempoDePreparo: 0, 
@@ -56,9 +74,8 @@ export default function MainViewer() {
     }]);
 
     const getRecipeInformations = async () => {
-      //feito
         try {
-            const response = await axios.get<RecipeData[]>(`${apiURL}/receitas`);
+            const response = await axios.get<RecipeData[]>(`${apiURL}/receitas/recomendacoes`);
             const updatedRecipeData = response.data.map(({id, nome, tempoDePreparo, pathImagem}) => {
             if(nome.length >= 14) {
                 nome = nome.slice(0, 13) + '...';
@@ -90,9 +107,80 @@ export default function MainViewer() {
             setMainOrSearch(true)
         }
     }
+
+    const getRecomendationsRecipes = async () => {
+        try {
+            const response = await axios.get<RecipeData[]>(`${apiURL}/receitas/recomendacoes`);
+            const updatedRecipeData = response.data.map(({id, nome, tempoDePreparo, pathImagem}) => {
+            if(nome.length >= 14) {
+                nome = nome.slice(0, 13) + '...';
+            }
+
+            return {
+                id: id,
+                nome: nome,
+                tempoDePreparo: tempoDePreparo,
+                pathImagem: pathImagem
+            }
+            })
+            setRecipeRecomendations(updatedRecipeData);
+
+        } catch (error) {
+            console.error('Error fetching recipe data:', error);
+        }
+    }
+
+    const getRecentlyRecipes = async () => {
+        try {
+            const response = await axios.get<RecipeData[]>(`${apiURL}/receitas/recomendacoes`);
+            const updatedRecipeData = response.data.map(({id, nome, tempoDePreparo, pathImagem}) => {
+            if(nome.length >= 14) {
+                nome = nome.slice(0, 13) + '...';
+            }
+
+            return {
+                id: id,
+                nome: nome,
+                tempoDePreparo: tempoDePreparo,
+                pathImagem: pathImagem
+            }
+            })
+            setRecipeRecently(updatedRecipeData);
+
+        } catch (error) {
+            console.error('Error fetching recipe data:', error);
+        }
+    }
+
+    const getWeekRecipes = async () => {
+        try {
+            const response = await axios.get<RecipeData[]>(`${apiURL}/receitas/recomendacoes`);
+            const updatedRecipeData = response.data.map(({id, nome, tempoDePreparo, pathImagem}) => {
+            if(nome.length >= 14) {
+                nome = nome.slice(0, 13) + '...';
+            }
+
+            return {
+                id: id,
+                nome: nome,
+                tempoDePreparo: tempoDePreparo,
+                pathImagem: pathImagem
+            }
+            })
+            setRecipeWeek(updatedRecipeData);
+
+        } catch (error) {
+            console.error('Error fetching recipe data:', error);
+        }
+    }
+
+    
         
     useEffect(() => {
         getRecipeInformations();
+        getRecomendationsRecipes();
+        getRecentlyRecipes();
+        getWeekRecipes();
     }, [])
 
     useEffect(() => {
@@ -119,7 +207,7 @@ export default function MainViewer() {
                             <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
                                 <ScrollCategoryContainer>
                                     {categories.map(({ name, image, value }, index) => (
-                                        <CategoryButton key={index} label={name} Icon={image} onPress={() => navigation.navigate('CategoryRecipes', { category: value })} />
+                                        <CategoryButton key={index} label={name} Icon={image} onPress={() => navigation.navigate('CategoryRecipes', { category: name , value: value})} />
                                     ))}
                                 </ScrollCategoryContainer>
                             </ScrollView>
@@ -128,7 +216,7 @@ export default function MainViewer() {
                             <TitleText>Recomendações</TitleText>
                             <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
                                 <ScrollContainer>
-                                    {recipeData?.map(({ id, nome, tempoDePreparo, pathImagem }) => (
+                                    {recipeRecomendations?.map(({ id, nome, tempoDePreparo, pathImagem }) => (
                                         <RecipeButton key={id} label={nome} icon={pathImagem} time={tempoDePreparo} onPress={() => navigation.navigate("RecipeInformations", { id: id })} />
                                     ))}
                                 </ScrollContainer>
@@ -138,7 +226,7 @@ export default function MainViewer() {
                             <TitleText>Receitas recentes</TitleText>
                             <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
                                 <ScrollContainer>
-                                    {recipeData?.map(({ id, nome, tempoDePreparo, pathImagem }) => (
+                                    {recipeRecently?.map(({ id, nome, tempoDePreparo, pathImagem }) => (
                                         <RecipeButton key={id} label={nome} icon={pathImagem} time={tempoDePreparo} onPress={() => navigation.navigate("RecipeInformations", { id: id })} />
                                     ))}
                                 </ScrollContainer>
@@ -148,7 +236,7 @@ export default function MainViewer() {
                             <TitleText>Receitas da semana</TitleText>
                             <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
                                 <ScrollContainer>
-                                    {recipeData?.map(({ id, nome, tempoDePreparo, pathImagem }) => (
+                                    {recipeWeek?.map(({ id, nome, tempoDePreparo, pathImagem }) => (
                                         <RecipeButton key={id} label={nome} icon={pathImagem} time={tempoDePreparo} onPress={() => navigation.navigate("RecipeInformations", { id: id })} />
                                     ))}
                                 </ScrollContainer>
