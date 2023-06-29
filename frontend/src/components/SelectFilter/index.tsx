@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import {CustomScrollView as ScrollView } from "../../../globalStyles";
+import unorm from 'unorm';
 import {
     Container,
     SelectButtonFlatList,
@@ -38,9 +39,12 @@ export default function SelectFilter({show, arrayIngredients, ingredientsArray, 
     
     const handleFilter = (text: string) => {
         setFilterText(text);
-        const filteredData = arrayIngredients.filter((item) =>
-            item.ingredients.toLowerCase().includes(text.toLowerCase())
-        );
+
+        const normalizedText = unorm.nfkd(text).replace(/[\u0300-\u036f]/g, ''); 
+        const filteredData = arrayIngredients.filter((item) => {
+            const normalizedIngredients = unorm.nfkd(item.ingredients).replace(/[\u0300-\u036f]/g, ''); 
+            return normalizedIngredients.toLowerCase().includes(normalizedText.toLowerCase());
+          });
         setFormatedData(filteredData);
         setIsFocused(true);
     };
@@ -58,6 +62,10 @@ export default function SelectFilter({show, arrayIngredients, ingredientsArray, 
         setIsFocused(false);
     }
 
+    useEffect(() => {
+        console.log(arrayIngredients)
+    })
+
 
     return (
         <ScrollView horizontal={true} style={{display: show === "none" ? "none" : "flex"}} >
@@ -70,7 +78,7 @@ export default function SelectFilter({show, arrayIngredients, ingredientsArray, 
                         onChangeText={handleFilter}
                         onFocus={() => setIsFocused(true)}
                     />
-                    <SelectButtonTouchableOpacity onPress={() => setIsFocused(!isFocused)} >
+                    <SelectButtonTouchableOpacity onPress={() => setIsFocused(!isFocused)}>
                         <SelectButtonImage source={require("../../assets/geral/arrowDown.png")} />
                     </SelectButtonTouchableOpacity>
                 </SelectButtonScope>
