@@ -10,6 +10,7 @@ import { apiURL } from "../../../api";
 
 type ParamsProps = {
     category: string;
+    value: string;
   }
 
 interface RecipeData {
@@ -22,7 +23,7 @@ interface RecipeData {
 export default function CategoryRecipes() {
     const route = useRoute();
     const navigation = useNavigation<propsStack>()
-    const { category } = route.params as ParamsProps;
+    const { category, value } = route.params as ParamsProps;
     const [allRecipes, setAllRecipes] = useState<RecipeData[] | null>([{ 
       id: 0, 
       nome: '', 
@@ -33,7 +34,7 @@ export default function CategoryRecipes() {
     const getRecipeInformations = async () => {
       try {
         //feito
-        const response = await axios.get<RecipeData[]>(`${apiURL}/receitas/filtro/${category}`);
+        const response = await axios.get<RecipeData[]>(`${apiURL}/receitas/filtro/${value}`);
         const updatedRecipeData = response.data.map(({ id, pathImagem, nome, tempoDePreparo }) => {
           if (nome.length >= 14) {
             nome = nome.slice(0, 13) + '...';
