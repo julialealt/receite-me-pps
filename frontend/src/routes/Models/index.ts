@@ -12,6 +12,7 @@ export type propsNavigationStack = {
     }
     CategoryRecipes: {
         category: string
+        value: string
     }
     SearchByIngredients: undefined
     RecipesByIngredients: {
