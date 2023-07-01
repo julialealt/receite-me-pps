@@ -7,25 +7,29 @@ import { apiURL } from "../../api";
 
 
 interface AuthContextProps {
-    data: {
-        bio: string;
-        nome: string,
-        email: string,
-        senha: string
-    }
-    signIn: (email: string, password: string) => Promise<boolean>,
-    saveId: (id: number) => void
+  data: {
+    id: number
+    bio: string;
+    nome: string,
+    email: string,
+    senha: string
+  }
+  signIn: (email: string, password: string) => Promise<boolean>,
+  saveId: (id: number) => void,
+  clearFormData: () => void
 }
   
 export const AuthContext = createContext<AuthContextProps>({
-    signIn: async (email, password) => false,
-    data: {
-        nome: "",
-        bio: "",
-        email: "",
-        senha: ""
-    },
-    saveId: async (id) => {}
+  data: {
+    id: 0,
+    nome: "",
+    bio: "",
+    email: "",
+    senha: ""
+  },
+  signIn: async (email, password) => false,
+  saveId: async (id) => {},
+  clearFormData: () => {}
 });
 
 interface AuthProviderProps {
@@ -53,28 +57,28 @@ export default function AuthProvider({children}: AuthProviderProps) {
       senha: ""
     })
 
-    const signIn = async (emailAdress: string, password: string) => {
-      try {
-        const response = await axios.post(`${apiURL}/usuarios/login`, {
-          email: emailAdress,
-          senha: password
-        });
-        const {bio, email, id, nome, senha} = response.data as UserFormData
-        console.log(response.data)
+  const signIn = async (emailAdress: string, password: string) => {
+    try {
+      const response = await axios.post(`${apiURL}/usuarios/login`, {
+        email: emailAdress,
+        senha: password
+      });
+      const {bio, email, id, nome, senha} = response.data as UserFormData
+      console.log(response.data)
 
-        setFormData({
-          id: id,
-          nome: nome,
-          bio: bio,
-          email: email,
-          senha: senha
-        })
-    
-        return true;
-      } catch (error) {
-        return false;
-      }
-    };
+      setFormData({
+        id: id,
+        nome: nome,
+        bio: bio,
+        email: email,
+        senha: senha
+      })
+  
+      return true;
+    } catch (error) {
+      return false;
+    }
+  };
 
   const saveId = async (id: number) => {
     try {
@@ -93,33 +97,28 @@ export default function AuthProvider({children}: AuthProviderProps) {
       ids.unshift(id); // Adicionar o ID no início do array
   
       await AsyncStorage.setItem("recentlyViewed", JSON.stringify(ids));
-      visualizarAsyncStorage();
     } catch (error) {
       console.error(error);
     }
   };
 
-  const visualizarAsyncStorage = async () => {
-    try {
-      const keys = await AsyncStorage.getAllKeys();
-      const items = await AsyncStorage.multiGet(keys);
-  
-      // Exiba os dados armazenados
-      items.forEach(([key, value]) => {
-        console.log(`${key}: ${value}`);
-      });
-    } catch (error) {
-      console.error('Erro ao visualizar o AsyncStorage:', error);
-    }
-  };
+  const clearFormData = () => {
+    setFormData({
+      id: 0,
+      nome: "",
+      bio: "",
+      email: "",
+      senha: ""
+    })
+  } 
 
   useEffect(() => {
     console.log(formData)
-  }, [])
+  }, [formData])
     
 
   return(
-      <AuthContext.Provider value={{ data: formData, signIn, saveId  }} >
+      <AuthContext.Provider value={{ data: formData, signIn, saveId, clearFormData  }} >
           {children}
       </AuthContext.Provider>
   )
