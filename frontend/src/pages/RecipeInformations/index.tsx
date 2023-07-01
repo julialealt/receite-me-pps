@@ -43,17 +43,18 @@ interface RecipeData {
 
 export default function RecipeInformations() {
     const route = useRoute();
+    const { data } = useContext(AuthContext);
+    const { id } = route.params as ParamsProps;
     const { saveId } = useContext(AuthContext);
     const navigation = useNavigation<propsStack>();
     const [tradeInformation, setTradeInformation] = useState(true);
-    const [hearthColor, setHearthColor] = useState(false)
-    const { id } = route.params as ParamsProps;
+    const [hearthColor, setHearthColor] = useState(true)
     const [recipeData, setRecipeData] = useState<RecipeData | undefined>();
     const [macroNutrients, setMacroNutrients] = useState<MacroNutrients[]>()
     
     const hearthWhite = require('../../assets/geral/hearthWhite.png');
     const hearthGreen = require('../../assets/geral/hearthGreen.png');
-    const source = hearthColor ? hearthWhite : hearthGreen;
+    const source = hearthColor ? hearthGreen : hearthWhite;
 
   const getRecipeInformations = async () => {
     //Feito
@@ -82,9 +83,39 @@ export default function RecipeInformations() {
     setMacroNutrients(macroNutrients)
   };
 
+  const favoriteRecipe = async () => {
+    try {
+      const userId = data.id;
+      const recipeId = id;
+  
+      const response = await axios.post(`${apiURL}/pastas/${recipeId}/${userId}`);
+      const favoriteRecipe = response.data.message
+      console.log(favoriteRecipe)
+      setHearthColor(favoriteRecipe)
+    } catch (error) {
+      console.log(error); // Lógica para tratar erros da requisição aqui
+    }
+  };
+
+  const favoriteRecipeUseEffect = async () => {
+    const userId = data.id;
+    const recipeId = id;
+
+    const response = await axios.post(`${apiURL}/pastas/${recipeId}/${userId}`);
+    const response2 = await axios.post(`${apiURL}/pastas/${recipeId}/${userId}`);
+    console.log(response2.data.message)
+    const favoriteRecipe = response2.data.message
+    setHearthColor(favoriteRecipe)
+  }
+
   useEffect(() => {
     getRecipeInformations();
     }, []);
+
+  useEffect(() => {
+    favoriteRecipeUseEffect()
+  }, [])
+
 
   // quantidade: Math.round(recipeData?.caloriasTotais),
 
@@ -94,7 +125,7 @@ export default function RecipeInformations() {
                 <TouchableOpacity onPress={() => navigation.goBack()} >
                     <BackArrow source={require("../../assets/geral/arrowLeftWhite.png")} />
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => setHearthColor(!hearthColor)}>
+                <TouchableOpacity onPress={() => favoriteRecipe()}>
                     <HeartImage source={source} />
                 </TouchableOpacity>
             </BackThePage>
