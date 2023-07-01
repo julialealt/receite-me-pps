@@ -22,7 +22,7 @@ export default function SignUp() {
   const [formData, setFormData] = useState<FormData>({
       nome: '',
       email: '',
-      bio: "Receite.me, o melhor app de receitas 👆🏻",
+      bio: 'Receite.me, o melhor app de receitas 👆🏻',
       senha: '',
   });
   const [error, setError] = useState("");
