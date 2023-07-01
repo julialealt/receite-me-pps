@@ -173,8 +173,6 @@ export default function MainViewer() {
             console.error('Error fetching recipe data:', error);
         }
     }
-
-    
         
     useEffect(() => {
         getRecipeInformations();
