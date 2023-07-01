@@ -63,7 +63,10 @@ export default function MainProfile() {
             <Container>
                 <UserContainer>
                     <UserLogo source={require('../../../assets/Users/Janet.png')} />
-                    <UserName>{data.name?.split(' ')[0] + " " + data.name?.split(' ')[1]}</UserName>
+                    <UserName>
+                      {data.nome && data.nome.split(' ')[0]}
+                      {data.nome && data.nome.split(' ')[1] && " " + data.nome.split(' ')[1]}
+                    </UserName>
                     <UserStatus>{data.bio}</UserStatus>
                 </UserContainer>
                 <UserFunctionsList>
