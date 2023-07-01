@@ -117,6 +117,9 @@ export default function InitialSliders() {
           <AppIntroSlider 
             renderItem={renderSlides}
             data={slides}
+            showSkipButton={false}
+            showNextButton={false}
+            showDoneButton={false}
             activeDotStyle={{
               backgroundColor: '#43927C',
               width: 17
