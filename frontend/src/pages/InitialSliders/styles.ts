@@ -4,8 +4,11 @@ import { Dimensions } from 'react-native';
 export const Container = styled.View`
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: flex-start;
   /* margin-top: ${Dimensions.get('window').height - 741}px; */
+  min-height: ${Dimensions.get('window').height * 1.1}px;
+  margin-bottom: 80px;
+
 `;
 
 export const IntroductionImage = styled.Image`
