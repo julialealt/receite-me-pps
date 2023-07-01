@@ -1,7 +1,6 @@
 import { TouchableOpacity, View } from "react-native";
 import {CustomScrollView as ScrollView } from "../../../globalStyles";
 import { BottomSideRightImage, Container, ContainerFavoriteBook, ContainerImages, LeftContainerImages, LeftImage, MainTitle, RightContainerImages, ScrollViewContainer, SeeMore, TitleContainer, TitleFavoriteBook, TopSideRightImage } from "./styles";
-
 import { propsStack } from '../../routes/Models';
 import { useNavigation } from "@react-navigation/native";
 
@@ -22,11 +21,11 @@ export default function FavoriteBook() {
                         </TitleContainer>
                         <ContainerImages>
                             <LeftContainerImages>
-                                <LeftImage source={require("../../assets/recipes/Ramen2.png")} />
+                                <LeftImage source={require("../../assets/recipes/spaghetti.jpg")} />
                             </LeftContainerImages>
                             <RightContainerImages>
-                                <TopSideRightImage source={require("../../assets/recipes/Ramen2.png")} />
-                                <BottomSideRightImage source={require("../../assets/recipes/Ramen2.png")} />
+                                <TopSideRightImage source={require("../../assets/recipes/yakisoba.jpeg")} />
+                                <BottomSideRightImage source={require("../../assets/recipes/mistoquente.jpeg")} />
                             </RightContainerImages>
                         </ContainerImages>
                     </ContainerFavoriteBook>
