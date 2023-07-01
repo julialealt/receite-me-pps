@@ -36,6 +36,10 @@ export default function Login() {
             if (result) {
                 console.log(result)
                 navigation.navigate("Tab");
+                setFormData({
+                    email: "",
+                    password: ""
+                })
             }
         })
         .catch((error) => {
