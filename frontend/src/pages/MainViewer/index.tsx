@@ -193,7 +193,7 @@ export default function MainViewer() {
                 <Container>
                     <UserContainer>
                         <GreetingUserContainer>
-                            <GreetingText>Olá, {data.name?.split(' ')[0]}</GreetingText>
+                            <GreetingText>Olá, {data.nome?.split(' ')[0]}</GreetingText>
                             <TitleText>Vamos cozinhar uma boa receita hoje!</TitleText>
                         </GreetingUserContainer>
                         <UserLogo source={require('../../assets/Users/Janet.png')} />
