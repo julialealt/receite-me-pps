@@ -16,7 +16,7 @@ export default function FavoriteBook() {
                     <ContainerFavoriteBook>
                         <TitleContainer>
                             <TitleFavoriteBook>Favoritos</TitleFavoriteBook>
-                            <TouchableOpacity>
+                            <TouchableOpacity onPress={() => navigation.navigate("FavoriteRecipes")}>
                                 <SeeMore>Ver mais</SeeMore>
                             </TouchableOpacity>
                         </TitleContainer>
