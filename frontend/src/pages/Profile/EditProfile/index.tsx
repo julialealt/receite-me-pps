@@ -31,10 +31,6 @@ export default function EditProfile() {
           }));
     }
 
-    useEffect(() => {
-        console.log(formData)
-    }, [formData])
-
     return(
         <ScrollView>
             <Container>

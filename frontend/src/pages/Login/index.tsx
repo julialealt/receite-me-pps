@@ -32,6 +32,7 @@ export default function Login() {
     const handleLogin = async() => {
         signIn(formData.email, formData.password)
         .then((result) => {
+            console.log(result)
             if (result) {
                 console.log(result)
                 navigation.navigate("Tab");
@@ -40,12 +41,6 @@ export default function Login() {
         .catch((error) => {
             console.error('Sign-in error:', error);
         });
-    //     const response = await axios.get("http://localhost:3000/users")
-    //     const users = response.data;
-    //     const account = formData;
-    //     const findUserInAccount = !!users.find((item: UserFormData) => item.email === account.email && item.password === account.password);
-        // if(findUserInAccount) 
-        //navigation.navigate('mainViewer');
     };
 
     return(

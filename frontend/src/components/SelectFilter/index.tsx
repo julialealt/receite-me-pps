@@ -62,10 +62,6 @@ export default function SelectFilter({show, arrayIngredients, ingredientsArray, 
         setIsFocused(false);
     }
 
-    useEffect(() => {
-        console.log(arrayIngredients)
-    })
-
 
     return (
         <ScrollView horizontal={true} style={{display: show === "none" ? "none" : "flex"}} >

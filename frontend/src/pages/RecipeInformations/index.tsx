@@ -59,7 +59,6 @@ export default function RecipeInformations() {
     //Feito
     const response = await axios.get(`${apiURL}/receitas/findById/${id}`);
     const responseData = response.data as RecipeData;
-    console.log(responseData)
     const macroNutrients = [
       {
         id: 1,
@@ -86,10 +85,6 @@ export default function RecipeInformations() {
   useEffect(() => {
     getRecipeInformations();
     }, []);
-
-  useEffect(() => {
-    console.log(macroNutrients);
-  }, [macroNutrients])
 
   // quantidade: Math.round(recipeData?.caloriasTotais),
 

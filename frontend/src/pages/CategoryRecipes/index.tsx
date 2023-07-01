@@ -47,7 +47,6 @@ export default function CategoryRecipes() {
           };
         });
 
-        console.log(updatedRecipeData)
         setAllRecipes(updatedRecipeData);
       } catch (error) {
         console.error('Error fetching recipe data:', error);
