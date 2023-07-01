@@ -20,6 +20,7 @@ export type propsNavigationStack = {
     }
 
     Favorites: undefined
+    FavoriteRecipes: undefined
     FavoriteBook: undefined
     Profile: undefined
     EditProfile: undefined
