@@ -66,7 +66,6 @@ export default function AuthProvider({children}: AuthProviderProps) {
         senha: password
       });
       const {bio, email, id, nome, senha} = response.data as UserFormData
-      console.log(response.data)
 
       setFormData({
         id: id,
@@ -89,14 +88,14 @@ export default function AuthProvider({children}: AuthProviderProps) {
   
       if (!ids.includes(id)) {
         if (ids.length === 12) {
-          ids.pop(); // Remover o último elemento do array
+          ids.pop(); 
         }
       } else {
         const index = ids.indexOf(id);
-        ids.splice(index, 1); // Remover o ID repetido do array
+        ids.splice(index, 1); 
       }
   
-      ids.unshift(id); // Adicionar o ID no início do array
+      ids.unshift(id);
   
       await AsyncStorage.setItem("recentlyViewed", JSON.stringify(ids));
     } catch (error) {

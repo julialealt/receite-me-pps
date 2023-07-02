@@ -41,8 +41,8 @@ export const BackArrow = styled.Image`
 `
 
 export const NotFoundText = styled.Text`
-    font-size: 16px;
-    font-weight: 500;
+    font-family: 'Poppins-Medium';
+    font-size: 14px;
     padding: 10px 20px;
     color: #878787;
 `

@@ -32,9 +32,7 @@ export default function Login() {
     const handleLogin = async() => {
         signIn(formData.email, formData.password)
         .then((result) => {
-            console.log(result)
             if (result) {
-                console.log(result)
                 navigation.navigate("Tab");
                 setFormData({
                     email: "",

@@ -67,12 +67,12 @@ export const ImageIcon = styled.Image`
 export const ContainerMacroNutrients = styled.View`
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-between;
     gap: 27px;
     border-width: 2px;
     border-radius: 16px;
     border-color: #c9c7c7;
-    padding: 10px 0;
+    padding: 10px 20px;
     margin: 20px 0 25px 0;
 `
 

@@ -90,10 +90,9 @@ export default function RecipeInformations() {
   
       const response = await axios.post(`${apiURL}/pastas/${recipeId}/${userId}`);
       const favoriteRecipe = response.data.message
-      console.log(favoriteRecipe)
       setHearthColor(favoriteRecipe)
     } catch (error) {
-      console.log(error); // Lógica para tratar erros da requisição aqui
+      console.error(error); // Lógica para tratar erros da requisição aqui
     }
   };
 

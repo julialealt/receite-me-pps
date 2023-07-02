@@ -1,10 +1,11 @@
-import { View } from "react-native";
+import { View, Text } from "react-native";
 import {CustomScrollView as ScrollView } from "../../../../globalStyles";
-import { Container, UserContainer, UserFunctionsIconContainer, UserFunctionsList, UserFunctionsText, UserIcon, UserLogo, UserName, UserStatus } from "./styles";
+import { ButtonContainer, Container, UserContainer, UserFunctionsIconContainer, UserFunctionsList, UserFunctionsText, UserIcon, UserLogo, UserName, UserStatus } from "./styles";
 import { useNavigation } from "@react-navigation/native";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../../../context/auth";
 import { Ionicons } from '@expo/vector-icons';
+import { Button, Overlay } from '@rneui/themed';
 
 import { propsStack } from '../../../routes/Models';
 import axios from "axios";
@@ -20,6 +21,11 @@ interface ProfileProps {
 export default function MainProfile() {
     const navigation = useNavigation<propsStack>();
     const { data, clearFormData } = useContext(AuthContext)
+
+    const [visible, setVisible] = useState(false);
+    const toggleOverlay = () => {
+      setVisible(!visible);
+    }
 
     const profiles: ProfileProps[] = [
       { 
@@ -54,7 +60,7 @@ export default function MainProfile() {
         id: 5,
         text: "Excluir conta", 
         icon: "ios-trash-outline",
-        command: () => handleDeleteUser(data.id)
+        command: toggleOverlay
 
       },
     ];
@@ -94,6 +100,40 @@ export default function MainProfile() {
                     ))}
                 </UserFunctionsList>
             </Container>
+            <Overlay 
+              isVisible={visible}
+              onBackdropPress={toggleOverlay}
+              overlayStyle={{backgroundColor: "#FFFFFF", width: 301, height: 178, borderRadius: 20}}>
+              <Text style={{fontFamily: 'Poppins-Medium', fontSize: 14, color:'#000000', textAlign:'center', paddingTop: 20, paddingRight: 38, paddingBottom: 35, paddingLeft: 38}}>Você deseja mesmo excluir sua conta?</Text>
+              <ButtonContainer>
+                <Button 
+                  title="Cancelar" 
+                  buttonStyle={{
+                    backgroundColor: '#A9A9A9',
+                    borderRadius: 5
+                  }}
+                  titleStyle={{fontFamily: 'Poppins-Medium', fontSize: 14, color:'#FFFFFF' }}
+                  containerStyle={{
+                    height: 40,
+                    width: 110
+                  }}
+                  onPress={toggleOverlay}
+                />
+                <Button 
+                  title="Excluir" 
+                  buttonStyle={{
+                    backgroundColor: '#da2d2d',
+                    borderRadius: 5
+                  }}
+                  titleStyle={{fontFamily: 'Poppins-Medium', fontSize: 14, color:'#FFFFFF' }}
+                  containerStyle={{
+                    height: 40,
+                    width: 110
+                  }}
+                  onPress={() => handleDeleteUser(data.id)}
+                />
+              </ButtonContainer>
+            </Overlay>
         </ScrollView>
       </View>
     )

@@ -86,7 +86,7 @@ export default function EditProfile() {
                         onChangeText={value => handleInputChange('email', value)}
                     />
                     <Input
-                        label="senha"
+                        label="Senha"
                         value={formDataEdit.senha}
                         type="password"
                         onChangeText={value => handleInputChange('senha', value)}

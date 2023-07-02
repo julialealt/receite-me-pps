@@ -43,7 +43,6 @@ export default function FavoriteRecipes() {
         }
         })
 
-        console.log(updatedRecipeData)
         if(updatedRecipeData.length == 0) {
           setNotFound(false)
         }
