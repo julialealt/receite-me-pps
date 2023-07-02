@@ -57,6 +57,10 @@ export default function SearchByIngredients() {
         getIngredients()
     }, [])
 
+    useEffect(() => {
+        setAddIngredient(false);
+    },[ingredientsArray])
+
     return(
         <View>
             <ContainerScrollView>

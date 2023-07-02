@@ -60,6 +60,7 @@ export default function SelectFilter({show, arrayIngredients, ingredientsArray, 
             addIngredient(FilteredIngredientsArray);
         }
         setIsFocused(false);
+        setFilterText('');
     }
 
 
