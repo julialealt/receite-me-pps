@@ -21,10 +21,16 @@
       "adaptiveIcon": {
         "foregroundImage": "./src/assets/adaptive-icon.png",
         "backgroundColor": "#22A36D"
-      }
+      },
+      "package": "com.julialealt.myapp"
     },
     "web": {
       "favicon": "./src/assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "cc624599-e538-4e01-9eeb-a8c3d2240230"
+      }
     }
   }
 }
