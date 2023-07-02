@@ -1,1 +1,1 @@
-export const apiURL = 'https://b01c-2804-d4b-94af-9300-43a2-2ef9-32b6-11dd.ngrok-free.app'
+export const apiURL = 'https://backend-receite-me.onrender.com'
