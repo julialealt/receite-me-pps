@@ -70,7 +70,7 @@ export const TitleText = styled.Text `
 
 export const NotFoundText = styled.Text`
     font-family: 'Poppins-Medium';
-    font-size: 16px;
+    font-size: 14px;
     color: #878787;
 `
 

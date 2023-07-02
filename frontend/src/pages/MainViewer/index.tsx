@@ -247,7 +247,7 @@ export default function MainViewer() {
                                 <RecipeButton key={id} label={nome} icon={pathImagem} time={tempoDePreparo} size="bigger" onPress={() => navigation.navigate("RecipeInformations", { id: id })} />
                             ))
                             ) : (
-                            <NotFoundText>Não encontramos receitas com os ingredientes selecionados...</NotFoundText>
+                            <NotFoundText>Não encontramos receitas com esse nome...</NotFoundText>
                         )}
                         
                     </RecipeContainer>   )}
