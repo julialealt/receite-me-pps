@@ -16,7 +16,8 @@ interface AuthContextProps {
   }
   signIn: (email: string, password: string) => Promise<boolean>,
   saveId: (id: number) => void,
-  clearFormData: () => void
+  clearFormData: () => void,
+  setNewFormData: (id: number, nome: string, bio: string, email: string) => void
 }
   
 export const AuthContext = createContext<AuthContextProps>({
@@ -29,7 +30,8 @@ export const AuthContext = createContext<AuthContextProps>({
   },
   signIn: async (email, password) => false,
   saveId: async (id) => {},
-  clearFormData: () => {}
+  clearFormData: () => {},
+  setNewFormData: (id, nome, bio, email) => {}
 });
 
 interface AuthProviderProps {
@@ -112,13 +114,24 @@ export default function AuthProvider({children}: AuthProviderProps) {
     })
   } 
 
+  const setNewFormData = (id: number, nome: string, bio: string, email: string) => {
+    setFormData({
+      id: id,
+      nome: nome,
+      bio: bio,
+      email: email,
+      senha: formData.senha
+    })
+
+  }
+
   useEffect(() => {
     console.log(formData)
   }, [formData])
     
 
   return(
-      <AuthContext.Provider value={{ data: formData, signIn, saveId, clearFormData  }} >
+      <AuthContext.Provider value={{ data: formData, signIn, saveId, clearFormData, setNewFormData  }} >
           {children}
       </AuthContext.Provider>
   )
