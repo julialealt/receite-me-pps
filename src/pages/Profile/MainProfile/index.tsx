@@ -10,6 +10,7 @@ import { Button, Overlay } from '@rneui/themed';
 import { propsStack } from '../../../routes/Models';
 import axios from "axios";
 import { apiURL } from "../../../../api";
+import PopUp from "../../../components/PopUp";
 
 interface ProfileProps {
   id: number,
@@ -82,6 +83,9 @@ export default function MainProfile() {
     return(
       <View>
         <ScrollView>
+            <PopUp 
+            text={"Você deseja mesmo excluir sua conta?"} isVisible={visible} 
+            handleDeleteUser={() => handleDeleteUser(data.id)} onPressBackDrop={toggleOverlay} id={data.id} />
             <Container>
                 <UserContainer>
                     <UserLogo source={require('../../../assets/Users/Janet.png')} />
@@ -100,40 +104,6 @@ export default function MainProfile() {
                     ))}
                 </UserFunctionsList>
             </Container>
-            <Overlay 
-              isVisible={visible}
-              onBackdropPress={toggleOverlay}
-              overlayStyle={{backgroundColor: "#FFFFFF", width: 301, height: 178, borderRadius: 20}}>
-              <Text style={{fontFamily: 'Poppins-Medium', fontSize: 14, color:'#000000', textAlign:'center', paddingTop: 20, paddingRight: 38, paddingBottom: 35, paddingLeft: 38}}>Você deseja mesmo excluir sua conta?</Text>
-              <ButtonContainer>
-                <Button 
-                  title="Cancelar" 
-                  buttonStyle={{
-                    backgroundColor: '#A9A9A9',
-                    borderRadius: 5
-                  }}
-                  titleStyle={{fontFamily: 'Poppins-Medium', fontSize: 14, color:'#FFFFFF' }}
-                  containerStyle={{
-                    height: 40,
-                    width: 110
-                  }}
-                  onPress={toggleOverlay}
-                />
-                <Button 
-                  title="Excluir" 
-                  buttonStyle={{
-                    backgroundColor: '#da2d2d',
-                    borderRadius: 5
-                  }}
-                  titleStyle={{fontFamily: 'Poppins-Medium', fontSize: 14, color:'#FFFFFF' }}
-                  containerStyle={{
-                    height: 40,
-                    width: 110
-                  }}
-                  onPress={() => handleDeleteUser(data.id)}
-                />
-              </ButtonContainer>
-            </Overlay>
         </ScrollView>
       </View>
     )
