@@ -14,6 +14,7 @@ interface FormData {
     email: string;
     bio: string;
     senha: string;
+    confirmarSenha: string;
   }
 
 export default function SignUp() {
@@ -24,9 +25,11 @@ export default function SignUp() {
       email: '',
       bio: 'Receite.me, o melhor app de receitas 👆🏻',
       senha: '',
+      confirmarSenha: '',
   });
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
+  const [isButtonEnabled, setIsButtonEnabled] = useState(false);
 
   const handleInputChange = (name: keyof FormData, value: string) => {
       setFormData(prevState => ({
@@ -36,7 +39,7 @@ export default function SignUp() {
   }
 
   const handleSignUp = () => {
-    if(!(formData.nome.length == 0 || formData.email.length == 0 || formData.senha.length == 0)) {
+    if(!(formData.nome.length == 0 || formData.email.length == 0 || formData.senha.length == 0 || formData.senha.length == 0)) {
       axios
         .post(`${apiURL}/usuarios`, formData)
         .then((response) => {
@@ -46,6 +49,7 @@ export default function SignUp() {
             email: '',
             bio: '',
             senha: '',
+            confirmarSenha: '',
           })
         })
         .catch((error) => {
@@ -53,6 +57,12 @@ export default function SignUp() {
         });
     }
   };
+
+  const checkButtonEnabled = () => {
+    const { nome, email, senha, confirmarSenha } = formData;
+    const isAllFields = nome.length > 0 && email.length > 0 && senha.length > 0 && confirmarSenha.length > 0 && senha == confirmarSenha;
+    setIsButtonEnabled(isAllFields);
+  }
   
   useEffect(() => {
     if (success) {
@@ -61,23 +71,47 @@ export default function SignUp() {
     }
   }, [success, navigation]);
 
+  useEffect(() => {
+    checkButtonEnabled()
+  })
+
   return(
       <Container>
           <LoginText>Sign up</LoginText>
           <Input label="Nome" type="text" placeholder="João" 
               value={formData.nome}
-              onChangeText={value => handleInputChange('nome', value)}
+              onChangeText={value => {
+                handleInputChange('nome', value);
+                checkButtonEnabled();
+              }}
+              required={true}
           />
           <Input label="Email" keyboardType="email-address" placeholder="joao@gmail.com"
               value={formData.email}
-              onChangeText={value => handleInputChange('email', value)}
+              onChangeText={value => {
+                handleInputChange('email', value);
+                checkButtonEnabled();
+              }}
+              required={true}
           />
           <Input label="Senha" type="password" placeholder="*********"
               value={formData.senha}
-              onChangeText={value => handleInputChange('senha', value)}
+              onChangeText={value => {
+                handleInputChange('senha', value);
+                checkButtonEnabled();
+              }}
+              required={true}
+          />
+          <Input label="Confirmar senha" type="password" placeholder="*********"
+              value={formData.confirmarSenha}
+              onChangeText={value => {
+                handleInputChange('confirmarSenha', value);
+                checkButtonEnabled();
+              }}
+              required={true}
           />
           <ContainerButton>
-              <Button labelButton="CADASTRAR" onPress={handleSignUp} width={200} height={47} radius={10} />
+              <Button labelButton="CADASTRAR" onPress={handleSignUp} width={200} height={47} radius={10} disabled={!isButtonEnabled} />
               <SubText>Já possui uma conta? <Weight700 
               style={{color: "#22A36D"}} 
               onPress={() => navigation.navigate('Login')}>Entre agora</Weight700></SubText>
