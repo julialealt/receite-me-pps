@@ -56,10 +56,12 @@ export default function Login() {
             </BackThePage>
             <Input label="Email" type="email" placeholder="joao@gmail.com" 
                 value={formData.email}
-                onChangeText={value => handleInputChange('email', value)} />
+                onChangeText={value => handleInputChange('email', value)} 
+                required={true} />
             <Input label="Senha" type="password" placeholder="*********" 
                 value={formData.password}
-                onChangeText={value => handleInputChange('password', value)} />
+                onChangeText={value => handleInputChange('password', value)} 
+                required={true} />
             <ContainerButton>
                 <Button labelButton="ENTRAR" width={200} height={47} radius={10} onPress={handleLogin} />
             </ContainerButton>

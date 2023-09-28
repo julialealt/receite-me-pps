@@ -21,6 +21,19 @@ export const InputText = styled.TextInput`
     color: #686868;
 `
 
+export const TextContainer = styled.View`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 4px;
+`
+
+export const TextError = styled.Text`
+    font-family: 'Poppins-Medium';
+    font-size: 10px;
+    color: #E33737;
+`
+
 export const TextMain = styled.Text`
     font-family: 'Poppins-Medium';
     font-size: 12px;
