@@ -21,6 +21,6 @@ export default function Input({label, type = 'text',required, ...props}: InputPr
             keyboardType={type === 'email' ? 'email-address' : 'default'}
             secureTextEntry={type === 'password'}
             />
-        </Container>
+        </Container>    
     )
 }

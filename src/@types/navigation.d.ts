@@ -21,6 +21,8 @@ export declare global {
             profile: undefined;
             editProfile: undefined;
             recentlyViewed: undefined;
+            
+            recoveryPassword: undefined;
         }
     }
 }

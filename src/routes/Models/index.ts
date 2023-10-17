@@ -25,6 +25,7 @@ export type propsNavigationStack = {
     Profile: undefined
     EditProfile: undefined
     RecentlyViewed: undefined
+    RecoveryPassword: undefined
 }
 
 export type propsStack = NativeStackNavigationProp<propsNavigationStack>

@@ -12,6 +12,7 @@ import RecipesByIngredients from '../../pages/RecipesByIngredients';
 import EditProfile from '../../pages/Profile/EditProfile';
 import RecentlyViewed from '../../pages/Profile/RecentlyViewed';
 import FavoriteRecipes from '../../pages/FavoriteRecipes';
+import RecoveryPassword from '../../pages/RecoveryPassword';
 
 const { Navigator, Screen } = createNativeStackNavigator<propsNavigationStack>();
 
@@ -60,6 +61,10 @@ export default function() {
             <Screen
             name='FavoriteRecipes'
             component={FavoriteRecipes}/>
+
+            <Screen
+            name='RecoveryPassword'
+            component={RecoveryPassword}/>
 
         </Navigator>
     )

@@ -9,7 +9,8 @@ export const Container = styled.View`
 
 export const LoginText = styled.Text`
     font-family: 'Poppins-Bold';
-    font-size: 25px;
+    font-weight: 700;
+    font-size: 20px;
     color: #272727;
 `
 
@@ -34,8 +35,3 @@ export const BackArrow = styled.Image`
     height: 20px;
 `
 
-export const EsqueciSenha = styled.Text`
-    font-size: 12px;
-    font-weight: 600;
-    color: #22A36D;
-`

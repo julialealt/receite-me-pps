@@ -11,6 +11,7 @@ import FavoriteBook from '../pages/FavoriteBook';
 import EditProfile from '../pages/Profile/EditProfile';
 import RecentlyViewed from '../pages/Profile/RecentlyViewed';
 import RecipesByIngredients from '../pages/RecipesByIngredients';
+import RecoveryPassword from '../pages/RecoveryPassword';
 
 const { Screen, Navigator } = createNativeStackNavigator();
 
@@ -68,6 +69,10 @@ export default function StackRoutes() {
             <Screen
                 name='recipesByIngredients'
                 component={RecipesByIngredients}
+            />
+            <Screen
+                name='recoveryPassword'
+                component={RecoveryPassword}
             />
         </Navigator>
     )
