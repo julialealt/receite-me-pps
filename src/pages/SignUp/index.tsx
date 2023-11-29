@@ -2,7 +2,7 @@ import { useNavigation } from "@react-navigation/native";
 import { Weight700 } from "../../../globalStyles";
 import Button from "../../components/Button";
 import Input from "../../components/Input";
-import { Container, ContainerButton, LoginText, SubText } from "./styles";
+import { Container, ContainerButton, ContainerTitle, ContainerWarning, ImageWarning, LoginText, SubText, WarningText } from "./styles";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Text } from "react-native";
@@ -60,7 +60,13 @@ export default function SignUp() {
 
   const checkButtonEnabled = () => {
     const { nome, email, senha, confirmarSenha } = formData;
-    const isAllFields = nome.length > 0 && email.length > 0 && senha.length > 0 && confirmarSenha.length > 0 && senha == confirmarSenha;
+    console.log(senha)
+    const isAllFields = nome.length > 0 && email.length > 0 && senha.length > 0 && confirmarSenha.length > 0 && senha.length >= 8 && senha == confirmarSenha;
+    if(senha.length >= 8) {
+      setError("Preencha todos os campos obrigatórios");
+    } else {
+      setError("A senha deve incluir no mínimo 8 caracteres");
+    }
     setIsButtonEnabled(isAllFields);
   }
   
@@ -77,7 +83,13 @@ export default function SignUp() {
 
   return(
       <Container>
+        <ContainerTitle>
           <LoginText>Sign up</LoginText>
+          <ContainerWarning>
+            <ImageWarning source={require('../../assets/geral/errorOutline.png')} />
+            <WarningText>{error}</WarningText>
+          </ContainerWarning>
+        </ContainerTitle>
           <Input label="Nome" type="text" placeholder="João" 
               value={formData.nome}
               onChangeText={value => {

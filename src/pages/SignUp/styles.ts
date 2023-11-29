@@ -25,3 +25,28 @@ export const ContainerButton = styled.View`
     gap: 30px;
     margin-top:13px;
 `
+
+export const ContainerTitle = styled.View`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+`
+
+export const ContainerWarning = styled.View`
+    display: flex;
+    flex-direction: row;
+    gap: 2px;
+    align-items: center;
+`
+
+export const WarningText = styled.Text`
+    font-family: 'Poppins-Medium';
+    font-size: 10px;
+    color: #E33737;
+`
+
+export const ImageWarning = styled.Image`
+  width: 14px;
+  height: 14px; 
+`;

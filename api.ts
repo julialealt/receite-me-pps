@@ -1,1 +1,1 @@
-export const apiURL = 'https://backend-receite-me.onrender.com'
+export const apiURL = 'https://receitemebackend.onrender.com'
