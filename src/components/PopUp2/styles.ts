@@ -14,12 +14,11 @@ export const TextPopUp = styled.Text`
   font-size: 13px;
   color: #000000;
   text-align: center;
-  padding: 20px 15px 0px 15px;
+  padding: 20px 30px 0px 30px;
 `
 
 export const TitlePopUp = styled.Text`
-    font-family: 'Poppins-Medium';
-    font-weight: bold;
+    font-family: 'Poppins-SemiBold';
     font-size: 16px;
     color: #000000;
     text-align: center;
@@ -29,5 +28,5 @@ export const TitlePopUp = styled.Text`
 export const InputContainer = styled.View`
     flex-direction: row;
     margin-bottom: 20px;
-
+    
 `
