@@ -60,7 +60,6 @@ export default function SignUp() {
 
   const checkButtonEnabled = () => {
     const { nome, email, senha, confirmarSenha } = formData;
-    console.log(senha)
     const isAllFields = nome.length > 0 && email.length > 0 && senha.length > 0 && confirmarSenha.length > 0 && senha.length >= 8 && senha == confirmarSenha;
     if(senha.length >= 8) {
       setError("Preencha todos os campos obrigatórios");
