@@ -2,13 +2,16 @@ import { useNavigation } from "@react-navigation/native";
 import { Weight700 } from "../../../globalStyles";
 import Button from "../../components/Button";
 import Input from "../../components/Input";
-import { BackArrow, BackThePage, Container, ContainerButton, EsqueciSenha, LoginText } from "./styles";
+import { BackArrow, BackThePage, ButtonContainer, Container, ContainerButton, EsqueciSenha, InputContainer, LoginText, TextPopUp, TitlePopUp } from "./styles";
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { AuthContext } from "../../context/auth"
 import { propsStack } from '../../routes/Models';
 import { Text, TouchableOpacity } from "react-native";
 import PopUp2 from "../../components/PopUp2";
+import { View } from "react-native";
+import { Button as BTOverlay, Overlay } from "@rneui/base";
+import { apiURL } from "../../../api";
 
 interface FormData {
     email: string;
@@ -19,17 +22,30 @@ export default function Login() {
     const navigation = useNavigation<propsStack>();
     const { signIn } = useContext(AuthContext)
     const [isVisible, setIsVisible] = useState(false);
-    const [sendCodeOverlay, setSendCodeOverlay] = useState(false);
     const [formData, setFormData] = useState({
         email: "",
         password: ""
     })
+    const [resetPasswordEmail, setResetPasswordEmail] = useState("");
+    const [codeReset, setCodeReset] = useState("");
 
     const handleInputChange = (name: keyof FormData, value: string) => {
         setFormData(prevState => ({
             ...prevState,
             [name]: value,
           }));
+    }
+
+    const sendEmailToResetPassword = async (email: string) => {
+        try {
+            await axios.get(`${apiURL}/usuarios/request_reset/${email}`);
+            setIsVisible(false)
+            navigation.navigate("RecoveryPassword", {email: email});
+
+        } catch(error) {
+            console.error("Error de requisição: ", error);
+            throw error;
+        }
     }
 
     const handleLogin = async() => {
@@ -48,27 +64,50 @@ export default function Login() {
         });
     };
 
-    const tradeOverlay = () => {
-        setIsVisible(false)
-        setSendCodeOverlay(true)
-    }
-
-    const handleNavigateRecoveryPassword = async() => {
-        navigation.navigate("RecoveryPassword");
-    };
+    useEffect(() => {
+        console.log(resetPasswordEmail)
+    }, [resetPasswordEmail])
 
 
 
     return(
         <Container>
-            <PopUp2 
-               title={"Recuperação de senha"} text={"Informe o email cadastrado na sua conta e enviaremos um código para você redefinir sua senha."} isVisible={isVisible}
-               onPressBackDrop={() => setIsVisible(false)} handleDeleteUser={tradeOverlay} placeholder="Insira seu email"
-             />
-             <PopUp2 
-               title={"Código enviado"} text={"Digite abaixo o código que enviamos para seu email para recuperar o acesso à sua conta."} isVisible={sendCodeOverlay}
-               onPressBackDrop={() => setSendCodeOverlay(false)} handleDeleteUser={handleNavigateRecoveryPassword} placeholder="Insira seu código"
-             />
+            <View>
+                <Overlay 
+                        isVisible={isVisible}
+                        overlayStyle={{backgroundColor: "#FFFFFF", width: 341, height: 310, borderRadius: 20}}>
+                        <TitlePopUp>Recuperação de senha</TitlePopUp>
+                        <TextPopUp>Informe o email cadastrado na sua conta e enviaremos um código para você redefinir sua senha.</TextPopUp>
+                        <InputContainer>
+                            <Input type={"email"} placeholder={"Insira seu email"} value={resetPasswordEmail} onChangeText={(value: string) => setResetPasswordEmail(value)} />
+                        </InputContainer>
+                        <ButtonContainer>
+                            <BTOverlay 
+                            title="Cancelar" 
+                            buttonStyle={{ backgroundColor: 'transparent', borderRadius: 10 }}
+                            titleStyle={{fontFamily: 'Poppins-Medium', fontSize: 14, color:'#da2d2d' }}
+                            containerStyle={{
+                                height: 40,
+                                width: 110
+                            }}
+                            onPress={() => setIsVisible(false)}
+                            />
+                            <BTOverlay 
+                            title="Enviar" 
+                            buttonStyle={{
+                                backgroundColor: '#22A36D', borderRadius: 5
+                            }}
+                            titleStyle={{fontFamily: 'Poppins-Medium', fontSize: 14, color:'#FFFFFF' }}
+                            containerStyle={{
+                                height: 40,
+                                width: 110
+                            }}
+                            onPress={() => sendEmailToResetPassword(resetPasswordEmail)}
+                            />
+                        </ButtonContainer>
+                </Overlay>
+            </View>
+
             <BackThePage>
                 <TouchableOpacity onPress={() => navigation.goBack()} >
                 <BackArrow source={require("../../assets/geral/arrowLeft.png")} />
@@ -91,5 +130,6 @@ export default function Login() {
                 <EsqueciSenha>Esqueci Minha Senha</EsqueciSenha>
             </TouchableOpacity>
         </Container>
+       
     )
 }

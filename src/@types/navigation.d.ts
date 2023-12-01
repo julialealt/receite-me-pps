@@ -22,7 +22,9 @@ export declare global {
             editProfile: undefined;
             recentlyViewed: undefined;
             
-            recoveryPassword: undefined;
+            recoveryPassword: {
+                email: string;
+            };
         }
     }
 }
