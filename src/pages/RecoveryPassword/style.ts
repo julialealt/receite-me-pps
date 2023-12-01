@@ -3,13 +3,12 @@ import styled from 'styled-components/native';
 export const Container = styled.View`
     flex: 1;
     align-items: center;
-    margin: 75px 0;
+    margin: 75px 20px 0 20px;
     gap: 17px;
 `
 
 export const LoginText = styled.Text`
     font-family: 'Poppins-Bold';
-    font-weight: 700;
     font-size: 20px;
     color: #272727;
 `
@@ -34,4 +33,3 @@ export const BackArrow = styled.Image`
     width: 20px;
     height: 20px;
 `
-

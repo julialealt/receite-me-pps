@@ -2,7 +2,7 @@ import { useNavigation } from "@react-navigation/native";
 import { Weight700 } from "../../../globalStyles";
 import Button from "../../components/Button";
 import Input from "../../components/Input";
-import { BackArrow, BackThePage, ButtonContainer, Container, ContainerButton, EsqueciSenha, InputContainer, LoginText, TextPopUp, TitlePopUp } from "./styles";
+import { BackArrow, BackThePage, ButtonContainer, Container, ContainerButton, EsqueciSenha, InputContainer, LoginText, SubText, TextPopUp, TitlePopUp } from "./styles";
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { AuthContext } from "../../context/auth"
@@ -119,16 +119,19 @@ export default function Login() {
                 value={formData.email}
                 onChangeText={value => handleInputChange('email', value)} 
                 required={true} />
-            <Input label="Senha" type="password" placeholder="*********" 
+            <Input label="Senha" type="password" placeholder="Insira sua senha" 
                 value={formData.password}
                 onChangeText={value => handleInputChange('password', value)} 
                 required={true} />
             <ContainerButton>
-                <Button labelButton="ENTRAR" width={200} height={47} radius={10} onPress={handleLogin} />
+                <Button labelButton="ENTRAR" width={290} height={47} radius={10} onPress={handleLogin} />
             </ContainerButton>
             <TouchableOpacity onPress={() => setIsVisible(true)}>
-                <EsqueciSenha>Esqueci Minha Senha</EsqueciSenha>
+                <EsqueciSenha>Esqueci minha senha</EsqueciSenha>
             </TouchableOpacity>
+            <SubText>Ainda não possui uma conta? <Weight700 
+            style={{color: "#22A36D"}} 
+            onPress={() => navigation.navigate('SignUp')}>Criar conta</Weight700></SubText>
         </Container>
        
     )

@@ -95,7 +95,7 @@ export default function RecoveryPassword() {
             }} />
 
             <ContainerButton>
-                <Button labelButton="ENTRAR" width={200} height={47} radius={10} onPress={sendCodeToResetPassword} disabled={!isButtonEnabled} />
+                <Button labelButton="CONFIRMAR" width={200} height={47} radius={10} onPress={sendCodeToResetPassword} disabled={!isButtonEnabled} />
             </ContainerButton>
         </Container>
     )
