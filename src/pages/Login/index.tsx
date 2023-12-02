@@ -12,6 +12,7 @@ import PopUp2 from "../../components/PopUp2";
 import { View } from "react-native";
 import { Button as BTOverlay, Overlay } from "@rneui/base";
 import { apiURL } from "../../../api";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 interface FormData {
     email: string;

@@ -10,6 +10,7 @@ import { propsStack } from '../../../routes/Models';
 import axios from "axios";
 import { apiURL } from "../../../../api";
 import { Button as BTOverlay, Overlay } from "@rneui/base";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 interface FormData {
     id: number;
@@ -47,12 +48,17 @@ export default function EditProfile() {
         if(formDataEdit.nome.length !== 0 && formDataEdit.email.length !== 0 && formDataEdit.senha.length !== 0) {
             if(formDataEdit.senha === data.senha) {
                 try {
+                    const token = await AsyncStorage.getItem('@token'); 
                     await axios.patch(`${apiURL}/usuarios/update`, {
                         id: data.id,
                         nome: formDataEdit.nome,
                         bio: formDataEdit.bio,
                         email: formDataEdit.email,
                         senha: data.senha,
+                    }, {
+                        headers: {
+                            Authorization: `Bearer ${token}`
+                        }
                     });
                     setNewFormData(data.id, formDataEdit.nome, formDataEdit.bio, formDataEdit.email)
                     setConfirmPassword(false)
@@ -69,12 +75,17 @@ export default function EditProfile() {
     const handleChangePasswordConfirmation = async () => {
         if(formDataEdit.novaSenha == formDataEdit.senha) {
             try {
+                const token = await AsyncStorage.getItem('@token'); 
                 await axios.patch(`${apiURL}/usuarios/update`, {
                     id: data.id,
                     nome: data.nome,
                     bio: data.bio,
                     email: data.email,
                     senha: formDataEdit.senha,
+                }, {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
                 });
                 setNewFormData(data.id, formDataEdit.nome, formDataEdit.bio, formDataEdit.email)
                 setChangePassword(false)

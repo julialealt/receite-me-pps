@@ -12,6 +12,7 @@ import axios from "axios";
 
 import { propsStack } from '../../routes/Models';
 import { apiURL } from "../../../api";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 
 interface IngredientName {
@@ -40,7 +41,12 @@ export default function SearchByIngredients() {
 
     const getIngredients = async () => {
         try {
-            const response = await axios.get<Ingredient>(`${apiURL}/ingredientes`);
+            const token = await AsyncStorage.getItem('@token'); 
+            const response = await axios.get<Ingredient>(`${apiURL}/ingredientes`, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
             const ingredients: IngredientName[] = response.data.map(({ id, nome }: { id: number, nome: string }) => ({ id, ingredients: nome }));
             setAllIngredients(ingredients);
         } catch (error) {

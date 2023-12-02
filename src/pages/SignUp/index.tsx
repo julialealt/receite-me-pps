@@ -41,7 +41,13 @@ export default function SignUp() {
   const handleSignUp = () => {
     if(!(formData.nome.length == 0 || formData.email.length == 0 || formData.senha.length == 0 || formData.senha.length == 0)) {
       axios
-        .post(`${apiURL}/usuarios`, formData)
+        .post(`${apiURL}/auth/create`, {
+          nome: formData.nome,
+          email: formData.email,
+          bio: formData.bio,
+          senha: formData.senha,
+          avatar: "1"
+        })
         .then((response) => {
           setSuccess(true);
           setFormData({

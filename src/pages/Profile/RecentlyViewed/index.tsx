@@ -31,8 +31,12 @@ export default function RecentlyViewed() {
         const recentlyViewedArray = await AsyncStorage.getItem("recentlyViewed");
         const ids = JSON.parse(recentlyViewedArray || "[]");
         const recipePromises = ids.map(async (id: number) => {
-          //feito
-          const response = await axios.get<RecipeData>(`${apiURL}/receitas/findById/${id}`);
+          const token = await AsyncStorage.getItem('@token'); 
+          const response = await axios.get<RecipeData>(`${apiURL}/receitas/findById/${id}`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
           const { nome, pathImagem, tempoDePreparo} = response.data;
           let updatedName = nome;
           if (nome.length >= 14) {

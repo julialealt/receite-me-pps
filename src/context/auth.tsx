@@ -51,22 +51,23 @@ interface UserFormData extends FormData {
   }
 
 export default function AuthProvider({children}: AuthProviderProps) {
-    const [formData, setFormData] = useState({
-      id: 0,
-      nome: "",
-      bio: "",
-      email: "",
-      senha: ""
-    })
+  const [formData, setFormData] = useState({
+    id: 0,
+    nome: "",
+    bio: "",
+    email: "",
+    senha: ""
+  })
 
   const signIn = async (emailAdress: string, password: string) => {
     try {
-      const response = await axios.post(`${apiURL}/usuarios/login`, {
+      const response = await axios.post(`${apiURL}/auth/authenticate`, {
         email: emailAdress,
         senha: password
       });
-      const {bio, email, id, nome, senha} = response.data as UserFormData
 
+      const token = response.data.token;
+      const {id, email, nome, senha, bio} = response.data.user;
       setFormData({
         id: id,
         nome: nome,
@@ -74,10 +75,14 @@ export default function AuthProvider({children}: AuthProviderProps) {
         email: email,
         senha: senha
       })
-  
-      return true;
+      console.log(token)
+      console.log(formData)
+
+      await AsyncStorage.setItem('@token', token);
+
+      return token;
     } catch (error) {
-      return false;
+      console.error("Error de requisição: ", error);
     }
   };
 

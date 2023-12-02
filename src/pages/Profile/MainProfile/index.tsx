@@ -11,6 +11,7 @@ import { propsStack } from '../../../routes/Models';
 import axios from "axios";
 import { apiURL } from "../../../../api";
 import PopUp from "../../../components/PopUp";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 interface ProfileProps {
   id: number,
@@ -73,7 +74,12 @@ export default function MainProfile() {
 
     const handleDeleteUser = async (id: number) => {
       try {
-        const response = await axios.delete(`${apiURL}/usuarios/${id}`);
+        const token = await AsyncStorage.getItem('@token'); 
+        const response = await axios.delete(`${apiURL}/usuarios/${id}`, {
+          headers: {
+              Authorization: `Bearer ${token}`
+          }
+      });
         navigation.navigate("SignUp");
       } catch (error) {
         console.error(error);

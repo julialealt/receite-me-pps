@@ -8,6 +8,7 @@ import { TouchableOpacity } from "react-native";
 import { propsStack } from '../../routes/Models';
 import { AuthContext } from "../../context/auth";
 import { apiURL } from "../../../api";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 type ParamsProps = {
   id: number;
@@ -57,8 +58,12 @@ export default function RecipeInformations() {
     const source = hearthColor ? hearthGreen : hearthWhite;
 
   const getRecipeInformations = async () => {
-    //Feito
-    const response = await axios.get(`${apiURL}/receitas/findById/${id}`);
+    const token = await AsyncStorage.getItem('@token'); 
+    const response = await axios.get(`${apiURL}/receitas/findById/${id}`, {
+      headers: {
+          Authorization: `Bearer ${token}`
+      }
+    });
     const responseData = response.data as RecipeData;
     const macroNutrients = [
       {
@@ -87,21 +92,35 @@ export default function RecipeInformations() {
     try {
       const userId = data.id;
       const recipeId = id;
+      const token = await AsyncStorage.getItem('@token'); 
   
-      const response = await axios.post(`${apiURL}/pastas/${recipeId}/${userId}`);
+      const response = await axios.post(`${apiURL}/pastas/${recipeId}/${userId}`, {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    });
       const favoriteRecipe = response.data.message
       setHearthColor(favoriteRecipe)
     } catch (error) {
-      console.error(error); // Lógica para tratar erros da requisição aqui
+      console.error(error);
     }
   };
 
   const favoriteRecipeUseEffect = async () => {
     const userId = data.id;
     const recipeId = id;
+    const token = await AsyncStorage.getItem('@token'); 
 
-    const response = await axios.post(`${apiURL}/pastas/${recipeId}/${userId}`);
-    const response2 = await axios.post(`${apiURL}/pastas/${recipeId}/${userId}`);
+    await axios.post(`${apiURL}/pastas/${recipeId}/${userId}`, {
+      headers: {
+          Authorization: `Bearer ${token}`
+      }
+    });
+    const response2 = await axios.post(`${apiURL}/pastas/${recipeId}/${userId}`, {
+      headers: {
+          Authorization: `Bearer ${token}`
+      }
+    });
     console.log(response2.data.message)
     const favoriteRecipe = response2.data.message
     setHearthColor(favoriteRecipe)

@@ -8,6 +8,7 @@ import { Text, TouchableOpacity } from "react-native";
 import { AuthContext } from "../../context/auth";
 import axios from "axios";
 import { apiURL } from "../../../api";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 interface RecipeData {
     id: number;    
@@ -29,7 +30,12 @@ export default function FavoriteRecipes() {
 
   const getFavoriteRecipes = async () => {
     try {
-        const response = await axios.get<RecipeData[]>(`${apiURL}/pastas/favoritos/${data.id}`);
+        const token = await AsyncStorage.getItem('@token'); 
+        const response = await axios.get<RecipeData[]>(`${apiURL}/pastas/favoritos/${data.id}`, {
+          headers: {
+              Authorization: `Bearer ${token}`
+          }
+        });
         const updatedRecipeData = response.data.map(({id, nome, tempoDePreparo, pathImagem}) => {
         if(nome.length >= 14) {
             nome = nome.slice(0, 13) + '...';

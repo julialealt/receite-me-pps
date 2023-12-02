@@ -7,6 +7,7 @@ import { propsStack } from '../../routes/Models';
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { apiURL } from "../../../api";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 type ParamsProps = {
     category: string;
@@ -33,8 +34,12 @@ export default function CategoryRecipes() {
 
     const getRecipeInformations = async () => {
       try {
-        //feito
-        const response = await axios.get<RecipeData[]>(`${apiURL}/receitas/filtro/${value}`);
+        const token = await AsyncStorage.getItem('@token'); 
+        const response = await axios.get<RecipeData[]>(`${apiURL}/receitas/filtro/${value}`,{
+          headers: {
+              Authorization: `Bearer ${token}`
+          }
+      });
         const updatedRecipeData = response.data.map(({ id, pathImagem, nome, tempoDePreparo }) => {
           if (nome.length >= 14) {
             nome = nome.slice(0, 13) + '...';

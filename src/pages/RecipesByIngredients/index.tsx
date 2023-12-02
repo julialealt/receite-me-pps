@@ -9,6 +9,7 @@ import { useNavigation, useRoute } from "@react-navigation/native";
 import axios from "axios";
 import { apiURL } from "../../../api";
 import { useEffect, useState } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 interface ParamsProps {
   ingredients: string[]
@@ -39,7 +40,12 @@ export default function RecipesByIngredients() {
   const [allRecipes, setAllRecipes] = useState<RecipeData[]>()
 
   const getRecipes = async() => {
-    axios.post(`${apiURL}/receitas/filtro`, ingredients)
+    const token = await AsyncStorage.getItem('@token'); 
+    axios.post(`${apiURL}/receitas/filtro`, ingredients, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
       .then(response => {
         setAllRecipes(response.data);
       })

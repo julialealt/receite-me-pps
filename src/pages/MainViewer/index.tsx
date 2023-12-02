@@ -10,6 +10,7 @@ import axios from "axios";
 import { AuthContext } from "../../context/auth"
 import { propsStack } from '../../routes/Models';
 import { apiURL } from "../../../api";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const categories = [
     { name: 'Vegetariano', 
@@ -75,7 +76,12 @@ export default function MainViewer() {
 
     const getRecipeInformations = async () => {
         try {
-            const response = await axios.get<RecipeData[]>(`${apiURL}/receitas/recomendacoes`);
+            const token = await AsyncStorage.getItem('@token'); 
+            const response = await axios.get<RecipeData[]>(`${apiURL}/receitas/recomendacoes`, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
             const updatedRecipeData = response.data.map(({id, nome, tempoDePreparo, pathImagem}) => {
             if(nome.length >= 14) {
                 nome = nome.slice(0, 13) + '...';
@@ -110,7 +116,12 @@ export default function MainViewer() {
 
     const getRecomendationsRecipes = async () => {
         try {
-            const response = await axios.get<RecipeData[]>(`${apiURL}/receitas/recomendacoes`);
+            const token = await AsyncStorage.getItem('@token'); 
+            const response = await axios.get<RecipeData[]>(`${apiURL}/receitas/recomendacoes`, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
             const updatedRecipeData = response.data.map(({id, nome, tempoDePreparo, pathImagem}) => {
             if(nome.length >= 14) {
                 nome = nome.slice(0, 13) + '...';
@@ -132,7 +143,12 @@ export default function MainViewer() {
 
     const getRecentlyRecipes = async () => {
         try {
-            const response = await axios.get<RecipeData[]>(`${apiURL}/receitas/recomendacoes`);
+            const token = await AsyncStorage.getItem('@token'); 
+            const response = await axios.get<RecipeData[]>(`${apiURL}/receitas/recomendacoes`, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
             const updatedRecipeData = response.data.map(({id, nome, tempoDePreparo, pathImagem}) => {
             if(nome.length >= 14) {
                 nome = nome.slice(0, 13) + '...';
@@ -154,7 +170,12 @@ export default function MainViewer() {
 
     const getWeekRecipes = async () => {
         try {
-            const response = await axios.get<RecipeData[]>(`${apiURL}/receitas/recomendacoes`);
+            const token = await AsyncStorage.getItem('@token'); 
+            const response = await axios.get<RecipeData[]>(`${apiURL}/receitas/recomendacoes`, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
             const updatedRecipeData = response.data.map(({id, nome, tempoDePreparo, pathImagem}) => {
             if(nome.length >= 14) {
                 nome = nome.slice(0, 13) + '...';
@@ -173,7 +194,7 @@ export default function MainViewer() {
             console.error('Error fetching recipe data:', error);
         }
     }
-        
+    
     useEffect(() => {
         getRecipeInformations();
         getRecomendationsRecipes();
@@ -184,6 +205,7 @@ export default function MainViewer() {
     useEffect(() => {
         filterRecipes(searchInput);
     }, [searchInput])
+
 
     return(
         <View>
