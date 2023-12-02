@@ -110,13 +110,9 @@ export default function Login() {
             </View>
 
             <BackThePage>
-                <TouchableOpacity onPress={() => navigation.goBack()} >
-                <BackArrow source={require("../../assets/geral/arrowLeft.png")} />
-                </TouchableOpacity>
                 <LoginText>Login</LoginText>
-                <Text>‎ ‎ ‎ ‎ ‎ </Text>
             </BackThePage>
-            <Input label="Email" type="email" placeholder="joao@gmail.com" 
+            <Input label="Email" type="email" placeholder="Insira seu email" 
                 value={formData.email}
                 onChangeText={value => handleInputChange('email', value)} 
                 required={true} />

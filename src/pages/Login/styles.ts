@@ -29,7 +29,7 @@ export const BackThePage = styled.View`
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     padding: 0 45px;
     width: 100%;
     margin: 0 0 50px 0 ;
