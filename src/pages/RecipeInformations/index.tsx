@@ -124,7 +124,6 @@ export default function RecipeInformations() {
     console.log(token)
 
     const response1 = await axios.post(`${apiURL}/pastas/${recipeId}/${userId}`, {}, { headers });
-
     const response2 = await axios.post(`${apiURL}/pastas/${recipeId}/${userId}`, {}, { headers });
     console.log(response2.data.message)
     const favoriteRecipe = response2.data.message
