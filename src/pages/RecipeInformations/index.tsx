@@ -93,12 +93,16 @@ export default function RecipeInformations() {
       const userId = data.id;
       const recipeId = id;
       const token = await AsyncStorage.getItem('@token'); 
+
+      const headers = {
+        Authorization: `Bearer ${token}`
+      };
+
+      console.log(userId)
+      console.log(recipeId)
+      console.log(token)
   
-      const response = await axios.post(`${apiURL}/pastas/${recipeId}/${userId}`, {
-        headers: {
-            Authorization: `Bearer ${token}`
-        }
-    });
+      const response = await axios.post(`${apiURL}/pastas/${recipeId}/${userId}`, {}, { headers });
       const favoriteRecipe = response.data.message
       setHearthColor(favoriteRecipe)
     } catch (error) {
@@ -111,16 +115,17 @@ export default function RecipeInformations() {
     const recipeId = id;
     const token = await AsyncStorage.getItem('@token'); 
 
-    await axios.post(`${apiURL}/pastas/${recipeId}/${userId}`, {
-      headers: {
-          Authorization: `Bearer ${token}`
-      }
-    });
-    const response2 = await axios.post(`${apiURL}/pastas/${recipeId}/${userId}`, {
-      headers: {
-          Authorization: `Bearer ${token}`
-      }
-    });
+    const headers = {
+      Authorization: `Bearer ${token}`
+    };
+
+    console.log(userId)
+    console.log(recipeId)
+    console.log(token)
+
+    const response1 = await axios.post(`${apiURL}/pastas/${recipeId}/${userId}`, {}, { headers });
+
+    const response2 = await axios.post(`${apiURL}/pastas/${recipeId}/${userId}`, {}, { headers });
     console.log(response2.data.message)
     const favoriteRecipe = response2.data.message
     setHearthColor(favoriteRecipe)
