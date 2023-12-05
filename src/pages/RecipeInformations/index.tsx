@@ -62,7 +62,6 @@ export default function RecipeInformations() {
     const [macroNutrients, setMacroNutrients] = useState<MacroNutrients[]>();
     const [folderItems, setFolderItems] = useState<FolderItems[]>();
     const [visibleOverlay, setVisibleOverlay] = useState(false);
-    const [takeValueOverlay, setTakeValueOverlay] = useState("");
     
     const hearthWhite = require('../../assets/geral/hearthWhite.png');
     const hearthGreen = require('../../assets/geral/hearthGreen.png');
@@ -97,28 +96,6 @@ export default function RecipeInformations() {
     saveId(id)
     setRecipeData(responseData);
     setMacroNutrients(macroNutrients)
-  };
-
-  const favoriteRecipe = async () => {
-    try {
-      const userId = data.id;
-      const recipeId = id;
-      const token = await AsyncStorage.getItem('@token'); 
-
-      const headers = {
-        Authorization: `Bearer ${token}`
-      };
-
-      console.log(userId)
-      console.log(recipeId)
-      console.log(token)
-  
-      const response = await axios.post(`${apiURL}/pastas/${recipeId}/${userId}`, {}, { headers });
-      const favoriteRecipe = response.data.message
-      setHearthColor(favoriteRecipe)
-    } catch (error) {
-      console.error(error);
-    }
   };
 
   const openOverlay = async() => {
@@ -168,15 +145,40 @@ export default function RecipeInformations() {
     }
   };
 
+  const favoriteRecipe = async () => {
+    try {
+      const userId = data.id;
+      const recipeId = id;
+      const token = await AsyncStorage.getItem('@token'); 
+
+      const headers = {
+        Authorization: `Bearer ${token}`
+      };
+
+      console.log(userId)
+      console.log(recipeId)
+      console.log(token)
+  
+      const response = await axios.post(`${apiURL}/pastas/${recipeId}/${userId}`, {}, { headers });
+      const favoriteRecipe = response.data.message
+      setHearthColor(favoriteRecipe)
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const addRecipeinFolder = async(idFolder: number) => {
     try {
       const token = await AsyncStorage.getItem('@token');
-      await axios.post(`${apiURL}/add-receita/${idFolder}/${id}`, {
+      console.log(idFolder);
+      console.log(id);
+      await axios.post(`${apiURL}/pastas/add-receita/${idFolder}/${id}`, {}, {
         headers: {
           Authorization: `Bearer ${token}`
         }
       });
       setVisibleOverlay(false);
+      setHearthColor(true);
     } catch(error) {
       console.error(error);
     }

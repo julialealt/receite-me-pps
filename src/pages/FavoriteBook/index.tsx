@@ -11,11 +11,17 @@ import axios from "axios";
 import { AuthContext } from "../../context/auth";
 import { apiURL } from "../../../api";
 
+interface FolderItems {
+    id: number;
+    nome: string;
+  }
+
 export default function FavoriteBook() {
     const navigation = useNavigation<propsStack>();
     const { data } = useContext(AuthContext)
     const [visibleOverlay, setVisibleOverlay] = useState(false);
     const [newFolder, setNewFolder] = useState('');
+    const [folderItems, setFolderItems] = useState<FolderItems[]>();
 
     const handleCreateFolder = async() => {
         const token = await AsyncStorage.getItem('@token'); 
@@ -35,9 +41,35 @@ export default function FavoriteBook() {
         }
     }
 
+    const findFoldersById = async () => {
+        try {
+          const token = await AsyncStorage.getItem('@token');
+          const response = await axios.get(`${apiURL}/pastas/list-usuario/${data.id}`, {
+            headers: {
+              Authorization: `Bearer ${token}`
+            }
+          });
+          const responseData = response.data;
+          const pastasFormatadas = responseData.map((pasta: FolderItems) => ({
+            id: pasta.id,
+            nome: pasta.nome
+          }));
+    
+          setFolderItems(pastasFormatadas);
+          console.log(folderItems)
+    
+        } catch (error) {
+          console.error(error);
+        }
+      };
+
     useEffect(() => {
         console.log(newFolder)
     }, [newFolder])
+
+    useEffect(() => {
+        findFoldersById()
+    }, [])
 
     return(
         <View>
@@ -78,11 +110,12 @@ export default function FavoriteBook() {
             <ScrollViewContainer>
                 <Container>
                     <MainTitle>Favoritos</MainTitle>
-                    <ContainerFavoriteBook>
+                    {folderItems?.map(({ id, nome }) => (
+                    <ContainerFavoriteBook key={id}>
                         <TitleContainer>
-                            <TitleFavoriteBook>Favoritos</TitleFavoriteBook>
-                            <TouchableOpacity onPress={() => navigation.navigate("FavoriteRecipes")}>
-                                <SeeMore>Ver mais</SeeMore>
+                            <TitleFavoriteBook>{nome}</TitleFavoriteBook>
+                            <TouchableOpacity onPress={() => navigation.navigate("FavoriteRecipes", {idFolder: id})}>
+                                <SeeMore>ver mais</SeeMore>
                             </TouchableOpacity>
                         </TitleContainer>
                         <ContainerImages>
@@ -95,13 +128,14 @@ export default function FavoriteBook() {
                             </RightContainerImages>
                         </ContainerImages>
                     </ContainerFavoriteBook>
+                    ))}
+
                     <ContainerFavoriteBook>
                         <TitleContainer>
                             <TitleFavoriteBook>Nova Pasta</TitleFavoriteBook>
                             <TouchableOpacity  onPress={() => setVisibleOverlay(true)}>
                                 <SeeMore style={{color: 'gray'}}>Criar pasta</SeeMore>
                             </TouchableOpacity>
-                            
                         </TitleContainer>
                         <ContainerImages>
                             <LeftContainerImages>

@@ -2,7 +2,7 @@ import {CustomScrollView as ScrollView } from "../../../globalStyles";
 import { useContext, useEffect, useState } from "react";
 import { BackArrow, BackThePage, Container, NotFoundText, RecipeContainer, TextRecentlyRecipes } from "./styles";
 import RecipeButton from "../../components/RecipeButton";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import { propsStack } from '../../routes/Models';
 import { Text, TouchableOpacity } from "react-native";
 import { AuthContext } from "../../context/auth";
@@ -10,14 +10,20 @@ import axios from "axios";
 import { apiURL } from "../../../api";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
+type ParamsProps = {
+  idFolder: number;
+}
+
 interface RecipeData {
     id: number;    
     nome: string;
     tempoDePreparo: number;
     pathImagem: string;
-  }
+}
 
 export default function FavoriteRecipes() {
+    const route = useRoute();
+    const { idFolder } = route.params as ParamsProps;
     const { data } = useContext(AuthContext);
     const navigation = useNavigation<propsStack>();
     const [notFound, setNotFound] = useState(true);
@@ -31,7 +37,7 @@ export default function FavoriteRecipes() {
   const getFavoriteRecipes = async () => {
     try {
         const token = await AsyncStorage.getItem('@token'); 
-        const response = await axios.get<RecipeData[]>(`${apiURL}/pastas/favoritos/${data.id}`, {
+        const response = await axios.get<RecipeData[]>(`${apiURL}/pastas/${idFolder}/receitas`, {
           headers: {
               Authorization: `Bearer ${token}`
           }
