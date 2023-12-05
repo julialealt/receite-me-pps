@@ -114,7 +114,7 @@ export default function FavoriteBook() {
                     <ContainerFavoriteBook key={id}>
                         <TitleContainer>
                             <TitleFavoriteBook>{nome}</TitleFavoriteBook>
-                            <TouchableOpacity onPress={() => navigation.navigate("FavoriteRecipes", {idFolder: id})}>
+                            <TouchableOpacity onPress={() => navigation.navigate("FavoriteRecipes", {idFolder: id, nameFolder: nome})}>
                                 <SeeMore>ver mais</SeeMore>
                             </TouchableOpacity>
                         </TitleContainer>

@@ -12,6 +12,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 type ParamsProps = {
   idFolder: number;
+  nameFolder: string;
 }
 
 interface RecipeData {
@@ -23,7 +24,7 @@ interface RecipeData {
 
 export default function FavoriteRecipes() {
     const route = useRoute();
-    const { idFolder } = route.params as ParamsProps;
+    const { idFolder, nameFolder } = route.params as ParamsProps;
     const { data } = useContext(AuthContext);
     const navigation = useNavigation<propsStack>();
     const [notFound, setNotFound] = useState(true);
@@ -77,7 +78,7 @@ export default function FavoriteRecipes() {
             <TouchableOpacity onPress={() => navigation.goBack()} >
               <BackArrow source={require("../../assets/geral/arrowLeft.png")} />
             </TouchableOpacity>
-            <TextRecentlyRecipes>Favoritos</TextRecentlyRecipes>
+            <TextRecentlyRecipes>{nameFolder}</TextRecentlyRecipes>
             <Text>‎ ‎ ‎ ‎ ‎ </Text>
           </BackThePage>
             <RecipeContainer>
