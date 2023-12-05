@@ -165,3 +165,26 @@ export const HeartImage = styled.Image`
     width: 40px;
     height: 40px;
 `
+
+export const TitlePopUp = styled.Text`
+    font-size: 14px;
+    font-weight: 500;
+    font-family: 'Poppins-Medium';
+    text-align: center;
+    margin-bottom: 25px;
+    padding: 20px 20px 0px 20px;
+`
+
+export const ButtonContainer = styled.View`
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 25px;
+  margin-bottom: 25px;
+`
+
+export const ItemFoldersContainer = styled.View`
+    display: flex;
+    gap: 10px;
+`

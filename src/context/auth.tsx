@@ -12,12 +12,13 @@ interface AuthContextProps {
     bio: string;
     nome: string,
     email: string,
-    senha: string
+    senha: string,
+    avatar: string
   }
   signIn: (email: string, password: string) => Promise<boolean>,
   saveId: (id: number) => void,
   clearFormData: () => void,
-  setNewFormData: (id: number, nome: string, bio: string, email: string) => void
+  setNewFormData: (id: number, nome: string, bio: string, email: string, avatar: string) => void
 }
   
 export const AuthContext = createContext<AuthContextProps>({
@@ -26,12 +27,13 @@ export const AuthContext = createContext<AuthContextProps>({
     nome: "",
     bio: "",
     email: "",
-    senha: ""
+    senha: "",
+    avatar: ""
   },
   signIn: async (email, password) => false,
   saveId: async (id) => {},
   clearFormData: () => {},
-  setNewFormData: (id, nome, bio, email) => {}
+  setNewFormData: (id, nome, bio, email, avatar) => {}
 });
 
 interface AuthProviderProps {
@@ -56,7 +58,8 @@ export default function AuthProvider({children}: AuthProviderProps) {
     nome: "",
     bio: "",
     email: "",
-    senha: ""
+    senha: "",
+    avatar: ""
   })
 
   const signIn = async (emailAdress: string, password: string) => {
@@ -67,13 +70,14 @@ export default function AuthProvider({children}: AuthProviderProps) {
       });
 
       const token = response.data.token;
-      const {id, email, nome, senha, bio} = response.data.user;
+      const {id, email, nome, senha, bio, avatar} = response.data.user;
       setFormData({
         id: id,
         nome: nome,
         bio: bio,
         email: email,
-        senha: senha
+        senha: senha,
+        avatar: avatar
       })
       console.log(token)
       console.log(formData)
@@ -114,17 +118,19 @@ export default function AuthProvider({children}: AuthProviderProps) {
       nome: "",
       bio: "",
       email: "",
-      senha: ""
+      senha: "",
+      avatar: ""
     })
   } 
 
-  const setNewFormData = (id: number, nome: string, bio: string, email: string) => {
+  const setNewFormData = (id: number, nome: string, bio: string, email: string, avatar: string) => {
     setFormData({
       id: id,
       nome: nome,
       bio: bio,
       email: email,
-      senha: formData.senha
+      senha: formData.senha,
+      avatar: avatar
     })
 
   }

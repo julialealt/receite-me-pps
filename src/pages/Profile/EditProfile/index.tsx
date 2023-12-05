@@ -35,7 +35,7 @@ export default function EditProfile() {
         email: data.email,
         senha: '',
         novaSenha: '',
-        avatar: ''
+        avatar: data.avatar
     })
     const handleInputChange = (name: keyof FormData, value: string) => {
         setFormDataEdit(prevState => ({
@@ -46,7 +46,13 @@ export default function EditProfile() {
 
     const handleInputConfirmation = async () => {
         if(formDataEdit.nome.length !== 0 && formDataEdit.email.length !== 0 && formDataEdit.senha.length !== 0) {
-            if(formDataEdit.senha === data.senha) {
+            const bool = await axios.post(`${apiURL}/auth/passwordConfirmation`, {
+                email: data.email,
+                senha: formDataEdit.senha
+            })
+            console.log(bool.data);
+            if(bool.data) {
+                console.log(data.senha);
                 try {
                     const token = await AsyncStorage.getItem('@token'); 
                     await axios.patch(`${apiURL}/usuarios/update`, {
@@ -55,12 +61,14 @@ export default function EditProfile() {
                         bio: formDataEdit.bio,
                         email: formDataEdit.email,
                         senha: data.senha,
+                        avatar: formDataEdit.avatar,
+                        cargo: "USER"
                     }, {
                         headers: {
                             Authorization: `Bearer ${token}`
                         }
                     });
-                    setNewFormData(data.id, formDataEdit.nome, formDataEdit.bio, formDataEdit.email)
+                    setNewFormData(data.id, formDataEdit.nome, formDataEdit.bio, formDataEdit.email, formDataEdit.avatar)
                     setConfirmPassword(false)
                     navigation.goBack()
                 } catch (error) {
@@ -76,18 +84,14 @@ export default function EditProfile() {
         if(formDataEdit.novaSenha == formDataEdit.senha) {
             try {
                 const token = await AsyncStorage.getItem('@token'); 
-                await axios.patch(`${apiURL}/usuarios/update`, {
-                    id: data.id,
-                    nome: data.nome,
-                    bio: data.bio,
+                await axios.post(`${apiURL}/usuarios/resetWithoutCode`, {
                     email: data.email,
-                    senha: formDataEdit.senha,
+                    novaSenha: formDataEdit.senha
                 }, {
                     headers: {
                         Authorization: `Bearer ${token}`
                     }
                 });
-                setNewFormData(data.id, formDataEdit.nome, formDataEdit.bio, formDataEdit.email)
                 setChangePassword(false)
                 navigation.goBack()
             } catch (error) {

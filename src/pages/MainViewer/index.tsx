@@ -73,6 +73,14 @@ export default function MainViewer() {
         tempoDePreparo: 0, 
         pathImagem: '' 
     }]);
+    
+    const avatarMappings: any = {
+        1: require('../../assets/Users/Janet.png'),
+        2: require('../../assets/Users/Hansel.png'),
+        3: require('../../assets/Users/Conan.png'),
+        4: require('../../assets/Users/Ruby.png'),
+        5: require('../../assets/Users/Jonas.png'),
+      };
 
     const getRecipeInformations = async () => {
         try {
@@ -216,7 +224,7 @@ export default function MainViewer() {
                             <GreetingText>Olá, {data.nome?.split(' ')[0]}</GreetingText>
                             <TitleText>Vamos cozinhar uma boa receita hoje!</TitleText>
                         </GreetingUserContainer>
-                        <UserLogo source={require('../../assets/Users/Janet.png')} />
+                        <UserLogo source={avatarMappings[data.avatar]} />
                     </UserContainer>
                     <Search placeholder="Pesquise por receitas" 
                     onChangeText={(text) => setSearchInput(text)} />

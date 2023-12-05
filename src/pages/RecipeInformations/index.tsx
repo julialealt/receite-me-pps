@@ -1,14 +1,17 @@
 import {CustomScrollView as ScrollView } from "../../../globalStyles";
-import { BackArrow, BackThePage, Container, ContainerButtons, ContainerFirstLayer, ContainerInformations, ContainerIngredientsAmounts, ContainerMacroNutrients, ContainerPreparationMethod, HeartImage, ImageIcon, ImageRecipe, IngredientsAmountsUnit, NumberMacroNutrients, PrepationMethodCircle, QuantityIngredientValue, SeparateIcons, SepareteMacroNutrients, TextFirstLayer, TextIngredientAmount, TextMacroNutrients, TextPrepationMethod, TitleInformations, UnitPrepationMethod } from "./styles";
+import { BackArrow, BackThePage, ButtonContainer, Container, ContainerButtons, ContainerFirstLayer, ContainerInformations, ContainerIngredientsAmounts, ContainerMacroNutrients, ContainerPreparationMethod, HeartImage, ImageIcon, ImageRecipe, IngredientsAmountsUnit, ItemFoldersContainer, NumberMacroNutrients, PrepationMethodCircle, QuantityIngredientValue, SeparateIcons, SepareteMacroNutrients, TextFirstLayer, TextIngredientAmount, TextMacroNutrients, TextPrepationMethod, TitleInformations, TitlePopUp, UnitPrepationMethod } from "./styles";
 import TradeColorButton from "../../components/TradeColorButton";
 import { useContext, useEffect, useState } from "react";
 import { useNavigation, useRoute } from '@react-navigation/native'
 import axios from "axios";
-import { TouchableOpacity } from "react-native";
+import { TouchableOpacity, View } from "react-native";
 import { propsStack } from '../../routes/Models';
 import { AuthContext } from "../../context/auth";
 import { apiURL } from "../../../api";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { Button as BTOverlay, Overlay } from "@rneui/base";
+import { Text } from "react-native-svg";
+import MenuItemsFolders from "../../components/MenuItemsFolders";
 
 type ParamsProps = {
   id: number;
@@ -37,6 +40,11 @@ interface RecipeData {
     quantidade: number
   }
 
+  interface FolderItems {
+    id: number;
+    nome: string;
+  }
+
   const imagePaths = {
     hearthColorTrue: require('../../assets/geral/hearthGreen.png'),
     hearthColorFalse: require('../../assets/geral/hearthWhite.png'),
@@ -51,7 +59,10 @@ export default function RecipeInformations() {
     const [tradeInformation, setTradeInformation] = useState(true);
     const [hearthColor, setHearthColor] = useState(true)
     const [recipeData, setRecipeData] = useState<RecipeData | undefined>();
-    const [macroNutrients, setMacroNutrients] = useState<MacroNutrients[]>()
+    const [macroNutrients, setMacroNutrients] = useState<MacroNutrients[]>();
+    const [folderItems, setFolderItems] = useState<FolderItems[]>();
+    const [visibleOverlay, setVisibleOverlay] = useState(true);
+    const [takeValueOverlay, setTakeValueOverlay] = useState("");
     
     const hearthWhite = require('../../assets/geral/hearthWhite.png');
     const hearthGreen = require('../../assets/geral/hearthGreen.png');
@@ -110,6 +121,11 @@ export default function RecipeInformations() {
     }
   };
 
+  const openOverlay = async() => {
+    setVisibleOverlay(true)
+
+  }
+
   const favoriteRecipeUseEffect = async () => {
     const userId = data.id;
     const recipeId = id;
@@ -130,6 +146,42 @@ export default function RecipeInformations() {
     setHearthColor(favoriteRecipe)
   }
 
+  const findFoldersById = async () => {
+    try {
+      const token = await AsyncStorage.getItem('@token');
+      const response = await axios.get(`${apiURL}/pastas/list-usuario/${data.id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+      const responseData = response.data;
+      const pastasFormatadas = responseData.map((pasta: FolderItems) => ({
+        id: pasta.id,
+        nome: pasta.nome
+      }));
+
+      setFolderItems(pastasFormatadas);
+      console.log(folderItems)
+
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const addRecipeinFolder = async(idFolder: number) => {
+    try {
+      const token = await AsyncStorage.getItem('@token');
+      await axios.post(`${apiURL}/add-receita/${idFolder}/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+      setVisibleOverlay(false);
+    } catch(error) {
+      console.error(error);
+    }
+  }
+
   useEffect(() => {
     getRecipeInformations();
     }, []);
@@ -138,16 +190,38 @@ export default function RecipeInformations() {
     favoriteRecipeUseEffect()
   }, [])
 
+  useEffect(() => {
+    findFoldersById()
+  }, [])
 
-  // quantidade: Math.round(recipeData?.caloriasTotais),
+
 
     return(
         <ScrollView>
+            <View>
+              <Overlay 
+              onBackdropPress={() => setVisibleOverlay(false)}
+              isVisible={visibleOverlay}
+              overlayStyle={{backgroundColor: "#FFFFFF", width: 301, height: 402, borderRadius: 20}}>
+                <TitlePopUp>Selecione a pasta que deseja salvar a receita</TitlePopUp>
+                <ScrollView>
+                  <ItemFoldersContainer>
+                    {folderItems?.map(({nome, id}) => (
+                        <MenuItemsFolders key={id} name={nome} onPress={() => addRecipeinFolder(id)} />
+                    ))}
+                    
+                  </ItemFoldersContainer>
+                </ScrollView>
+              </Overlay>
+
+            </View>
+
             <BackThePage>
                 <TouchableOpacity onPress={() => navigation.goBack()} >
                     <BackArrow source={require("../../assets/geral/arrowLeftWhite.png")} />
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => favoriteRecipe()}>
+                {/* <TouchableOpacity onPress={() => favoriteRecipe()}> */}
+                <TouchableOpacity onPress={() => openOverlay()}>
                     <HeartImage source={source} />
                 </TouchableOpacity>
             </BackThePage>

@@ -89,3 +89,23 @@ export const SeeMore = styled.Text`
     color: #22A36D;
 `
 
+export const TitlePopUp = styled.Text`
+    font-family: 'Poppins-Medium';
+    font-weight: 500;
+    font-size: 14px;
+    margin-top: 20px;
+    text-align: center;
+`
+
+export const InputContainer = styled.View`
+    flex-direction: row;
+    margin-bottom: 20px;
+`
+
+export const ButtonContainer = styled.View`
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 32px;
+  padding: 0 25px;
+`
