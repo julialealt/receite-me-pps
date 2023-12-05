@@ -61,7 +61,7 @@ export default function RecipeInformations() {
     const [recipeData, setRecipeData] = useState<RecipeData | undefined>();
     const [macroNutrients, setMacroNutrients] = useState<MacroNutrients[]>();
     const [folderItems, setFolderItems] = useState<FolderItems[]>();
-    const [visibleOverlay, setVisibleOverlay] = useState(true);
+    const [visibleOverlay, setVisibleOverlay] = useState(false);
     const [takeValueOverlay, setTakeValueOverlay] = useState("");
     
     const hearthWhite = require('../../assets/geral/hearthWhite.png');
