@@ -4,80 +4,80 @@ import RecipeButton from "../../components/RecipeButton";
 import { BackArrow, BackThePage, Container, RecipeContainer, TextRecentlyRecipes } from "./styles";
 import { Text, TouchableOpacity } from "react-native";
 import { propsStack } from '../../routes/Models';
-import axios from "axios";
 import { useEffect, useState } from "react";
-import { apiURL } from "../../../api";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { axiosInstance } from "../../lib/axios";
+import React from "react";
 
 type ParamsProps = {
-    category: string;
-    value: string;
-  }
+  category: string;
+  value: string;
+}
 
 interface RecipeData {
-  id: number;    
+  id: number;
   nome: string;
   tempoDePreparo: number;
   pathImagem: string;
 }
 
 export default function CategoryRecipes() {
-    const route = useRoute();
-    const navigation = useNavigation<propsStack>()
-    const { category, value } = route.params as ParamsProps;
-    const [allRecipes, setAllRecipes] = useState<RecipeData[] | null>([{ 
-      id: 0, 
-      nome: '', 
-      tempoDePreparo: 0, 
-      pathImagem: '' 
-    }]);
+  const route = useRoute();
+  const navigation = useNavigation<propsStack>()
+  const { category, value } = route.params as ParamsProps;
+  const [allRecipes, setAllRecipes] = useState<RecipeData[] | null>([{
+    id: 0,
+    nome: '',
+    tempoDePreparo: 0,
+    pathImagem: ''
+  }]);
 
-    const getRecipeInformations = async () => {
-      try {
-        const token = await AsyncStorage.getItem('@token'); 
-        const response = await axios.get<RecipeData[]>(`${apiURL}/receitas/filtro/${value}`,{
-          headers: {
-              Authorization: `Bearer ${token}`
-          }
+  const getRecipeInformations = async () => {
+    try {
+      const token = await AsyncStorage.getItem('@token');
+      const response = await axiosInstance.get<RecipeData[]>(`/receitas/filtro/${value}`, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
       });
-        const updatedRecipeData = response.data.map(({ id, pathImagem, nome, tempoDePreparo }) => {
-          if (nome.length >= 14) {
-            nome = nome.slice(0, 13) + '...';
-          }
-          return {
-            id: id,
-            nome: nome,
-            tempoDePreparo: tempoDePreparo,
-            pathImagem: pathImagem,
-          };
-        });
+      const updatedRecipeData = response.data.map(({ id, pathImagem, nome, tempoDePreparo }) => {
+        if (nome.length >= 14) {
+          nome = nome.slice(0, 13) + '...';
+        }
+        return {
+          id: id,
+          nome: nome,
+          tempoDePreparo: tempoDePreparo,
+          pathImagem: pathImagem,
+        };
+      });
 
-        setAllRecipes(updatedRecipeData);
-      } catch (error) {
-        console.error('Error fetching recipe data:', error);
-      }
-    };
+      setAllRecipes(updatedRecipeData);
+    } catch (error) {
+      console.error('Error fetching recipe data:', error);
+    }
+  };
 
-    useEffect(() => {
-      getRecipeInformations()
-    }, [])
+  useEffect(() => {
+    getRecipeInformations()
+  }, [])
 
-    return(
-      <ScrollView>
-        <Container>
-          <BackThePage>
-            <TouchableOpacity onPress={() => navigation.goBack()} >
-                <BackArrow source={require("../../assets/geral/arrowLeft.png")} />
-            </TouchableOpacity>
-              <TextRecentlyRecipes>{category}</TextRecentlyRecipes>
-            <Text>‎ ‎ ‎ ‎ </Text>
-          </BackThePage>
-          <RecipeContainer>
-            {allRecipes?.map(({nome, id, pathImagem, tempoDePreparo}) => (
-                <RecipeButton key={id} label={nome} icon={pathImagem} time={tempoDePreparo} size="bigger" onPress={() => navigation.navigate("RecipeInformations", { id: id })} />
-            ))}
-          </RecipeContainer>
-        </Container>
-      </ScrollView>
-    )
+  return (
+    <ScrollView>
+      <Container>
+        <BackThePage>
+          <TouchableOpacity onPress={() => navigation.goBack()} >
+            <BackArrow source={require("../../assets/geral/arrowLeft.png")} />
+          </TouchableOpacity>
+          <TextRecentlyRecipes>{category}</TextRecentlyRecipes>
+          <Text>‎ ‎ ‎ ‎ </Text>
+        </BackThePage>
+        <RecipeContainer>
+          {allRecipes?.map(({ nome, id, pathImagem, tempoDePreparo }) => (
+            <RecipeButton key={id} label={nome} icon={pathImagem} time={tempoDePreparo} size="bigger" onPress={() => navigation.navigate("RecipeInformations", { id: id })} />
+          ))}
+        </RecipeContainer>
+      </Container>
+    </ScrollView>
+  )
 }

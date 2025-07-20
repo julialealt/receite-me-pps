@@ -1,9 +1,7 @@
-import { useNavigation } from "@react-navigation/native";
-import axios from "axios";
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { createContext, ReactNode, useEffect, useState } from "react";
-import RecentlyViewed from "../pages/Profile/RecentlyViewed";
+import React, { createContext, ReactNode, useEffect, useState } from "react";
 import { apiURL } from "../../api";
+import { axiosInstance } from "../lib/axios";
 
 
 interface AuthContextProps {
@@ -20,7 +18,7 @@ interface AuthContextProps {
   clearFormData: () => void,
   setNewFormData: (id: number, nome: string, bio: string, email: string, avatar: string) => void
 }
-  
+
 export const AuthContext = createContext<AuthContextProps>({
   data: {
     id: 0,
@@ -31,28 +29,28 @@ export const AuthContext = createContext<AuthContextProps>({
     avatar: ""
   },
   signIn: async (email, password) => false,
-  saveId: async (id) => {},
-  clearFormData: () => {},
-  setNewFormData: (id, nome, bio, email, avatar) => {}
+  saveId: async (id) => { },
+  clearFormData: () => { },
+  setNewFormData: (id, nome, bio, email, avatar) => { }
 });
 
 interface AuthProviderProps {
-    children: ReactNode;
+  children: ReactNode;
 }
 
 interface FormData {
-    email: string;
-    senha: string;
+  email: string;
+  senha: string;
 }
 
 interface UserFormData extends FormData {
-    nome: string;
-    id: number;
-    bio: string;
-    avatar: string;
-  }
+  nome: string;
+  id: number;
+  bio: string;
+  avatar: string;
+}
 
-export default function AuthProvider({children}: AuthProviderProps) {
+export default function AuthProvider({ children }: AuthProviderProps) {
   const [formData, setFormData] = useState({
     id: 0,
     nome: "",
@@ -64,13 +62,13 @@ export default function AuthProvider({children}: AuthProviderProps) {
 
   const signIn = async (emailAdress: string, password: string) => {
     try {
-      const response = await axios.post(`${apiURL}/auth/authenticate`, {
+      const response = await axiosInstance.post(`/auth/authenticate`, {
         email: emailAdress,
         senha: password
       });
 
       const token = response.data.token;
-      const {id, email, nome, senha, bio, avatar} = response.data.user;
+      const { id, email, nome, senha, bio, avatar } = response.data.user;
       setFormData({
         id: id,
         nome: nome,
@@ -94,18 +92,18 @@ export default function AuthProvider({children}: AuthProviderProps) {
     try {
       const savedIds = await AsyncStorage.getItem("recentlyViewed");
       let ids = savedIds ? JSON.parse(savedIds) : [];
-  
+
       if (!ids.includes(id)) {
         if (ids.length === 12) {
-          ids.pop(); 
+          ids.pop();
         }
       } else {
         const index = ids.indexOf(id);
-        ids.splice(index, 1); 
+        ids.splice(index, 1);
       }
-  
+
       ids.unshift(id);
-  
+
       await AsyncStorage.setItem("recentlyViewed", JSON.stringify(ids));
     } catch (error) {
       console.error(error);
@@ -121,7 +119,7 @@ export default function AuthProvider({children}: AuthProviderProps) {
       senha: "",
       avatar: ""
     })
-  } 
+  }
 
   const setNewFormData = (id: number, nome: string, bio: string, email: string, avatar: string) => {
     setFormData({
@@ -138,11 +136,11 @@ export default function AuthProvider({children}: AuthProviderProps) {
   useEffect(() => {
     console.log(formData)
   }, [formData])
-    
 
-  return(
-      <AuthContext.Provider value={{ data: formData, signIn, saveId, clearFormData, setNewFormData  }} >
-          {children}
-      </AuthContext.Provider>
+
+  return (
+    <AuthContext.Provider value={{ data: formData, signIn, saveId, clearFormData, setNewFormData }} >
+      {children}
+    </AuthContext.Provider>
   )
 }
