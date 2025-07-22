@@ -5,9 +5,8 @@ import Button from "../../components/Button";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { propsStack } from "../../routes/Models";
 import { useEffect, useState } from "react";
-import { apiURL } from "../../../api";
-import { axiosInstance } from "../../lib/axios";
 import React from "react";
+import { userService } from "../../services/userService";
 
 interface EmailProps {
   email: string;
@@ -44,13 +43,7 @@ export default function RecoveryPassword() {
 
   const sendCodeToResetPassword = async () => {
     try {
-      await axiosInstance.post(`/usuarios/reset`, {
-        email: formData.email,
-        codigo: formData.codigo,
-        novaSenha: formData.novaSenha
-
-      })
-
+      await userService.resetPassword(formData.email, formData.codigo, formData.novaSenha);
       navigation.goBack();
     } catch (error) {
       console.error("Error de requisição: ", error);

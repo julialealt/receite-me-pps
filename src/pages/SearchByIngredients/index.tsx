@@ -8,27 +8,16 @@ import { View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
 import { propsStack } from '../../routes/Models';
-import { apiURL } from "../../../api";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { axiosInstance } from "../../lib/axios";
 import React from "react";
+import type { Ingredient } from "../../types";
+import { ingredientService } from "../../services/ingredientService";
 
 
 interface IngredientName {
   id: number;
   ingredients: string;
-}
-
-interface Ingredient {
-  calorias: number,
-  carboidratos: number,
-  gorduras: number,
-  id: number,
-  medida: string,
-  nome: string,
-  proteinas: number,
-  quantidade: number,
-  map: any
 }
 
 
@@ -40,13 +29,8 @@ export default function SearchByIngredients() {
 
   const getIngredients = async () => {
     try {
-      const token = await AsyncStorage.getItem('@token');
-      const response = await axiosInstance.get<Ingredient>(`/ingredientes`, {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      });
-      const ingredients: IngredientName[] = response.data.map(({ id, nome }: { id: number, nome: string }) => ({ id, ingredients: nome }));
+      const response = await ingredientService.getIngredients()
+      const ingredients: IngredientName[] = response.map(({ id, nome }: { id: number, nome: string }) => ({ id, ingredients: nome }));
       setAllIngredients(ingredients);
     } catch (error) {
       console.error('Erro ao obter ingredientes:', error);

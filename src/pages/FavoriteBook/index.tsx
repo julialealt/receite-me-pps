@@ -7,9 +7,9 @@ import { Button as BTOverlay, Overlay } from "@rneui/base";
 import Input from "../../components/Input";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { AuthContext } from "../../context/auth";
-import { apiURL } from "../../../api";
 import { axiosInstance } from "../../lib/axios";
 import React from "react";
+import { folderService } from "../../services/folderService";
 
 interface FolderItems {
   id: number;
@@ -26,13 +26,7 @@ export default function FavoriteBook() {
   const handleCreateFolder = async () => {
     const token = await AsyncStorage.getItem('@token');
     try {
-      await axiosInstance.post(`/pastas/create/${data.id}`, {
-        nome: newFolder
-      }, {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      })
+      await folderService.createFolder(data.id, newFolder);
 
       setVisibleOverlay(false);
     } catch (error) {
@@ -43,13 +37,8 @@ export default function FavoriteBook() {
 
   const findFoldersById = async () => {
     try {
-      const token = await AsyncStorage.getItem('@token');
-      const response = await axiosInstance.get(`/pastas/list-usuario/${data.id}`, {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      });
-      const responseData = response.data;
+      const responseData = await folderService.getFoldersByUserId(data.id)
+
       const pastasFormatadas = responseData.map((pasta: FolderItems) => ({
         id: pasta.id,
         nome: pasta.nome

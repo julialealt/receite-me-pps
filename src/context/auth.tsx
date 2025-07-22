@@ -1,7 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, { createContext, ReactNode, useEffect, useState } from "react";
-import { apiURL } from "../../api";
-import { axiosInstance } from "../lib/axios";
+import { authService } from '../services/authService';
 
 
 interface AuthContextProps {
@@ -62,10 +61,7 @@ export default function AuthProvider({ children }: AuthProviderProps) {
 
   const signIn = async (emailAdress: string, password: string) => {
     try {
-      const response = await axiosInstance.post(`/auth/authenticate`, {
-        email: emailAdress,
-        senha: password
-      });
+      const response = await authService.signIn(emailAdress, password)
 
       const token = response.data.token;
       const { id, email, nome, senha, bio, avatar } = response.data.user;
@@ -77,8 +73,6 @@ export default function AuthProvider({ children }: AuthProviderProps) {
         senha: senha,
         avatar: avatar
       })
-      console.log(token)
-      console.log(formData)
 
       await AsyncStorage.setItem('@token', token);
 

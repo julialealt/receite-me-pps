@@ -9,9 +9,8 @@ import { propsStack } from '../../routes/Models';
 import { TouchableOpacity } from "react-native";
 import { View } from "react-native";
 import { Button as BTOverlay, Overlay } from "@rneui/base";
-import { apiURL } from "../../../api";
-import { axiosInstance } from "../../lib/axios";
 import React from "react";
+import { userService } from "../../services/userService";
 
 interface FormData {
   email: string;
@@ -38,7 +37,7 @@ export default function Login() {
 
   const sendEmailToResetPassword = async (email: string) => {
     try {
-      await axiosInstance.get(`/usuarios/request_reset/${email}`);
+      await userService.sendEmailToResetPassword(email);
       setIsVisible(false)
       navigation.navigate("RecoveryPassword", { email: email });
 

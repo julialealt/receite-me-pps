@@ -8,24 +8,19 @@ import { useEffect, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { axiosInstance } from "../../lib/axios";
 import React from "react";
+import type { Recipe } from "../../types";
+import { recipeService } from "../../services/recipeService";
 
 type ParamsProps = {
   category: string;
   value: string;
 }
 
-interface RecipeData {
-  id: number;
-  nome: string;
-  tempoDePreparo: number;
-  pathImagem: string;
-}
-
 export default function CategoryRecipes() {
   const route = useRoute();
   const navigation = useNavigation<propsStack>()
   const { category, value } = route.params as ParamsProps;
-  const [allRecipes, setAllRecipes] = useState<RecipeData[] | null>([{
+  const [allRecipes, setAllRecipes] = useState<Recipe[] | null>([{
     id: 0,
     nome: '',
     tempoDePreparo: 0,
@@ -34,13 +29,9 @@ export default function CategoryRecipes() {
 
   const getRecipeInformations = async () => {
     try {
-      const token = await AsyncStorage.getItem('@token');
-      const response = await axiosInstance.get<RecipeData[]>(`/receitas/filtro/${value}`, {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      });
-      const updatedRecipeData = response.data.map(({ id, pathImagem, nome, tempoDePreparo }) => {
+      const response = await recipeService.getRecipesByCategory(value);
+
+      const updatedRecipeData = response.map(({ id, pathImagem, nome, tempoDePreparo }) => {
         if (nome.length >= 14) {
           nome = nome.slice(0, 13) + '...';
         }

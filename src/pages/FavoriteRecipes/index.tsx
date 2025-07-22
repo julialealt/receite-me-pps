@@ -6,21 +6,15 @@ import { useNavigation, useRoute } from "@react-navigation/native";
 import { propsStack } from '../../routes/Models';
 import { Text, TouchableOpacity } from "react-native";
 import { AuthContext } from "../../context/auth";
-import { apiURL } from "../../../api";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { axiosInstance } from "../../lib/axios";
 import React from "react";
+import type { Recipe } from "../../types";
+import { folderService } from "../../services/folderService";
 
 type ParamsProps = {
   idFolder: number;
   nameFolder: string;
-}
-
-interface RecipeData {
-  id: number;
-  nome: string;
-  tempoDePreparo: number;
-  pathImagem: string;
 }
 
 export default function FavoriteRecipes() {
@@ -29,7 +23,7 @@ export default function FavoriteRecipes() {
   const { data } = useContext(AuthContext);
   const navigation = useNavigation<propsStack>();
   const [notFound, setNotFound] = useState(true);
-  const [allRecipes, setAllRecipes] = useState<RecipeData[] | null>([{
+  const [allRecipes, setAllRecipes] = useState<Recipe[] | null>([{
     id: 0,
     nome: '',
     tempoDePreparo: 0,
@@ -38,13 +32,9 @@ export default function FavoriteRecipes() {
 
   const getFavoriteRecipes = async () => {
     try {
-      const token = await AsyncStorage.getItem('@token');
-      const response = await axiosInstance.get<RecipeData[]>(`/pastas/${idFolder}/receitas`, {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      });
-      const updatedRecipeData = response.data.map(({ id, nome, tempoDePreparo, pathImagem }) => {
+      const response = await folderService.getFolderRecipes(idFolder.toString())
+
+      const updatedRecipeData = response.map(({ id, nome, tempoDePreparo, pathImagem }) => {
         if (nome.length >= 14) {
           nome = nome.slice(0, 13) + '...';
         }

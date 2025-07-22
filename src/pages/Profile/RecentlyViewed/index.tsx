@@ -7,20 +7,14 @@ import { useNavigation } from "@react-navigation/native";
 import { propsStack } from '../../../routes/Models';
 import { useEffect, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { apiURL } from "../../../../api";
 import { axiosInstance } from "../../../lib/axios";
 import React from "react";
-
-interface RecipeData {
-  id: number;
-  nome: string;
-  tempoDePreparo: number;
-  pathImagem: string;
-}
+import type { Recipe } from "../../../types";
+import { recipeService } from "../../../services/recipeService";
 
 export default function RecentlyViewed() {
   const navigation = useNavigation<propsStack>()
-  const [allRecipes, setAllRecipes] = useState<RecipeData[] | null>([{
+  const [allRecipes, setAllRecipes] = useState<Recipe[] | null>([{
     id: 0,
     nome: '',
     tempoDePreparo: 0,
@@ -32,13 +26,9 @@ export default function RecentlyViewed() {
       const recentlyViewedArray = await AsyncStorage.getItem("recentlyViewed");
       const ids = JSON.parse(recentlyViewedArray || "[]");
       const recipePromises = ids.map(async (id: number) => {
-        const token = await AsyncStorage.getItem('@token');
-        const response = await axiosInstance.get<RecipeData>(`/receitas/findById/${id}`, {
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
-        });
-        const { nome, pathImagem, tempoDePreparo } = response.data;
+        const responseData = await recipeService.getRecipeById(id);
+
+        const { nome, pathImagem, tempoDePreparo } = responseData;
         let updatedName = nome;
         if (nome.length >= 14) {
           updatedName = nome.slice(0, 13) + '...';

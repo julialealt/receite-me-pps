@@ -6,32 +6,17 @@ import { useNavigation, useRoute } from '@react-navigation/native'
 import { TouchableOpacity, View } from "react-native";
 import { propsStack } from '../../routes/Models';
 import { AuthContext } from "../../context/auth";
-import { apiURL } from "../../../api";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Button as BTOverlay, Overlay } from "@rneui/base";
 import MenuItemsFolders from "../../components/MenuItemsFolders";
 import { axiosInstance } from "../../lib/axios";
 import React from "react";
+import type { Recipe } from "../../types";
+import { folderService } from "../../services/folderService";
+import { recipeService } from "../../services/recipeService";
 
 type ParamsProps = {
   id: number;
-}
-interface RecipeData {
-  id: number;
-  nome: string;
-  caloriasTotais: number;
-  proteinasTotais: number;
-  carboidratosTotais: number;
-  gordurasTotais: number;
-  ingredientes: {
-    id: number;
-    nome: string;
-    quantidade: string;
-    medida: string;
-  }[];
-  tempoDePreparo: string;
-  pathImagem: string;
-  modoDePreparo: string;
 }
 
 interface MacroNutrients {
@@ -58,7 +43,7 @@ export default function RecipeInformations() {
   const navigation = useNavigation<propsStack>();
   const [tradeInformation, setTradeInformation] = useState(true);
   const [hearthColor, setHearthColor] = useState(true)
-  const [recipeData, setRecipeData] = useState<RecipeData | undefined>();
+  const [recipeData, setRecipeData] = useState<Recipe | undefined>();
   const [macroNutrients, setMacroNutrients] = useState<MacroNutrients[]>();
   const [folderItems, setFolderItems] = useState<FolderItems[]>();
   const [visibleOverlay, setVisibleOverlay] = useState(false);
@@ -68,28 +53,22 @@ export default function RecipeInformations() {
   const source = hearthColor ? hearthGreen : hearthWhite;
 
   const getRecipeInformations = async () => {
-    const token = await AsyncStorage.getItem('@token');
-    const response = await axiosInstance.get(`/receitas/findById/${id}`, {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    });
-    const responseData = response.data as RecipeData;
+    const responseData = await recipeService.getRecipeById(id);
     const macroNutrients = [
       {
         id: 1,
         nome: 'carboidratos',
-        quantidade: Math.round(responseData.carboidratosTotais)
+        quantidade: Math.round(responseData.carboidratosTotais ?? 0)
       },
       {
         id: 2,
         nome: 'proteínas',
-        quantidade: Math.round(responseData.proteinasTotais),
+        quantidade: Math.round(responseData.proteinasTotais ?? 0),
       },
       {
         id: 3,
         nome: 'gorduras',
-        quantidade: Math.round(responseData.gordurasTotais),
+        quantidade: Math.round(responseData.gordurasTotais ?? 0),
       },
 
     ]
@@ -106,32 +85,17 @@ export default function RecipeInformations() {
   const favoriteRecipeUseEffect = async () => {
     const userId = data.id;
     const recipeId = id;
-    const token = await AsyncStorage.getItem('@token');
 
-    const headers = {
-      Authorization: `Bearer ${token}`
-    };
-
-    console.log(userId)
-    console.log(recipeId)
-    console.log(token)
-
-    const response1 = await axiosInstance.post(`/pastas/${recipeId}/${userId}`, {}, { headers });
-    const response2 = await axiosInstance.post(`/pastas/${recipeId}/${userId}`, {}, { headers });
-    console.log(response2.data.message)
-    const favoriteRecipe = response2.data.message
+    const response1 = await folderService.favoriteRecipe(recipeId, userId);
+    const response2 = await folderService.favoriteRecipe(recipeId, userId);
+    console.log(response2.message)
+    const favoriteRecipe = response2.message
     setHearthColor(favoriteRecipe)
   }
 
   const findFoldersById = async () => {
     try {
-      const token = await AsyncStorage.getItem('@token');
-      const response = await axiosInstance.get(`/pastas/list-usuario/${data.id}`, {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      });
-      const responseData = response.data;
+      const responseData = await folderService.getFoldersByUserId(data.id);
       const pastasFormatadas = responseData.map((pasta: FolderItems) => ({
         id: pasta.id,
         nome: pasta.nome
@@ -149,18 +113,9 @@ export default function RecipeInformations() {
     try {
       const userId = data.id;
       const recipeId = id;
-      const token = await AsyncStorage.getItem('@token');
 
-      const headers = {
-        Authorization: `Bearer ${token}`
-      };
-
-      console.log(userId)
-      console.log(recipeId)
-      console.log(token)
-
-      const response = await axiosInstance.post(`/pastas/${recipeId}/${userId}`, {}, { headers });
-      const favoriteRecipe = response.data.message
+      const response = await folderService.favoriteRecipe(recipeId, userId);
+      const favoriteRecipe = response.message
       setHearthColor(favoriteRecipe)
     } catch (error) {
       console.error(error);
@@ -169,14 +124,7 @@ export default function RecipeInformations() {
 
   const addRecipeinFolder = async (idFolder: number) => {
     try {
-      const token = await AsyncStorage.getItem('@token');
-      console.log(idFolder);
-      console.log(id);
-      await axiosInstance.post(`/pastas/add-receita/${idFolder}/${id}`, {}, {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      });
+      await folderService.addRecipeToFolder(idFolder, id)
       setVisibleOverlay(false);
       setHearthColor(true);
     } catch (error) {
@@ -238,7 +186,7 @@ export default function RecipeInformations() {
             </SeparateIcons>
             <SeparateIcons>
               <ImageIcon source={require("../../assets/geral/fire.png")} />
-              <TextFirstLayer>{recipeData?.caloriasTotais ? Math.round(recipeData?.caloriasTotais) : 0} kcal</TextFirstLayer>
+              <TextFirstLayer>{Math.round(recipeData?.caloriasTotais ?? 0)} kcal</TextFirstLayer>
             </SeparateIcons>
           </ContainerFirstLayer>
           <ContainerMacroNutrients>
@@ -255,7 +203,7 @@ export default function RecipeInformations() {
           </ContainerButtons>
           {tradeInformation ? (
             <ContainerIngredientsAmounts>
-              {recipeData?.ingredientes.map(({ id, nome, quantidade, medida }) => (
+              {recipeData?.ingredientes?.map(({ id, nome, quantidade, medida }) => (
                 <IngredientsAmountsUnit key={id} >
                   <TextIngredientAmount>{nome}</TextIngredientAmount>
                   <QuantityIngredientValue> {medida === 'A gosto' ? medida : `${quantidade} ${medida}`}</QuantityIngredientValue>
@@ -264,7 +212,7 @@ export default function RecipeInformations() {
             </ContainerIngredientsAmounts>
           ) : (
             <ContainerPreparationMethod>
-              {recipeData?.modoDePreparo.split("\n").map((item, index) => (
+              {recipeData?.modoDePreparo?.split("\n").map((item, index) => (
                 <UnitPrepationMethod key={index} >
                   <PrepationMethodCircle source={require('../../assets/geral/circle.png')} />
                   <TextPrepationMethod>{item}</TextPrepationMethod>

@@ -11,11 +11,9 @@ import { Ionicons } from '@expo/vector-icons';
 import { Overlay } from '@rneui/themed';
 
 import { propsStack } from '../../../routes/Models';
-import { apiURL } from "../../../../api";
 import PopUp from "../../../components/PopUp";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { axiosInstance } from "../../../lib/axios";
 import React from "react";
+import { userService } from "../../../services/userService";
 
 interface ProfileProps {
   id: number,
@@ -87,12 +85,7 @@ export default function MainProfile() {
 
   const handleDeleteUser = async (id: number) => {
     try {
-      const token = await AsyncStorage.getItem('@token');
-      const response = await axiosInstance.delete(`/usuarios/${id}`, {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      });
+      await userService.deleteUserAccount(id)
       navigation.navigate("SignUp");
     } catch (error) {
       console.error(error);
@@ -101,24 +94,7 @@ export default function MainProfile() {
 
   const handleEditAvatar = async (value: string) => {
     try {
-      const token = await AsyncStorage.getItem('@token');
-      const response = await axiosInstance.patch(
-        'https://receitemebackend.onrender.com/usuarios/update',
-        {
-          id: data.id,
-          nome: data.nome,
-          email: data.email,
-          senha: data.senha,
-          bio: data.bio,
-          avatar: value,
-          cargo: "USER"
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
-        }
-      );
+      await userService.updateUserProfile(data.id, data.nome, data.bio, data.email, data.senha, value)
 
       setNewFormData(data.id, data.nome, data.bio, data.email, value)
 

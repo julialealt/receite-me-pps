@@ -7,22 +7,20 @@ import { Text, TouchableOpacity, View } from "react-native";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../context/auth";
 import { propsStack } from '../../../routes/Models';
-import { apiURL } from "../../../../api";
 import { Button as BTOverlay, Overlay } from "@rneui/base";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { axiosInstance } from "../../../lib/axios";
 import React from "react";
+import { authService } from "../../../services/authService";
+import { userService } from "../../../services/userService";
 
-interface FormData {
+export interface FormDataUpdate {
   id: number;
   nome: string;
   bio: string;
   email: string;
   senha: string;
-  novaSenha: String;
+  novaSenha: string;
   avatar: any;
 }
-
 
 export default function EditProfile() {
   const navigation = useNavigation<propsStack>()
@@ -38,7 +36,7 @@ export default function EditProfile() {
     novaSenha: '',
     avatar: data.avatar
   })
-  const handleInputChange = (name: keyof FormData, value: string) => {
+  const handleInputChange = (name: keyof FormDataUpdate, value: string) => {
     setFormDataEdit(prevState => ({
       ...prevState,
       [name]: value,
@@ -47,28 +45,13 @@ export default function EditProfile() {
 
   const handleInputConfirmation = async () => {
     if (formDataEdit.nome.length !== 0 && formDataEdit.email.length !== 0 && formDataEdit.senha.length !== 0) {
-      const bool = await axiosInstance.post(`/auth/passwordConfirmation`, {
-        email: data.email,
-        senha: formDataEdit.senha
-      })
-      console.log(bool.data);
-      if (bool.data) {
+      const response = await authService.passwordConfirmation(data.email, formDataEdit.senha)
+
+      if (response.data) {
         console.log(data.senha);
         try {
-          const token = await AsyncStorage.getItem('@token');
-          await axiosInstance.patch(`/usuarios/update`, {
-            id: data.id,
-            nome: formDataEdit.nome,
-            bio: formDataEdit.bio,
-            email: formDataEdit.email,
-            senha: data.senha,
-            avatar: formDataEdit.avatar,
-            cargo: "USER"
-          }, {
-            headers: {
-              Authorization: `Bearer ${token}`
-            }
-          });
+          await userService.updateUserProfile(data.id, formDataEdit.nome, formDataEdit.bio, formDataEdit.email, formDataEdit.senha, formDataEdit.avatar)
+
           setNewFormData(data.id, formDataEdit.nome, formDataEdit.bio, formDataEdit.email, formDataEdit.avatar)
           setConfirmPassword(false)
           navigation.goBack()
@@ -84,15 +67,8 @@ export default function EditProfile() {
   const handleChangePasswordConfirmation = async () => {
     if (formDataEdit.novaSenha == formDataEdit.senha) {
       try {
-        const token = await AsyncStorage.getItem('@token');
-        await axiosInstance.post(`/usuarios/resetWithoutCode`, {
-          email: data.email,
-          novaSenha: formDataEdit.senha
-        }, {
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
-        });
+        await userService.updateUserPassword(data.email, formDataEdit.senha)
+
         setChangePassword(false)
         navigation.goBack()
       } catch (error) {

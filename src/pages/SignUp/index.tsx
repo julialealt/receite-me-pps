@@ -6,11 +6,11 @@ import { Container, ContainerButton, ContainerTitle, ContainerWarning, ImageWarn
 import { useEffect, useState } from "react";
 import { Text } from "react-native";
 import { propsStack } from '../../routes/Models';
-import { apiURL } from "../../../api";
-import { axiosInstance } from "../../lib/axios";
 import React from "react";
+import type { SignUpData } from "../../types";
+import { authService } from "../../services/authService";
 
-interface FormData {
+export interface FormData {
   nome: string;
   email: string;
   bio: string;
@@ -39,29 +39,31 @@ export default function SignUp() {
     }));
   }
 
-  const handleSignUp = () => {
+  const handleSignUp = async () => {
     if (!(formData.nome.length == 0 || formData.email.length == 0 || formData.senha.length == 0 || formData.senha.length == 0)) {
-      axiosInstance
-        .post(`/auth/create`, {
+      try {
+        const userData: SignUpData = {
           nome: formData.nome,
           email: formData.email,
           bio: formData.bio,
           senha: formData.senha,
-          avatar: "1"
-        })
-        .then((response) => {
-          setSuccess(true);
-          setFormData({
-            nome: '',
-            email: '',
-            bio: '',
-            senha: '',
-            confirmarSenha: '',
-          })
-        })
-        .catch((error) => {
-          console.error(error);
+        };
+
+        await authService.signUp(userData);
+
+        setSuccess(true);
+        setFormData({
+          nome: '',
+          email: '',
+          bio: '',
+          senha: '',
+          confirmarSenha: '',
         });
+
+      } catch (err) {
+        setError("Ocorreu um erro ao criar a conta. Tente novamente.");
+        console.error(err);
+      }
     }
   };
 

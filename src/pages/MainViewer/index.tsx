@@ -8,10 +8,11 @@ import Search from "../../components/Search";
 import { View } from "react-native";
 import { AuthContext } from "../../context/auth"
 import { propsStack } from '../../routes/Models';
-import { apiURL } from "../../../api";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { axiosInstance } from "../../lib/axios";
 import React from "react";
+import type { Recipe } from "../../types";
+import { recipeService } from "../../services/recipeService";
 
 const categories = [
   {
@@ -41,44 +42,37 @@ const categories = [
   }
 ];
 
-interface RecipeData {
-  id: number;
-  nome: string;
-  tempoDePreparo: number;
-  pathImagem: string;
-}
-
 export default function MainViewer() {
   const navigation = useNavigation<propsStack>();
   const { data } = useContext(AuthContext);
   const [searchInput, setSearchInput] = useState('');
   const [mainOrSearch, setMainOrSearch] = useState(true)
   const [notFound, setNotFound] = useState(true);
-  const [recipeData, setRecipeData] = useState<RecipeData[] | null>([{
+  const [recipeData, setRecipeData] = useState<Recipe[] | null>([{
     id: 0,
     nome: '',
     tempoDePreparo: 0,
     pathImagem: ''
   }]);
-  const [recipeRecomendations, setRecipeRecomendations] = useState<RecipeData[] | null>([{
+  const [recipeRecomendations, setRecipeRecomendations] = useState<Recipe[] | null>([{
     id: 0,
     nome: '',
     tempoDePreparo: 0,
     pathImagem: ''
   }]);
-  const [recipeRecently, setRecipeRecently] = useState<RecipeData[] | null>([{
+  const [recipeRecently, setRecipeRecently] = useState<Recipe[] | null>([{
     id: 0,
     nome: '',
     tempoDePreparo: 0,
     pathImagem: ''
   }]);
-  const [recipeWeek, setRecipeWeek] = useState<RecipeData[] | null>([{
+  const [recipeWeek, setRecipeWeek] = useState<Recipe[] | null>([{
     id: 0,
     nome: '',
     tempoDePreparo: 0,
     pathImagem: ''
   }]);
-  const [allRecipes, setAllRecipes] = useState<RecipeData[] | null>([{
+  const [allRecipes, setAllRecipes] = useState<Recipe[] | null>([{
     id: 0,
     nome: '',
     tempoDePreparo: 0,
@@ -95,13 +89,9 @@ export default function MainViewer() {
 
   const getRecipeInformations = async () => {
     try {
-      const token = await AsyncStorage.getItem('@token');
-      const response = await axiosInstance.get<RecipeData[]>(`/receitas/recomendacoes`, {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      });
-      const updatedRecipeData = response.data.map(({ id, nome, tempoDePreparo, pathImagem }) => {
+      const response = await recipeService.getRecommendedRecipes()
+
+      const updatedRecipeData = response.map(({ id, nome, tempoDePreparo, pathImagem }) => {
         if (nome.length >= 14) {
           nome = nome.slice(0, 13) + '...';
         }
@@ -135,13 +125,9 @@ export default function MainViewer() {
 
   const getRecomendationsRecipes = async () => {
     try {
-      const token = await AsyncStorage.getItem('@token');
-      const response = await axiosInstance.get<RecipeData[]>(`/receitas/recomendacoes`, {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      });
-      const updatedRecipeData = response.data.map(({ id, nome, tempoDePreparo, pathImagem }) => {
+      const response = await recipeService.getRecommendedRecipes()
+
+      const updatedRecipeData = response.map(({ id, nome, tempoDePreparo, pathImagem }) => {
         if (nome.length >= 14) {
           nome = nome.slice(0, 13) + '...';
         }
@@ -162,13 +148,9 @@ export default function MainViewer() {
 
   const getRecentlyRecipes = async () => {
     try {
-      const token = await AsyncStorage.getItem('@token');
-      const response = await axiosInstance.get<RecipeData[]>(`/receitas/recomendacoes`, {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      });
-      const updatedRecipeData = response.data.map(({ id, nome, tempoDePreparo, pathImagem }) => {
+      const response = await recipeService.getRecommendedRecipes()
+
+      const updatedRecipeData = response.map(({ id, nome, tempoDePreparo, pathImagem }) => {
         if (nome.length >= 14) {
           nome = nome.slice(0, 13) + '...';
         }
@@ -189,13 +171,9 @@ export default function MainViewer() {
 
   const getWeekRecipes = async () => {
     try {
-      const token = await AsyncStorage.getItem('@token');
-      const response = await axiosInstance.get<RecipeData[]>(`/receitas/recomendacoes`, {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      });
-      const updatedRecipeData = response.data.map(({ id, nome, tempoDePreparo, pathImagem }) => {
+      const response = await recipeService.getRecommendedRecipes()
+
+      const updatedRecipeData = response.map(({ id, nome, tempoDePreparo, pathImagem }) => {
         if (nome.length >= 14) {
           nome = nome.slice(0, 13) + '...';
         }

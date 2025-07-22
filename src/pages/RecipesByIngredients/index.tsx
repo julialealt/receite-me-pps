@@ -5,53 +5,28 @@ import { CustomScrollView as ScrollView } from "../../../globalStyles";
 import RecipeButton from "../../components/RecipeButton";
 import { Text, TouchableOpacity } from "react-native";
 import { useNavigation, useRoute } from "@react-navigation/native";
-import { apiURL } from "../../../api";
 import { useEffect, useState } from "react";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { axiosInstance } from "../../lib/axios";
 import React from "react";
+import type { Recipe } from "../../types";
+import { recipeService } from "../../services/recipeService";
 
 interface ParamsProps {
   ingredients: string[]
-}
-
-interface RecipeData {
-  id: number;
-  nome: string;
-  caloriasTotais: number;
-  proteinasTotais: number;
-  carboidratosTotais: number;
-  gordurasTotais: number;
-  ingredientes: {
-    id: number;
-    nome: string;
-    quantidade: string;
-    medida: string;
-  }[];
-  tempoDePreparo: number;
-  pathImagem: string;
-  modoDePreparo: string;
 }
 
 export default function RecipesByIngredients() {
   const navigation = useNavigation<propsStack>();
   const route = useRoute();
   const { ingredients } = route.params as ParamsProps;
-  const [allRecipes, setAllRecipes] = useState<RecipeData[]>()
+  const [allRecipes, setAllRecipes] = useState<Recipe[]>()
 
   const getRecipes = async () => {
-    const token = await AsyncStorage.getItem('@token');
-    axiosInstance.post(`/receitas/filtro`, ingredients, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
-      .then(response => {
-        setAllRecipes(response.data);
-      })
-      .catch(error => {
-        console.error('Ocorreu um erro ao enviar o post:', error);
-      });
+    try {
+      const responseData = await recipeService.getRecipesByIngredients(ingredients)
+      setAllRecipes(responseData);
+    } catch (error) {
+      console.error('Erro ao buscar receitas:', error);
+    }
   }
 
   useEffect(() => {
