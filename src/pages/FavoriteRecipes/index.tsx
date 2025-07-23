@@ -6,8 +6,6 @@ import { useNavigation, useRoute } from "@react-navigation/native";
 import { propsStack } from '../../routes/Models';
 import { Text, TouchableOpacity } from "react-native";
 import { AuthContext } from "../../context/auth";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { axiosInstance } from "../../lib/axios";
 import React from "react";
 import type { Recipe } from "../../types";
 import { folderService } from "../../services/folderService";
@@ -32,7 +30,7 @@ export default function FavoriteRecipes() {
 
   const getFavoriteRecipes = async () => {
     try {
-      const response = await folderService.getFolderRecipes(idFolder.toString())
+      const response = await folderService.getFolderRecipes(idFolder)
 
       const updatedRecipeData = response.map(({ id, nome, tempoDePreparo, pathImagem }) => {
         if (nome.length >= 14) {

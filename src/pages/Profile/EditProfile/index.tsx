@@ -1,16 +1,16 @@
 import { CustomScrollView as ScrollView } from "../../../../globalStyles";
 import Input from "../../../components/Input";
 import { BackArrow, BackThePage, Container, ContainerChangePassword, ContainerEditProfileInputs, EditProfileText, InputContainer, OverlayContainerButton, OverlayText, OverlayTitle, PadlockImage, PadlockText } from "./styles";
-import Button from "../../../components/Button";
 import { useNavigation } from "@react-navigation/native";
 import { Text, TouchableOpacity, View } from "react-native";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../context/auth";
 import { propsStack } from '../../../routes/Models';
-import { Button as BTOverlay, Overlay } from "@rneui/base";
+import { Overlay } from "@rneui/base";
 import React from "react";
 import { authService } from "../../../services/authService";
 import { userService } from "../../../services/userService";
+import { ButtonFactory } from "../../../factories/ButtonFactory";
 
 export interface FormDataUpdate {
   id: number;
@@ -98,29 +98,18 @@ export default function EditProfile() {
             />
           </InputContainer>
           <OverlayContainerButton>
-            <BTOverlay
-              title="Cancelar"
-              buttonStyle={{ backgroundColor: 'transparent', borderRadius: 10 }}
-              titleStyle={{ fontFamily: 'Poppins-Medium', fontSize: 14, color: '#da2d2d' }}
-              containerStyle={{
-                height: 40,
-                width: 110
-              }}
+            <ButtonFactory
+              type="secondary"
+              label="Cancelar"
+              size="small"
               onPress={() => setConfirmPassword(false)}
             />
-            <BTOverlay
-              title="Enviar"
-              buttonStyle={{
-                backgroundColor: '#22A36D', borderRadius: 5
-              }}
-              titleStyle={{ fontFamily: 'Poppins-Medium', fontSize: 14, color: '#FFFFFF' }}
-              containerStyle={{
-                height: 40,
-                width: 110
-              }}
+            <ButtonFactory
+              type="primary"
+              label="Enviar"
+              size="small"
               onPress={handleInputConfirmation}
             />
-
           </OverlayContainerButton>
 
         </Overlay>
@@ -148,29 +137,18 @@ export default function EditProfile() {
             <Text>{error}</Text>
           </InputContainer>
           <OverlayContainerButton>
-            <BTOverlay
-              title="Cancelar"
-              buttonStyle={{ backgroundColor: 'transparent', borderRadius: 10 }}
-              titleStyle={{ fontFamily: 'Poppins-Medium', fontSize: 14, color: '#da2d2d' }}
-              containerStyle={{
-                height: 40,
-                width: 110
-              }}
+            <ButtonFactory
+              type="secondary"
+              label="Cancelar"
+              size="small"
               onPress={() => setChangePassword(false)}
             />
-            <BTOverlay
-              title="Enviar"
-              buttonStyle={{
-                backgroundColor: '#22A36D', borderRadius: 5
-              }}
-              titleStyle={{ fontFamily: 'Poppins-Medium', fontSize: 14, color: '#FFFFFF' }}
-              containerStyle={{
-                height: 40,
-                width: 110
-              }}
+            <ButtonFactory
+              type="primary"
+              label="Enviar"
+              size="small"
               onPress={handleChangePasswordConfirmation}
             />
-
           </OverlayContainerButton>
 
         </Overlay>
@@ -209,7 +187,7 @@ export default function EditProfile() {
           <PadlockText>Alterar senha</PadlockText>
         </ContainerChangePassword>
 
-        <Button labelButton="Salvar alterações" width={290} height={47} radius={12} onPress={() => setConfirmPassword(true)} />
+        <ButtonFactory type="primary" label="Salvar alterações" onPress={() => setConfirmPassword(true)} />
       </Container>
     </ScrollView>
   )

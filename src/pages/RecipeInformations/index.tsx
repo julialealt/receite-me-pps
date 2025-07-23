@@ -6,10 +6,8 @@ import { useNavigation, useRoute } from '@react-navigation/native'
 import { TouchableOpacity, View } from "react-native";
 import { propsStack } from '../../routes/Models';
 import { AuthContext } from "../../context/auth";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { Button as BTOverlay, Overlay } from "@rneui/base";
+import { Overlay } from "@rneui/base";
 import MenuItemsFolders from "../../components/MenuItemsFolders";
-import { axiosInstance } from "../../lib/axios";
 import React from "react";
 import type { Recipe } from "../../types";
 import { folderService } from "../../services/folderService";

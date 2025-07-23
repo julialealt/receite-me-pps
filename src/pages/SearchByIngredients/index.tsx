@@ -2,17 +2,14 @@ import { ButtonContainer, Container, ContainerScrollView, IngredientsContainer, 
 import AddIngredientsButton from "../../components/AddIngredientsButton";
 import SelectFilter from "../../components/SelectFilter";
 import SelectedIngredient from "../../components/SelectedIngredient";
-import Button from "../../components/Button";
 import { useEffect, useState } from "react";
 import { View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
 import { propsStack } from '../../routes/Models';
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { axiosInstance } from "../../lib/axios";
 import React from "react";
-import type { Ingredient } from "../../types";
 import { ingredientService } from "../../services/ingredientService";
+import { ButtonFactory } from "../../factories/ButtonFactory";
 
 
 interface IngredientName {
@@ -63,7 +60,7 @@ export default function SearchByIngredients() {
             ))}
           </IngredientsContainer>
           <ButtonContainer>
-            <Button labelButton="PESQUISAR  >" height={50} width={200} radius={50} onPress={() => navigation.navigate('RecipesByIngredients', { ingredients: ingredientsArray.map(item => item.ingredients) })} />
+            <ButtonFactory type="primary" label="PESQUISAR  >" size="medium" height={50} rounded onPress={() => navigation.navigate('RecipesByIngredients', { ingredients: ingredientsArray.map(item => item.ingredients) })} />
           </ButtonContainer>
         </Container>
       </ContainerScrollView>

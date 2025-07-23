@@ -3,13 +3,12 @@ import { BottomSideRightImage, ButtonContainer, Container, ContainerFavoriteBook
 import { propsStack } from '../../routes/Models';
 import { useNavigation } from "@react-navigation/native";
 import { useContext, useEffect, useState } from "react";
-import { Button as BTOverlay, Overlay } from "@rneui/base";
+import { Overlay } from "@rneui/base";
 import Input from "../../components/Input";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { AuthContext } from "../../context/auth";
-import { axiosInstance } from "../../lib/axios";
 import React from "react";
 import { folderService } from "../../services/folderService";
+import { ButtonFactory } from "../../factories/ButtonFactory";
 
 interface FolderItems {
   id: number;
@@ -24,7 +23,6 @@ export default function FavoriteBook() {
   const [folderItems, setFolderItems] = useState<FolderItems[]>();
 
   const handleCreateFolder = async () => {
-    const token = await AsyncStorage.getItem('@token');
     try {
       await folderService.createFolder(data.id, newFolder);
 
@@ -71,26 +69,16 @@ export default function FavoriteBook() {
             <Input type={"text"} placeholder={"Nome da pasta"} value={newFolder} onChangeText={(value: string) => setNewFolder(value)} />
           </InputContainer>
           <ButtonContainer>
-            <BTOverlay
-              title="Cancelar"
-              buttonStyle={{ backgroundColor: 'transparent', borderRadius: 10 }}
-              titleStyle={{ fontFamily: 'Poppins-Medium', fontSize: 14, color: '#da2d2d' }}
-              containerStyle={{
-                height: 40,
-                width: 110
-              }}
+            <ButtonFactory
+              type="secondary"
+              label="Cancelar"
+              size="small"
               onPress={() => setVisibleOverlay(false)}
             />
-            <BTOverlay
-              title="Salvar"
-              buttonStyle={{
-                backgroundColor: '#22A36D', borderRadius: 5
-              }}
-              titleStyle={{ fontFamily: 'Poppins-Medium', fontSize: 14, color: '#FFFFFF' }}
-              containerStyle={{
-                height: 40,
-                width: 110
-              }}
+            <ButtonFactory
+              type="primary"
+              label="Salvar"
+              size="small"
               onPress={() => handleCreateFolder()}
             />
           </ButtonContainer>

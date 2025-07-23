@@ -4,8 +4,8 @@ import { BackgroundImage, Container, ImageWrapper, ContainerLogo, ImageLogo, Tex
 import { Image, Text, ScrollView } from 'react-native';
 import { Weight700 } from '../../../globalStyles';
 import AppIntroSlider from 'react-native-app-intro-slider';
-import Button from '../../components/Button';
 import { propsStack } from '../../routes/Models';
+import { ButtonFactory } from '../../factories/ButtonFactory';
 
 const slides: Item[] = [
   {
@@ -100,7 +100,13 @@ export default function InitialSliders() {
             </BackgroundImage>
             <ContainerButton>
               {item.title}
-              <Button labelButton='JUNTE-SE A NÓS' onPress={() => navigation.navigate('SignUp')} width={290} height={65} radius={20} />
+              <ButtonFactory
+                type='primary'
+                label='JUNTE-SE A NÓS'
+                onPress={() => navigation.navigate('SignUp')}
+                height={60}
+                rounded
+              />
             </ContainerButton>
           </Container>
         </ScrollView>

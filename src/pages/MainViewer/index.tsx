@@ -8,8 +8,6 @@ import Search from "../../components/Search";
 import { View } from "react-native";
 import { AuthContext } from "../../context/auth"
 import { propsStack } from '../../routes/Models';
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { axiosInstance } from "../../lib/axios";
 import React from "react";
 import type { Recipe } from "../../types";
 import { recipeService } from "../../services/recipeService";

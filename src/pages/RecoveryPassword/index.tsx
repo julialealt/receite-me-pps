@@ -1,12 +1,12 @@
 import { Text, TouchableOpacity } from "react-native";
 import { BackArrow, BackThePage, Container, ContainerButton, LoginText } from "./style";
 import Input from "../../components/Input";
-import Button from "../../components/Button";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { propsStack } from "../../routes/Models";
 import { useEffect, useState } from "react";
 import React from "react";
 import { userService } from "../../services/userService";
+import { ButtonFactory } from "../../factories/ButtonFactory";
 
 interface EmailProps {
   email: string;
@@ -89,7 +89,7 @@ export default function RecoveryPassword() {
       }} />
 
       <ContainerButton>
-        <Button labelButton="CONFIRMAR" width={200} height={47} radius={10} onPress={sendCodeToResetPassword} disabled={!isButtonEnabled} />
+        <ButtonFactory type="primary" label="CONFIRMAR" size="medium" onPress={sendCodeToResetPassword} disabled={!isButtonEnabled} />
       </ContainerButton>
     </Container>
   )

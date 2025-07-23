@@ -1,6 +1,5 @@
 import { useNavigation } from "@react-navigation/native";
 import { Weight700 } from "../../../globalStyles";
-import Button from "../../components/Button";
 import Input from "../../components/Input";
 import { BackThePage, ButtonContainer, Container, ContainerButton, EsqueciSenha, InputContainer, LoginText, SubText, TextPopUp, TitlePopUp } from "./styles";
 import { useContext, useEffect, useState } from "react";
@@ -8,9 +7,10 @@ import { AuthContext } from "../../context/auth"
 import { propsStack } from '../../routes/Models';
 import { TouchableOpacity } from "react-native";
 import { View } from "react-native";
-import { Button as BTOverlay, Overlay } from "@rneui/base";
+import { Overlay } from "@rneui/base";
 import React from "react";
 import { userService } from "../../services/userService";
+import { ButtonFactory } from "../../factories/ButtonFactory";
 
 interface FormData {
   email: string;
@@ -81,26 +81,16 @@ export default function Login() {
             <Input type={"email"} placeholder={"Insira seu email"} value={resetPasswordEmail} onChangeText={(value: string) => setResetPasswordEmail(value)} />
           </InputContainer>
           <ButtonContainer>
-            <BTOverlay
-              title="Cancelar"
-              buttonStyle={{ backgroundColor: 'transparent', borderRadius: 10 }}
-              titleStyle={{ fontFamily: 'Poppins-Medium', fontSize: 14, color: '#da2d2d' }}
-              containerStyle={{
-                height: 40,
-                width: 110
-              }}
+            <ButtonFactory
+              type="secondary"
+              label="Cancelar"
+              size="small"
               onPress={() => setIsVisible(false)}
             />
-            <BTOverlay
-              title="Enviar"
-              buttonStyle={{
-                backgroundColor: '#22A36D', borderRadius: 5
-              }}
-              titleStyle={{ fontFamily: 'Poppins-Medium', fontSize: 14, color: '#FFFFFF' }}
-              containerStyle={{
-                height: 40,
-                width: 110
-              }}
+            <ButtonFactory
+              type="primary"
+              label="Enviar"
+              size="small"
               onPress={() => sendEmailToResetPassword(resetPasswordEmail)}
             />
           </ButtonContainer>
@@ -119,7 +109,7 @@ export default function Login() {
         onChangeText={value => handleInputChange('password', value)}
         required={true} />
       <ContainerButton>
-        <Button labelButton="ENTRAR" width={290} height={47} radius={10} onPress={handleLogin} />
+        <ButtonFactory type="primary" label="ENTRAR" onPress={handleLogin} />
       </ContainerButton>
       <TouchableOpacity onPress={() => setIsVisible(true)}>
         <EsqueciSenha>Esqueci minha senha</EsqueciSenha>

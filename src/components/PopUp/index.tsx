@@ -1,7 +1,8 @@
-import { Button, Overlay } from '@rneui/themed';
+import { Overlay } from '@rneui/themed';
 import { View } from 'react-native';
 import { ButtonContainer, TextPopUp } from './styles';
 import React from 'react';
+import { ButtonFactory } from '../../factories/ButtonFactory';
 
 interface PopUpProps {
   text: String,
@@ -20,27 +21,16 @@ export default function PopUp({ isVisible, onPressBackDrop, handleDeleteUser, te
         overlayStyle={{ backgroundColor: "#FFFFFF", width: 301, height: 178, borderRadius: 20 }}>
         <TextPopUp>{text}</TextPopUp>
         <ButtonContainer>
-          <Button
-            title="Cancelar"
-            buttonStyle={{ backgroundColor: '#A9A9A9', borderRadius: 5 }}
-            titleStyle={{ fontFamily: 'Poppins-Medium', fontSize: 14, color: '#FFFFFF' }}
-            containerStyle={{
-              height: 40,
-              width: 110
-            }}
+          <ButtonFactory
+            type="secondary"
+            label="Cancelar"
+            size='small'
             onPress={onPressBackDrop}
           />
-          <Button
-            title="Excluir"
-            buttonStyle={{
-              backgroundColor: '#da2d2d',
-              borderRadius: 5
-            }}
-            titleStyle={{ fontFamily: 'Poppins-Medium', fontSize: 14, color: '#FFFFFF' }}
-            containerStyle={{
-              height: 40,
-              width: 110
-            }}
+          <ButtonFactory
+            type="danger"
+            label="Excluir"
+            size='small'
             onPress={() => handleDeleteUser(id)}
           />
         </ButtonContainer>

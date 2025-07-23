@@ -5,8 +5,6 @@ import { BackArrow, BackThePage, Container, RecipeContainer, TextRecentlyRecipes
 import { Text, TouchableOpacity } from "react-native";
 import { propsStack } from '../../routes/Models';
 import { useEffect, useState } from "react";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { axiosInstance } from "../../lib/axios";
 import React from "react";
 import type { Recipe } from "../../types";
 import { recipeService } from "../../services/recipeService";

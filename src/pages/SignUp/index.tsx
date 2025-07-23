@@ -9,6 +9,7 @@ import { propsStack } from '../../routes/Models';
 import React from "react";
 import type { SignUpData } from "../../types";
 import { authService } from "../../services/authService";
+import { ButtonFactory } from "../../factories/ButtonFactory";
 
 export interface FormData {
   nome: string;
@@ -132,10 +133,15 @@ export default function SignUp() {
         required={true}
       />
       <ContainerButton>
-        <Button labelButton="CADASTRAR" onPress={handleSignUp} width={290} height={47} radius={10} disabled={!isButtonEnabled} />
-        <SubText>Já possui uma conta? <Weight700
-          style={{ color: "#22A36D" }}
-          onPress={() => navigation.navigate('Login')}>Entrar agora</Weight700></SubText>
+        <ButtonFactory type="primary" label="CADASTRAR" onPress={handleSignUp} disabled={!isButtonEnabled} />
+        <SubText>Já possui uma conta?
+          <Weight700
+            style={{ color: "#22A36D" }}
+            onPress={() => navigation.navigate('Login')}
+          >
+            Entrar agora
+          </Weight700>
+        </SubText>
       </ContainerButton>
     </Container>
   )
