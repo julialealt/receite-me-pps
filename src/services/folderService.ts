@@ -1,11 +1,12 @@
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import { axiosInstance } from "../lib/axios"
-import type { Recipe } from "../types"
+import type { PastaDto } from "../dtos/PastaDto"
+import type { ReceitaDto } from "../dtos/ReceitaDto"
 
 const FOLDER_SERVICE_BASE_URL = '/pastas'
 
 export const folderService = {
-  createFolder: async (userId: number, folderName: string) => {
+  createFolder: async (userId: number, folderName: string): Promise<number> => {
     try {
       const token = await AsyncStorage.getItem('@token')
       const response = await axiosInstance.post(`${FOLDER_SERVICE_BASE_URL}/create/${userId}`, {
@@ -23,7 +24,7 @@ export const folderService = {
     }
   },
 
-  getFoldersByUserId: async (userId: number) => {
+  getFoldersByUserId: async (userId: number): Promise<PastaDto[]> => {
     try {
       const token = await AsyncStorage.getItem('@token')
       const response = await axiosInstance.get(`${FOLDER_SERVICE_BASE_URL}/list-usuario/${userId}`, {
@@ -39,10 +40,10 @@ export const folderService = {
     }
   },
 
-  getFolderRecipes: async (folderId: number): Promise<Recipe[]> => {
+  getFolderRecipes: async (folderId: number): Promise<ReceitaDto[]> => {
     try {
       const token = await AsyncStorage.getItem('@token')
-      const response = await axiosInstance.get<Recipe[]>(`${FOLDER_SERVICE_BASE_URL}/${folderId}/receitas`, {
+      const response = await axiosInstance.get(`${FOLDER_SERVICE_BASE_URL}/${folderId}/receitas`, {
         headers: {
           Authorization: `Bearer ${token}`
         }

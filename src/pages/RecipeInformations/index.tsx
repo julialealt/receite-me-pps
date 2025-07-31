@@ -9,9 +9,9 @@ import { AuthContext } from "../../context/auth";
 import { Overlay } from "@rneui/base";
 import MenuItemsFolders from "../../components/MenuItemsFolders";
 import React from "react";
-import type { Recipe } from "../../types";
 import { folderService } from "../../services/folderService";
 import { recipeService } from "../../services/recipeService";
+import type { ReceitaDto } from "../../dtos/ReceitaDto";
 
 type ParamsProps = {
   id: number;
@@ -41,7 +41,7 @@ export default function RecipeInformations() {
   const navigation = useNavigation<propsStack>();
   const [tradeInformation, setTradeInformation] = useState(true);
   const [hearthColor, setHearthColor] = useState(true)
-  const [recipeData, setRecipeData] = useState<Recipe | undefined>();
+  const [recipeData, setRecipeData] = useState<ReceitaDto | undefined>();
   const [macroNutrients, setMacroNutrients] = useState<MacroNutrients[]>();
   const [folderItems, setFolderItems] = useState<FolderItems[]>();
   const [visibleOverlay, setVisibleOverlay] = useState(false);
@@ -94,7 +94,7 @@ export default function RecipeInformations() {
   const findFoldersById = async () => {
     try {
       const responseData = await folderService.getFoldersByUserId(data.id);
-      const pastasFormatadas = responseData.map((pasta: FolderItems) => ({
+      const pastasFormatadas = responseData.map((pasta) => ({
         id: pasta.id,
         nome: pasta.nome
       }));

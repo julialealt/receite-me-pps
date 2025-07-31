@@ -1,14 +1,14 @@
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import { axiosInstance } from "../lib/axios"
-import type { Ingredient } from "../types"
+import type { IngredienteDto } from "../dtos/IngredienteDto"
 
 const INGREDIENT_SERVICE_BASE_URL = '/ingredientes'
 
 export const ingredientService = {
-  getIngredients: async (): Promise<Ingredient> => {
+  getIngredients: async (): Promise<IngredienteDto[]> => {
     try {
       const token = await AsyncStorage.getItem('@token')
-      const response = await axiosInstance.get<Ingredient>(`${INGREDIENT_SERVICE_BASE_URL}`, {
+      const response = await axiosInstance.get(`${INGREDIENT_SERVICE_BASE_URL}`, {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -21,10 +21,10 @@ export const ingredientService = {
     }
   },
 
-  getIngredientsByName: async (name: string): Promise<Ingredient> => {
+  getIngredientsByName: async (name: string): Promise<IngredienteDto[]> => {
     try {
       const token = await AsyncStorage.getItem('@token')
-      const response = await axiosInstance.get<Ingredient>(`${INGREDIENT_SERVICE_BASE_URL}/${name}`, {
+      const response = await axiosInstance.get(`${INGREDIENT_SERVICE_BASE_URL}/${name}`, {
         headers: {
           Authorization: `Bearer ${token}`
         }

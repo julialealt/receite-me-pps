@@ -37,7 +37,7 @@ export default function FavoriteBook() {
     try {
       const responseData = await folderService.getFoldersByUserId(data.id)
 
-      const pastasFormatadas = responseData.map((pasta: FolderItems) => ({
+      const pastasFormatadas = responseData.map((pasta) => ({
         id: pasta.id,
         nome: pasta.nome
       }));

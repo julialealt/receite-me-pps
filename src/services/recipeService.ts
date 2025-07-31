@@ -1,14 +1,14 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { axiosInstance } from '../lib/axios'
-import type { Recipe } from '../types'
+import type { ReceitaDto } from '../dtos/ReceitaDto'
 
 const RECIPE_SERVICE_BASE_URL = '/receitas'
 
 export const recipeService = {
-  getRecipeById: async (id: number): Promise<Recipe> => {
+  getRecipeById: async (id: number): Promise<ReceitaDto> => {
     try {
       const token = await AsyncStorage.getItem('@token')
-      const response = await axiosInstance.get<Recipe>(`${RECIPE_SERVICE_BASE_URL}/findById/${id}`, {
+      const response = await axiosInstance.get(`${RECIPE_SERVICE_BASE_URL}/findById/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -21,10 +21,10 @@ export const recipeService = {
     }
   },
 
-  getRecipes: async (): Promise<Recipe[]> => {
+  getRecipes: async (): Promise<ReceitaDto[]> => {
     try {
       const token = await AsyncStorage.getItem('@token')
-      const response = await axiosInstance.get<Recipe[]>(`${RECIPE_SERVICE_BASE_URL}`, {
+      const response = await axiosInstance.get(`${RECIPE_SERVICE_BASE_URL}`, {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -37,10 +37,10 @@ export const recipeService = {
     }
   },
 
-  getRecipesByIngredients: async (ingredients: string[]): Promise<Recipe[]> => {
+  getRecipesByIngredients: async (ingredients: string[]): Promise<ReceitaDto[]> => {
     try {
       const token = await AsyncStorage.getItem('@token')
-      const response = await axiosInstance.post<Recipe[]>(`${RECIPE_SERVICE_BASE_URL}/filtro`, ingredients, {
+      const response = await axiosInstance.post(`${RECIPE_SERVICE_BASE_URL}/filtro`, ingredients, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -52,10 +52,10 @@ export const recipeService = {
     }
   },
 
-  getRecipesByName: async (name: string): Promise<Recipe[]> => {
+  getRecipesByName: async (name: string): Promise<ReceitaDto[]> => {
     try {
       const token = await AsyncStorage.getItem('@token')
-      const response = await axiosInstance.get<Recipe[]>(`${RECIPE_SERVICE_BASE_URL}/${name}`, {
+      const response = await axiosInstance.get(`${RECIPE_SERVICE_BASE_URL}/${name}`, {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -68,10 +68,10 @@ export const recipeService = {
     }
   },
 
-  getRecommendedRecipes: async (): Promise<Recipe[]> => {
+  getRecommendedRecipes: async (): Promise<ReceitaDto[]> => {
     try {
       const token = await AsyncStorage.getItem('@token')
-      const response = await axiosInstance.get<Recipe[]>(`${RECIPE_SERVICE_BASE_URL}/recomendacoes`, {
+      const response = await axiosInstance.get(`${RECIPE_SERVICE_BASE_URL}/recomendacoes`, {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -84,10 +84,10 @@ export const recipeService = {
     }
   },
 
-  getRecipesByCategory: async (category: string): Promise<Recipe[]> => {
+  getRecipesByCategory: async (category: string): Promise<ReceitaDto[]> => {
     try {
       const token = await AsyncStorage.getItem('@token')
-      const response = await axiosInstance.get<Recipe[]>(`${RECIPE_SERVICE_BASE_URL}/filtro/${category}`, {
+      const response = await axiosInstance.get(`${RECIPE_SERVICE_BASE_URL}/filtro/${category}`, {
         headers: {
           Authorization: `Bearer ${token}`
         }

@@ -7,8 +7,8 @@ import { Text, TouchableOpacity } from "react-native";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { useEffect, useState } from "react";
 import React from "react";
-import type { Recipe } from "../../types";
 import { recipeService } from "../../services/recipeService";
+import type { ReceitaDto } from "../../dtos/ReceitaDto";
 
 interface ParamsProps {
   ingredients: string[]
@@ -18,7 +18,7 @@ export default function RecipesByIngredients() {
   const navigation = useNavigation<propsStack>();
   const route = useRoute();
   const { ingredients } = route.params as ParamsProps;
-  const [allRecipes, setAllRecipes] = useState<Recipe[]>()
+  const [allRecipes, setAllRecipes] = useState<ReceitaDto[]>()
 
   const getRecipes = async () => {
     try {
